@@ -1,132 +1,132 @@
-export default async function decorate(block) {
-    var container = document.querySelector('.emicalculator-container');
+export default async function decorate() {
+  const  container = document.querySelector('.emicalculator-container');
 
-    function createElement(type, attributes = {}, ...children) {
-        const element = document.createElement(type);
-        for (const [key, value] of Object.entries(attributes)) {
-            element.setAttribute(key, value);
+  function createElement(type, attributes = {}, ...children) {
+    const element = document.createElement(type);
+    for (const [key, value] of Object.entries(attributes)) {
+      element.setAttribute(key, value);
         }
         for (const child of children) {
-            if (typeof child === "string") {
-                element.appendChild(document.createTextNode(child));
-            } else {
-                element.appendChild(child);
-            }
-        }
-        return element;
+            if (typeof child === 'string') {
+        element.appendChild(document.createTextNode(child));
+      } else {
+        element.appendChild(child);
+      }
     }
+    return element;
+  }
 
-    const header = createElement('div', { class: 'header' },
-        createElement('h1', {}, 'Loan Calculator'),
-        createElement('button', {},
+  const header = createElement('div', { class: 'header' },
+    createElement('h1', {}, 'Loan Calculator'),
+    createElement('button', {},
             createElement('i', { class: 'bi bi-list' })
         )
-    );
+  );
 
-    // Get the meta value from the meta tag
-    // function getMetaContentByName(name) {
-    //     const metaTag = document.querySelector(`meta[name="${name}"]`);
-    //     return metaTag ? metaTag.getAttribute('content') : null;
-    // }
+  // Get the meta value from the meta tag
+  // function getMetaContentByName(name) {
+  //     const metaTag = document.querySelector(`meta[name="${name}"]`);
+  //     return metaTag ? metaTag.getAttribute('content') : null;
+  // }
 
-    function getDataAttributeValueByName(name) {
-        const element = document.querySelector(`[data-${name}]`);
-        return element ? element.getAttribute(`data-${name}`) : null;
-    }
+  function getDataAttributeValueByName(name) {
+    const element = document.querySelector(`[data-${name}]`);
+    return element ? element.getAttribute(`data-${name}`) : null;
+  }
 
-    const loanAmountMaxValue = getDataAttributeValueByName('laonamount-maxvalue');
-    const loanAmountMinValue = getDataAttributeValueByName('laonamount-minvalue');
-    const laonamount_title = getDataAttributeValueByName('laonamount-title');
-    const interestrate_maxvalue = getDataAttributeValueByName('interestrate-maxvalue');
-    const interestrate_minvalue = getDataAttributeValueByName('interestrate-minvalue');
-    const interestrate_title = getDataAttributeValueByName('interestrate-title');
-    const tenure_title_year = getDataAttributeValueByName('tenure-title-year');
-    const tenure_min_yearvalue = getDataAttributeValueByName('tenure-min-yearvalue');
-    const tenure_max_yearvalue = getDataAttributeValueByName('tenure-max-yearvalue');
-    const tenure_title_months = getDataAttributeValueByName('tenure-title-months');
-    const tenure_min_monthvalue = getDataAttributeValueByName('tenure-min-monthvalue');
-    const tenure_max_monthvalue = getDataAttributeValueByName('tenure-max-monthvalue');
+  const loanAmountMaxValue = getDataAttributeValueByName('laonamount-maxvalue');
+  const loanAmountMinValue = getDataAttributeValueByName('laonamount-minvalue');
+  const laonamount_title = getDataAttributeValueByName('laonamount-title');
+  const interestrate_maxvalue = getDataAttributeValueByName('interestrate-maxvalue');
+  const interestrate_minvalue = getDataAttributeValueByName('interestrate-minvalue');
+  const interestrate_title = getDataAttributeValueByName('interestrate-title');
+  const tenure_title_year = getDataAttributeValueByName('tenure-title-year');
+  const tenure_min_yearvalue = getDataAttributeValueByName('tenure-min-yearvalue');
+  const tenure_max_yearvalue = getDataAttributeValueByName('tenure-max-yearvalue');
+  const tenure_title_months = getDataAttributeValueByName('tenure-title-months');
+  const tenure_min_monthvalue = getDataAttributeValueByName('tenure-min-monthvalue');
+  const tenure_max_monthvalue = getDataAttributeValueByName('tenure-max-monthvalue');
 
     const amountDetail = createElement('div', {},
-        createElement('div', { class: 'detail' },
-            createElement('p', { style: 'color: #9088D2' }, laonamount_title),
-            createElement('div',{class:"inputDetail"},
-            createElement('span',{class:"rupeeSpan"},"Rs"),
-            createElement('input', { id: 'loan-amt-text', type: 'number', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000', style: 'color: #6258A8' })
-            )
-        ),
-        createElement('input', { type: 'range', id: 'loan-amount', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000' }), 
-        createElement('div', { class: 'range-values' },
-            createElement('p', { class: 'min-value' }, loanAmountMinValue),
-            createElement('p', { class: 'max-value', style: 'float: right;' }, loanAmountMaxValue))
-    );
+    createElement('div', { class: 'detail' },
+      createElement('p', { style: 'color: #9088D2' }, laonamount_title),
+      createElement('div',{class:"inputDetail"},
+      createElement('span',{class:"rupeeSpan"},"Rs"),
+        createElement('input', { id: 'loan-amt-text', type: 'number', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000', style: 'color: #6258A8' })
+      )
+    ),
+    createElement('input', { type: 'range', id: 'loan-amount', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000' }), 
+    createElement('div', { class: 'range-values' },
+      createElement('p', { class: 'min-value' }, loanAmountMinValue),
+      createElement('p', { class: 'max-value', style: 'float: right;' }, loanAmountMaxValue))
+  );
 
-    const interestDetail = createElement('div', {},
-        createElement('div', { class: 'detail' },
-            createElement('p', { style: 'color: #9088D2' }, interestrate_title),
-            createElement('div',{class:"inputDetail"},
-            createElement('span',{class:"percentSpan"},"%"),
-            createElement('input', { id: 'interest-rate-text', type: 'number', min: interestrate_minvalue, max: interestrate_maxvalue, step: '0.5', style: 'color: #6258A8' })
-            )
-        ),
-        createElement('input', { type: 'range', id: 'interest-rate', min: interestrate_minvalue, max: interestrate_maxvalue, step: '0.5' }),
+ const interestDetail = createElement('div', {},
+    createElement('div', { class: 'detail' },
+      createElement('p', { style: 'color: #9088D2' }, interestrate_title),
+      createElement('div',{class:"inputDetail"},
+      createElement('span',{class:"percentSpan"},"%"),
+      createElement('input', { id: 'interest-rate-text', type: 'number', min: interestrate_minvalue, max: interestrate_maxvalue, step: '0.5', style: 'color: #6258A8' })
+      )
+    ),
+    createElement('input', { type: 'range', id: 'interest-rate', min: interestrate_minvalue, max: interestrate_maxvalue, step: '0.5' }),
         createElement('div', { class: 'range-values' },
-            createElement('p', { class: 'min-value' }, interestrate_minvalue + "%"),
-            createElement('p', { class: 'max-value', style: 'float: right;' }, interestrate_maxvalue + "%"))
-    );
+        createElement('p', { class: 'min-value' }, interestrate_minvalue + "%"),
+        createElement('p', { class: 'max-value', style: 'float: right;' }, interestrate_maxvalue + "%"))
+  );
 
-    const tenureYearsDetail = createElement('div', {},
+  const tenureYearsDetail = createElement('div', {},
         createElement('div', { class: 'detail' },
-            createElement('p', { style: 'color: #9088D2' }, tenure_title_year),
-            createElement('div',{class:"inputDetail"},
-            createElement('span',{class:"yearSpan"},"Yrs."),
-            createElement('input', { id: 'loan-period-text', type: 'number', min: tenure_min_yearvalue, max: tenure_max_yearvalue, step: '1', style: 'color: #6258A8' })
-            )
-        ),
-        createElement('input', { type: 'range', id: 'loan-period', min: tenure_min_yearvalue, max: tenure_max_yearvalue, step: '1' }),
-        createElement('div', { class: 'range-values' },
-            createElement('p', { class: 'min-value' }, tenure_min_yearvalue + " Year"),
-            createElement('p', { class: 'max-value', style: 'float: right;' }, tenure_max_yearvalue + " Year"))
-    );
+      createElement('p', { style: 'color: #9088D2' }, tenure_title_year),
+      createElement('div',{class:"inputDetail"},
+      createElement('span',{class:"yearSpan"},"Yrs."),
+      createElement('input', { id: 'loan-period-text', type: 'number', min: tenure_min_yearvalue, max: tenure_max_yearvalue, step: '1', style: 'color: #6258A8' })
+      )
+    ),
+    createElement('input', { type: 'range', id: 'loan-period', min: tenure_min_yearvalue, max: tenure_max_yearvalue, step: '1' }),
+    createElement('div', { class: 'range-values' },
+      createElement('p', { class: 'min-value' }, tenure_min_yearvalue + " Year"),
+      createElement('p', { class: 'max-value', style: 'float: right;' }, tenure_max_yearvalue + " Year"))
+  );
 
-    const tenureMonthsDetail = createElement('div', {},
-        createElement('div', { class: 'detail' },
-            createElement('p', { style: 'color: #9088D2' }, tenure_title_months),
-            createElement('div',{class:"inputDetail"},
-            createElement('span',{class:"monthSpan"},"Mos."),
-            createElement('input', { id: 'loan-period-month-text', type: 'number', min: tenure_min_monthvalue, max: tenure_max_monthvalue, step: '1', style: 'color: #6258A8' })
-            )
-        ),
+  const tenureMonthsDetail = createElement('div', {},
+    createElement('div', { class: 'detail' },
+      createElement('p', { style: 'color: #9088D2' }, tenure_title_months),
+      createElement('div',{class:"inputDetail"},
+      createElement('span',{class:"monthSpan"},"Mos."),
+      createElement('input', { id: 'loan-period-month-text', type: 'number', min: tenure_min_monthvalue, max: tenure_max_monthvalue, step: '1', style: 'color: #6258A8' })
+      )
+    ),
         createElement('input', { type: 'range', id: 'loan-period-month', min: tenure_min_monthvalue, max: tenure_max_monthvalue, step: '1' }),
-        createElement('div', { class: 'range-values' },
-            createElement('p', { class: 'min-value' }, tenure_min_monthvalue + " Month"),
-            createElement('p', { class: 'max-value', style: 'float: right;' }, tenure_max_monthvalue + " Month"))
-    );
+    createElement('div', { class: 'range-values' },
+      createElement('p', { class: 'min-value' }, tenure_min_monthvalue + " Month"),
+      createElement('p', { class: 'max-value', style: 'float: right;' }, tenure_max_monthvalue + " Month"))
+  );
 
-    const details = createElement('div', { class: 'details' },
-        amountDetail, interestDetail, tenureYearsDetail, tenureMonthsDetail
-    );
+  const details = createElement('div', { class: 'details' },
+    amountDetail, interestDetail, tenureYearsDetail, tenureMonthsDetail
+  );
 
-    const footer = createElement('div', { class: 'footer' },
-        createElement('div',{style:'chart-detail'},
-        createElement('p', { id: 'price-container-emi' }, "Your Monthly Emi",
-            createElement('p', { id: 'price' }, '0'),
-        )
+  const footer = createElement('div', { class: 'footer' },
+    createElement('div',{style:'chart-detail'},
+      createElement('p', { id: 'price-container-emi' }, "Your Monthly Emi",
+        createElement('p', { id: 'price' }, '0'),
+      )
     )
-    );
+  );
 
-    const view = createElement('div', { class: 'view' }, details, footer);
+  const view = createElement('div', { class: 'view' }, details, footer);
 
-    const breakup = createElement('div', { class: 'breakup' },
-        createElement('canvas', { id: 'pieChart' })
-    );
+  const breakup = createElement('div', { class: 'breakup' },
+      createElement('canvas', { id: 'pieChart' })
+  );
 
-    const subContainer = createElement('div', { class: 'sub-container' }, view, breakup);
+  const subContainer = createElement('div', { class: 'sub-container' }, view, breakup);
 
-    const loanDetails = createElement('div', { class: 'loan-details' },
-        createElement('div', { class: 'chart-details' },
-            createElement('p', { style: 'color: #9088D2' }, 'Principal'),
-            createElement('p', { id: 'cp', style: 'color: #130F31; font-size: 17px;' })
+  const loanDetails = createElement('div', { class: 'loan-details' },
+    createElement('div', { class: 'chart-details' },
+      createElement('p', { style: 'color: #9088D2' }, 'Principal'),
+      createElement('p', { id: 'cp', style: 'color: #130F31; font-size: 17px;' })
         ),
         createElement('div', { class: 'chart-details' },
             createElement('p', { style: 'color: #9088D2' }, 'Interest'),
@@ -141,15 +141,15 @@ export default async function decorate(block) {
 
     container.append(header, subContainer, loanDetails);
 
-    var P, R, N, M, pie, line;
-    var loan_amt_slider = document.getElementById("loan-amount");
-    var loan_amt_text = document.getElementById("loan-amt-text");
-    var int_rate_slider = document.getElementById("interest-rate");
-    var int_rate_text = document.getElementById("interest-rate-text");
-    var loan_period_slider = document.getElementById("loan-period");
-    var loan_period_text = document.getElementById("loan-period-text");
-    var loan_period_slider_month = document.getElementById("loan-period-month");
-    var loan_period_text_month = document.getElementById("loan-period-month-text");
+    let  P, R, N, M, pie, line;
+    const  loan_amt_slider = document.getElementById("loan-amount");
+    const  loan_amt_text = document.getElementById("loan-amt-text");
+    const  int_rate_slider = document.getElementById("interest-rate");
+    const  int_rate_text = document.getElementById("interest-rate-text");
+    const  loan_period_slider = document.getElementById("loan-period");
+    const  loan_period_text = document.getElementById("loan-period-text");
+    const  loan_period_slider_month = document.getElementById("loan-period-month");
+    const  loan_period_text_month = document.getElementById("loan-period-month-text");
 
 
     loan_amt_slider.addEventListener("change", (self) => {
