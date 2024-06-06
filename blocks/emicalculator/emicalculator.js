@@ -119,13 +119,18 @@ export default async function decorate() {
 
   const view = createElement(
     'div',
-    { class: 'view' }, details, footer);
+    { class: 'view' },
+    details,
+    footer,
+  );
 
   const breakup = createElement(
     'div',
     { class: 'breakup' },
-    createElement('canvas',
-      { id: 'pieChart' }),
+    createElement(
+      'canvas',
+      { id: 'pieChart' }
+    ),
   );
 
   const subContainer = createElement(
