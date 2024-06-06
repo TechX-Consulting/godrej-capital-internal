@@ -145,7 +145,7 @@ export default async function decorate() {
   let R;
   let N;
   let M;
-  let pie; 
+  let pie;
   let line;
 
   const loanAmtSlider = document.getElementById('loan-amount');
@@ -231,8 +231,7 @@ export default async function decorate() {
     displayDetails();
   });
 
-
-    //  error message
+  //  error message
   function createErrorSpan(message) {
     return createElement('span', { class: 'error-message', style: 'color: red; display: none;' }, message);
   }
