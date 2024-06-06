@@ -89,36 +89,31 @@ export default async function decorate(block) {
       newsContent.classList.add('active');
       pressReleaseContent.classList.remove('active');
     } else {
-       newsTab.classList.remove('active');
-       pressReleaseTab.classList.add('active');
-       newsContent.classList.remove('active');
-       pressReleaseContent.classList.add('active');
+      newsTab.classList.remove('active');
+      pressReleaseTab.classList.add('active');
+      newsContent.classList.remove('active');
+      pressReleaseContent.classList.add('active');
     }
   }
 
   // Function to render news items
   function getResponseData(filteredData) {
-        newsContent.innerHTML = '';
-    
-        if (filteredData.length === 0) {
-            newsContent.innerHTML = '<p>No results found</p>';
-        } else {
-            filteredData.forEach(item => {
-                const newsContainerData = document.createElement('div');
-                newsContainerData.className = 'newsContainer';
-    
-                const titleElement = document.createElement('h3');
-                titleElement.textContent = item.title;
-    
-                const descriptionElement = document.createElement('p');
-                descriptionElement.textContent = item.description;
-    
-                newsContainerData.appendChild(titleElement);
-                newsContainerData.appendChild(descriptionElement);
-    
-                newsContent.appendChild(newsContainerData);
-            });
-        }
+    newsContent.innerHTML = '';    
+    if (filteredData.length === 0) {
+      newsContent.innerHTML = '<p>No results found</p>';
+    } else {
+      filteredData.forEach(item => {
+      const newsContainerData = document.createElement('div');
+      newsContainerData.className = 'newsContainer';
+      const titleElement = document.createElement('h3');
+      titleElement.textContent = item.title;
+      const descriptionElement = document.createElement('p');
+      descriptionElement.textContent = item.description;
+      newsContainerData.appendChild(titleElement);
+      newsContainerData.appendChild(descriptionElement);
+      newsContent.appendChild(newsContainerData);
+      });
+    }
   }
 
   // Function for an api call
