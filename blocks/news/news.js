@@ -149,17 +149,26 @@ export default async function decorate(block) {
   });
 
   // Add event listener to the search input
-  searchInput.addEventListener('input', function handleSearchInput(event) {
-    const searchText = event.target.value.toLowerCase();
+  // searchInput.addEventListener('input', function handleSearchInput(event) {
+  //   const searchText = event.target.value.toLowerCase();
 
+  //   const filteredData = responseData.filter((item) => {
+  //       return item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);
+  //   });
+  //   getResponseData(filteredData);
+  // });
+
+  function handleSearchInput(event) {
+    const searchText = event.target.value.toLowerCase(); 
     const filteredData = responseData.filter((item) => {
-        return item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);
-    });
+      return item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);});
     getResponseData(filteredData);
-  });
-
+  }
+  
+  searchInput.addEventListener('input', handleSearchInput);
+  
 }
 
-  // Use the decorate function
-  const blockElement = document.getElementById('block');
-  decorate(blockElement);
+// Use the decorate function
+const blockElement = document.getElementById('block');
+decorate(blockElement);
