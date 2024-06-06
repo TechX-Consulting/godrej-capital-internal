@@ -1,6 +1,4 @@
-console.log("loan eligibilty");
 export default async function decorate(block) {
-    console.log(block);
     var container = document.querySelector('.loaneligibility');
 
     function createElement(type, attributes = {}, ...children) {
@@ -43,8 +41,6 @@ export default async function decorate(block) {
     const existing_emi_title = getDataAttributeValueByName('existing-emi-title');
     const existing_emi_min = getDataAttributeValueByName('existing-emi-min');
     const existing_emi_max = getDataAttributeValueByName('existing-emi-max');
-
-    // console.log(existing_emi_title,existing_emi_min,existing_emi_max);
 
     const interestrate_maxvalue = getDataAttributeValueByName('interestrate-maxvalue');
     const interestrate_minvalue = getDataAttributeValueByName('interestrate-minvalue');
