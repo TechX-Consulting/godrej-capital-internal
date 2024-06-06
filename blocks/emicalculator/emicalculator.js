@@ -287,7 +287,6 @@ export default async function decorate() {
     }
   });
 
-
   function calculateLoanDetails(p, r, emi, n, m) {
     let totalInterest = 0;
     const yearlyInterest = [];
@@ -296,9 +295,9 @@ export default async function decorate() {
     let year = 1;
     let [counter, principal, interest] = [0, 0, 0];
     const totalMonths = n * 12 + m;
-    for (let i = 0; i < totalMonths; i++) {
+    for (let i = 0; i < totalMonths; i+=1) {
       const monthlyInterest = p * r;
-      p = p - (emi - monthlyInterest);
+      p -= (emi - monthlyInterest);
       totalInterest += monthlyInterest;
       principal += emi - monthlyInterest;
       interest += monthlyInterest;
@@ -316,7 +315,7 @@ export default async function decorate() {
     line.data.labels = years;
     return totalInterest;
   }
-  
+
   function initialize() {
     loanAmtSlider.value = loanAmountMinValue;
     loanAmtText.value = loanAmountMinValue;
