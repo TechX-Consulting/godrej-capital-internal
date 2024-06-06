@@ -296,19 +296,19 @@ export default async function decorate() {
 
     let payableInterest = calculateLoanDetails(P, r, emi, n, m);
 
-    let opts = { style: "currency", currency: "INR" };
+    let opts = { style: 'currency', currency: 'INR' };
 
-    document.querySelector("#cp").innerText =
+    document.querySelector('#cp').innerText =
             P.toLocaleString("en-IN", opts);
 
-    document.querySelector("#ci").innerText =
-            payableInterest.toLocaleString("en-IN", opts);
+    document.querySelector('#ci').innerText =
+            payableInterest.toLocaleString('en-IN', opts);
 
-    document.querySelector("#ct").innerText =
-            (P + payableInterest).toLocaleString("en-IN", opts);
+    document.querySelector('#ct').innerText =
+            (P + payableInterest).toLocaleString('en-IN', opts);
 
-    document.querySelector("#price").innerText =
-            emi.toLocaleString("en-IN", opts);
+    document.querySelector('#price').innerText =
+            emi.toLocaleString('en-IN', opts);
 
     pie.data.datasets[0].data[0] = P;
     pie.data.datasets[0].data[1] = payableInterest;
@@ -333,33 +333,33 @@ export default async function decorate() {
     loan_period_text_month.value = tenureMinMonthvalue;
     M = parseFloat(tenureMinMonthvalue);
 
-    line = new Chart(document.getElementById("lineChart"), {
+    line = new Chart(document.getElementById('lineChart'), {
       data: {
         labels: [],
         datasets: [
           {
-            label: "Principal",
-            backgroundColor: "rgb(255, 99, 132)",
-            borderColor: "rgb(255, 99, 132)",
+            label: 'Principal',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
             data: [],
           },
         {
-            label: "Interest",
-            backgroundColor: "rgb(54, 162, 235)",
-            borderColor: "rgb(54, 162, 235)",
+            label: 'Interest',
+            backgroundColor: 'rgb(54, 162, 235)',
+            borderColor: 'rgb(54, 162, 235)',
             data: [],
           },
         ],
       },
-      type: "line",
+      type: 'line',
       options: {
         scales: {
           y: {
             ticks: {
               callback: function (val) {
-                return val.toLocaleString("en-IN", {
-                  style: "currency",
-                  currency: "INR",
+                return val.toLocaleString('en-IN', {
+                  style: 'currency',
+                  currency: 'INR',
                 });
               },
             },
@@ -368,14 +368,14 @@ export default async function decorate() {
       },
     });
 
-    pie = new Chart(document.getElementById("pieChart"), {
-      type: "doughnut",
+    pie = new Chart(document.getElementById('pieChart'), {
+      type: 'doughnut',
       data: {
-        labels: ["Principal", "Interest"],
+        labels: ['Principal', 'Interest'],
         datasets: [
           {
             data: [P, 0],
-            backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
             hoverOffset: 4,
           },
         ],
