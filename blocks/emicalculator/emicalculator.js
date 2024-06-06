@@ -107,7 +107,9 @@ export default async function decorate() {
     amountDetail, interestDetail, tenureYearsDetail, tenureMonthsDetail
   );
 
-  const footer = createElement('div', { class: 'footer' },
+  const footer = createElement(
+    'div',
+    { class: 'footer' },
     createElement('div', { style: 'chart-detail' },
       createElement('p', { id: 'price-container-emi' }, 'Your Monthly Emi',
         createElement('p', { id: 'price' }, '0'),
@@ -115,15 +117,23 @@ export default async function decorate() {
     ),
   );
 
-  const view = createElement('div', { class: 'view' }, details, footer);
+  const view = createElement(
+    'div',
+    { class: 'view' }, details, footer);
 
-  const breakup = createElement('div', { class: 'breakup' },
+  const breakup = createElement(
+    'div',
+    { class: 'breakup' },
     createElement('canvas', { id: 'pieChart' }),
   );
 
-  const subContainer = createElement('div', { class: 'sub-container' }, view, breakup);
+  const subContainer = createElement(
+    'div',
+    { class: 'sub-container' }, view, breakup);
 
-  const loanDetails = createElement('div', { class: 'loan-details' },
+  const loanDetails = createElement(
+    'div',
+    { class: 'loan-details' },
     createElement(
       'div',
       { class: 'chart-details' },
