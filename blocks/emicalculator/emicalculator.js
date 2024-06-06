@@ -1,16 +1,16 @@
 export default async function decorate() {
-    const container = document.querySelector('.emicalculator-container');
+  const container = document.querySelector('.emicalculator-container');
 
-    function createElement(type, attributes = {}, ...children) {
-        const element = document.createElement(type);
-        for (const [key, value] of Object.entries(attributes)) {
-            element.setAttribute(key, value);
-        }
-        for (const child of children) {
-            if (typeof child === 'string') {
-                element.appendChild(document.createTextNode(child));
+  function createElement(type, attributes = {}, ...children) {
+    const element = document.createElement(type);
+    for (const [key, value] of Object.entries(attributes)) {
+      element.setAttribute(key, value);
+    }
+    for (const child of children) {
+      if (typeof child === 'string') {
+        element.appendChild(document.createTextNode(child));
             } else {
-                element.appendChild(child);
+          element.appendChild(child);
             }
         }
         return element;
