@@ -37,20 +37,20 @@ export default async function decorate() {
 
   const loanAmountMaxValue = getDataAttributeValueByName('laonamount-maxvalue');
   const loanAmountMinValue = getDataAttributeValueByName('laonamount-minvalue');
-  const laonamount_title = getDataAttributeValueByName('laonamount-title');
-  const interestrate_maxvalue = getDataAttributeValueByName('interestrate-maxvalue');
-  const interestrate_minvalue = getDataAttributeValueByName('interestrate-minvalue');
-  const interestrate_title = getDataAttributeValueByName('interestrate-title');
-  const tenure_title_year = getDataAttributeValueByName('tenure-title-year');
-  const tenure_min_yearvalue = getDataAttributeValueByName('tenure-min-yearvalue');
-  const tenure_max_yearvalue = getDataAttributeValueByName('tenure-max-yearvalue');
-  const tenure_title_months = getDataAttributeValueByName('tenure-title-months');
-  const tenure_min_monthvalue = getDataAttributeValueByName('tenure-min-monthvalue');
-  const tenure_max_monthvalue = getDataAttributeValueByName('tenure-max-monthvalue');
+  const laonamountTitle = getDataAttributeValueByName('laonamount-title');
+  const interestrateMaxvalue = getDataAttributeValueByName('interestrate-maxvalue');
+  const interestrateMinvalue = getDataAttributeValueByName('interestrate-minvalue');
+  const interestrateTitle = getDataAttributeValueByName('interestrate-title');
+  const tenureTitleYear = getDataAttributeValueByName('tenure-title-year');
+  const tenureMinYearvalue = getDataAttributeValueByName('tenure-min-yearvalue');
+  const tenureMaxYearvalue = getDataAttributeValueByName('tenure-max-yearvalue');
+  const tenureTitleMonths = getDataAttributeValueByName('tenure-title-months');
+  const tenureMinMonthvalue = getDataAttributeValueByName('tenure-min-monthvalue');
+  const tenureMaxMonthvalue = getDataAttributeValueByName('tenure-max-monthvalue');
 
   const amountDetail = createElement('div', {},
     createElement('div', { class: 'detail' },
-      createElement('p', { style: 'color: #9088D2' }, laonamount_title),
+      createElement('p', { style: 'color: #9088D2' }, laonamountTitle),
             createElement('div', { class: "inputDetail" },
         createElement('span', { class: "rupeeSpan" }, "Rs"),
         createElement('input', { id: 'loan-amt-text', type: 'number', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000', style: 'color: #6258A8' })
@@ -63,44 +63,44 @@ export default async function decorate() {
 
   const interestDetail = createElement('div', {},
     createElement('div', { class: 'detail' },
-      createElement('p', { style: 'color: #9088D2' }, interestrate_title),
+      createElement('p', { style: 'color: #9088D2' }, interestrateTitle),
             createElement('div', { class: "inputDetail" },
         createElement('span', { class: "percentSpan" }, "%"),
-        createElement('input', { id: 'interest-rate-text', type: 'number', min: interestrate_minvalue, max: interestrate_maxvalue, step: '0.5', style: 'color: #6258A8' })
+        createElement('input', { id: 'interest-rate-text', type: 'number', min: interestrateMinvalue, max: interestrateMaxvalue, step: '0.5', style: 'color: #6258A8' })
       )
     ),
-    createElement('input', { type: 'range', id: 'interest-rate', min: interestrate_minvalue, max: interestrate_maxvalue, step: '0.5' }),
+    createElement('input', { type: 'range', id: 'interest-rate', min: interestrateMinvalue, max: interestrateMaxvalue, step: '0.5' }),
     createElement('div', { class: 'range-values' },
-      createElement('p', { class: 'min-value' }, interestrate_minvalue + "%"),
-      createElement('p', { class: 'max-value', style: 'float: right;' }, interestrate_maxvalue + "%"))
+      createElement('p', { class: 'min-value' }, interestrateMinvalue + "%"),
+      createElement('p', { class: 'max-value', style: 'float: right;' }, interestrateMaxvalue + "%"))
   );
 
   const tenureYearsDetail = createElement('div', {},
     createElement('div', { class: 'detail' },
-      createElement('p', { style: 'color: #9088D2' }, tenure_title_year),
+      createElement('p', { style: 'color: #9088D2' }, tenureTitleYear),
       createElement('div', { class: "inputDetail" },
         createElement('span', { class: "yearSpan" }, "Yrs."),
-        createElement('input', { id: 'loan-period-text', type: 'number', min: tenure_min_yearvalue, max: tenure_max_yearvalue, step: '1', style: 'color: #6258A8' })
+        createElement('input', { id: 'loan-period-text', type: 'number', min: tenureMinYearvalue, max: tenureMaxYearvalue, step: '1', style: 'color: #6258A8' })
       )
         ),
-    createElement('input', { type: 'range', id: 'loan-period', min: tenure_min_yearvalue, max: tenure_max_yearvalue, step: '1' }),
+    createElement('input', { type: 'range', id: 'loan-period', min: tenureMinYearvalue, max: tenureMaxYearvalue, step: '1' }),
     createElement('div', { class: 'range-values' },
-      createElement('p', { class: 'min-value' }, tenure_min_yearvalue + " Year"),
-      createElement('p', { class: 'max-value', style: 'float: right;' }, tenure_max_yearvalue + " Year"))
+      createElement('p', { class: 'min-value' }, tenureMinYearvalue + " Year"),
+      createElement('p', { class: 'max-value', style: 'float: right;' }, tenureMaxYearvalue + " Year"))
   );
 
   const tenureMonthsDetail = createElement('div', {},
     createElement('div', { class: 'detail' },
-      createElement('p', { style: 'color: #9088D2' }, tenure_title_months),
+      createElement('p', { style: 'color: #9088D2' }, tenureTitleMonths),
       createElement('div', { class: "inputDetail" },
         createElement('span', { class: "monthSpan" }, "Mos."),
-        createElement('input', { id: 'loan-period-month-text', type: 'number', min: tenure_min_monthvalue, max: tenure_max_monthvalue, step: '1', style: 'color: #6258A8' })
+        createElement('input', { id: 'loan-period-month-text', type: 'number', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1', style: 'color: #6258A8' })
       )
     ),
-    createElement('input', { type: 'range', id: 'loan-period-month', min: tenure_min_monthvalue, max: tenure_max_monthvalue, step: '1' }),
+    createElement('input', { type: 'range', id: 'loan-period-month', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1' }),
     createElement('div', { class: 'range-values' },
-      createElement('p', { class: 'min-value' }, tenure_min_monthvalue + " Month"),
-      createElement('p', { class: 'max-value', style: 'float: right;' }, tenure_max_monthvalue + " Month"))
+      createElement('p', { class: 'min-value' }, tenureMinMonthvalue + " Month"),
+      createElement('p', { class: 'max-value', style: 'float: right;' }, tenureMaxMonthvalue + " Month"))
   );
 
   const details = createElement('div', { class: 'details' },
@@ -208,9 +208,9 @@ export default async function decorate() {
 
   // Error message spans
   const loanAmtError = createErrorSpan("Value should be between " + loanAmountMinValue + " and " + loanAmountMaxValue);
-  const interestRateError = createErrorSpan("Value should be between " + interestrate_minvalue + "% and " + interestrate_maxvalue + "%");
-  const loanPeriodError = createErrorSpan("Value should be between " + tenure_min_yearvalue + " and " + tenure_max_yearvalue);
-  const loanPeriodMonthError = createErrorSpan("Value should be between " + tenure_min_monthvalue + " and " + tenure_max_monthvalue);
+  const interestRateError = createErrorSpan("Value should be between " + interestrateMinvalue + "% and " + interestrateMaxvalue + "%");
+  const loanPeriodError = createErrorSpan("Value should be between " + tenureMinYearvalue + " and " + tenureMaxYearvalue);
+  const loanPeriodMonthError = createErrorSpan("Value should be between " + tenureMinMonthvalue + " and " + tenureMaxMonthvalue);
 
   // Append error message spans to their respective input containers
   amountDetail.appendChild(loanAmtError);
@@ -231,7 +231,7 @@ export default async function decorate() {
 
   //error for loan amount
   int_rate_text.addEventListener("input", function () {
-    if (parseFloat(this.value) < parseFloat(interestrate_minvalue) || parseFloat(this.value) > parseFloat(interestrate_maxvalue)) {
+    if (parseFloat(this.value) < parseFloat(interestrateMinvalue) || parseFloat(this.value) > parseFloat(interestrateMaxvalue)) {
       interestRateError.style.display = "block";
     } else {
       interestRateError.style.display = "none";
@@ -240,7 +240,7 @@ export default async function decorate() {
 
   //error for year
   loan_period_text.addEventListener("input", function () {
-    if (parseFloat(this.value) < parseFloat(tenure_min_yearvalue) || parseFloat(this.value) > parseFloat(tenure_max_yearvalue)) {
+    if (parseFloat(this.value) < parseFloat(tenureMinYearvalue) || parseFloat(this.value) > parseFloat(tenureMaxYearvalue)) {
        loanPeriodError.style.display = "block";
     } else {
       loanPeriodError.style.display = "none";
@@ -249,7 +249,7 @@ export default async function decorate() {
 
   //error for month
   loan_period_text_month.addEventListener("input", function () {
-    if (parseFloat(this.value) < parseFloat(tenure_min_monthvalue) || parseFloat(this.value) > parseFloat(tenure_max_monthvalue)) {
+    if (parseFloat(this.value) < parseFloat(tenureMinMonthvalue) || parseFloat(this.value) > parseFloat(tenureMaxMonthvalue)) {
       loanPeriodMonthError.style.display = "block";
     } else {
       loanPeriodMonthError.style.display = "none";
@@ -321,17 +321,17 @@ export default async function decorate() {
     loan_amt_text.value = loanAmountMinValue;
     P = parseFloat(loanAmountMinValue);
 
-    int_rate_slider.value = interestrate_minvalue;
-    int_rate_text.value = interestrate_minvalue;
-    R = parseFloat(interestrate_minvalue);
+    int_rate_slider.value = interestrateMinvalue;
+    int_rate_text.value = interestrateMinvalue;
+    R = parseFloat(interestrateMinvalue);
 
-    loan_period_slider.value = tenure_min_yearvalue;
-    loan_period_text.value = tenure_min_yearvalue;
-    N = parseFloat(tenure_min_yearvalue);
+    loan_period_slider.value = tenureMinYearvalue;
+    loan_period_text.value = tenureMinYearvalue;
+    N = parseFloat(tenureMinYearvalue);
 
-    loan_period_slider_month.value = tenure_min_monthvalue;
-    loan_period_text_month.value = tenure_min_monthvalue;
-    M = parseFloat(tenure_min_monthvalue);
+    loan_period_slider_month.value = tenureMinMonthvalue;
+    loan_period_text_month.value = tenureMinMonthvalue;
+    M = parseFloat(tenureMinMonthvalue);
 
     line = new Chart(document.getElementById("lineChart"), {
       data: {
