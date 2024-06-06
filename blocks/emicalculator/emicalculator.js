@@ -285,23 +285,23 @@ export default async function decorate() {
   }
 
   function displayDetails() {
-    let r = parseFloat(R) / 1200;
-    let n = parseFloat(N);
-    let m = parseFloat(M);
-    let totalMonths = n * 12 + m;
+    const r = parseFloat(R) / 1200;
+    const n = parseFloat(N);
+    const m = parseFloat(M);
+    const totalMonths = n * 12 + m;
 
-    let num = P * r * Math.pow(1 + r, totalMonths);
-    let denom = Math.pow(1 + r, totalMonths) - 1;
-    let emi = num / denom;
+    const num = P * r * Math.pow(1 + r, totalMonths);
+    const denom = Math.pow(1 + r, totalMonths) - 1;
+    const emi = num / denom;
 
-    let payableInterest = calculateLoanDetails(P, r, emi, n, m);
+    const payableInterest = calculateLoanDetails(P, r, emi, n, m);
 
-    let opts = { style: 'currency', currency: 'INR' };
+    const opts = { style: 'currency', currency: 'INR' };
 
-    document.querySelector('#cp').innerText =P.toLocaleString("en-IN", opts);
-    document.querySelector('#ci').innerText =payableInterest.toLocaleString('en-IN', opts);
-    document.querySelector('#ct').innerText =(P + payableInterest).toLocaleString('en-IN', opts);
-    document.querySelector('#price').innerText =emi.toLocaleString('en-IN', opts);
+    document.querySelector('#cp').innerText = P.toLocaleString("en-IN", opts);
+    document.querySelector('#ci').innerText = payableInterest.toLocaleString('en-IN', opts);
+    document.querySelector('#ct').innerText = (P + payableInterest).toLocaleString('en-IN', opts);
+    document.querySelector('#price').innerText = emi.toLocaleString('en-IN', opts);
 
     pie.data.datasets[0].data[0] = P;
     pie.data.datasets[0].data[1] = payableInterest;
