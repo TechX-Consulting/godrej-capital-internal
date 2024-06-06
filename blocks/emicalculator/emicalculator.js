@@ -111,8 +111,8 @@ export default async function decorate() {
     createElement('div', { style: 'chart-detail' },
       createElement('p', { id: 'price-container-emi' }, 'Your Monthly Emi',
         createElement('p', { id: 'price' }, '0'),
-      )
-    )
+      ),
+    ),
   );
 
   const view = createElement('div', { class: 'view' }, details, footer);
@@ -156,7 +156,6 @@ export default async function decorate() {
   const loanPeriodText = document.getElementById('loan-period-text');
   const loanPeriodSliderMonth = document.getElementById('loan-period-month');
   const loanPeriodTextMonth = document.getElementById('loan-period-month-text');
-
 
   function displayDetails() {
     const r = parseFloat(R) / 1200;
