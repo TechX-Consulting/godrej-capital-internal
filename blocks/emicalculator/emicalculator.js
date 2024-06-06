@@ -18,10 +18,10 @@ export default async function decorate() {
 
   const header = createElement(
     'div',
-    { class: 'header' },createElement('h1', {}, 'Loan Calculator'),
+    { class: 'header' }, createElement('h1', {}, 'Loan Calculator'),
     createElement('button', {},
-      createElement('i', { class: 'bi bi-list' })
-    )
+      createElement('i', { class: 'bi bi-list' }),
+    ),
   );
 
   // Get the meta value from the meta tag
@@ -54,8 +54,7 @@ export default async function decorate() {
             createElement('div', { class: "inputDetail" },
         createElement('span', { class: "rupeeSpan" }, "Rs"),
         createElement('input', { id: 'loan-amt-text', type: 'number', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000', style: 'color: #6258A8' })
-      )
-    ),
+      )),
     createElement('input', { type: 'range', id: 'loan-amount', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000' }),
     createElement('div', { class: 'range-values' },
       createElement('p', { class: 'min-value' }, loanAmountMinValue),
