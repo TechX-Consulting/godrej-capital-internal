@@ -300,13 +300,10 @@ export default async function decorate() {
 
     document.querySelector('#cp').innerText =
             P.toLocaleString("en-IN", opts);
-
     document.querySelector('#ci').innerText =
             payableInterest.toLocaleString('en-IN', opts);
-
     document.querySelector('#ct').innerText =
             (P + payableInterest).toLocaleString('en-IN', opts);
-
     document.querySelector('#price').innerText =
             emi.toLocaleString('en-IN', opts);
 
@@ -343,7 +340,7 @@ export default async function decorate() {
             borderColor: 'rgb(255, 99, 132)',
             data: [],
           },
-        {
+          {
             label: 'Interest',
             backgroundColor: 'rgb(54, 162, 235)',
             borderColor: 'rgb(54, 162, 235)',
