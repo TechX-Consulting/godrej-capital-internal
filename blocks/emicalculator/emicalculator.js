@@ -298,14 +298,10 @@ export default async function decorate() {
 
     let opts = { style: 'currency', currency: 'INR' };
 
-    document.querySelector('#cp').innerText =
-            P.toLocaleString("en-IN", opts);
-    document.querySelector('#ci').innerText =
-            payableInterest.toLocaleString('en-IN', opts);
-    document.querySelector('#ct').innerText =
-            (P + payableInterest).toLocaleString('en-IN', opts);
-    document.querySelector('#price').innerText =
-            emi.toLocaleString('en-IN', opts);
+    document.querySelector('#cp').innerText =P.toLocaleString("en-IN", opts);
+    document.querySelector('#ci').innerText =payableInterest.toLocaleString('en-IN', opts);
+    document.querySelector('#ct').innerText =(P + payableInterest).toLocaleString('en-IN', opts);
+    document.querySelector('#price').innerText =emi.toLocaleString('en-IN', opts);
 
     pie.data.datasets[0].data[0] = P;
     pie.data.datasets[0].data[1] = payableInterest;
