@@ -131,7 +131,9 @@ export default async function decorate() {
   const subContainer = createElement(
     'div',
     { class: 'sub-container' },
-    view, breakup);
+    
+    view, breakup
+  );
 
   const loanDetails = createElement(
     'div',
@@ -381,7 +383,7 @@ export default async function decorate() {
                   style: 'currency',
                   currency: 'INR',
                 });
-              }
+              },
             },
           },
         },
