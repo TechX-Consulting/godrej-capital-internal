@@ -1,5 +1,18 @@
 export default async function decorate(block) {
-    var container = document.querySelector('.loaneligibility');
+    var container = document.querySelector('.loaneligibility'),
+        selectProduct, optionsArray, i, option, applyButton,
+        P, R, N, M, E, pie, line,
+        loan_amt_slider,
+        loan_amt_text,
+        loan_period_text_month,
+        loan_period_slider_month,
+        loan_period_text,
+        loan_period_slider,
+        int_rate_text,
+        int_rate_slider,
+        exisiting_emi_amount_slider,
+        exisiting_emi_text;
+
 
     function createElement(type, attributes = {}, ...children) {
         const element = document.createElement(type);
@@ -57,14 +70,14 @@ export default async function decorate(block) {
 
 
     // Create a select element
-    var selectProduct = document.createElement("select");
+    selectProduct = document.createElement("select");
 
     // Split the string into an array of loan options
-    var optionsArray = product_list.split(",");
+    optionsArray = product_list.split(",");
 
     // Loop through the array and create option elements
-    for (var i = 0; i < optionsArray.length; i++) {
-        var option = document.createElement("option");
+    for (i = 0; i < optionsArray.length; i++) {
+        option = document.createElement("option");
         option.value = optionsArray[i].toLowerCase().replace(/ /g, '-');
         option.text = optionsArray[i];
         selectProduct.appendChild(option);
@@ -140,7 +153,7 @@ export default async function decorate(block) {
             createElement('p', { class: 'max-value', style: 'float: right;' }, tenure_max_monthvalue + " Month"))
     );
 
-    var applyButton = document.createElement('button');
+    applyButton = document.createElement('button');
     applyButton.textContent = 'Apply Now';
     applyButton.id = 'apply-btn';
 
@@ -183,19 +196,18 @@ export default async function decorate(block) {
 
     container.append(header, subContainer, loanDetails);
 
-    var P, R, N, M, E, pie, line;
-    var loan_amt_slider = document.getElementById("loan-amount");
-    var loan_amt_text = document.getElementById("loan-amt-text");
+    loan_amt_slider = document.getElementById("loan-amount");
+    loan_amt_text = document.getElementById("loan-amt-text");
 
-    var exisiting_emi_text = document.getElementById("exisiting-emi-text");
-    var exisiting_emi_amount_slider = document.getElementById("exisiting-emi-amount");
+    exisiting_emi_text = document.getElementById("exisiting-emi-text");
+    exisiting_emi_amount_slider = document.getElementById("exisiting-emi-amount");
 
-    var int_rate_slider = document.getElementById("interest-rate");
-    var int_rate_text = document.getElementById("interest-rate-text");
-    var loan_period_slider = document.getElementById("loan-period");
-    var loan_period_text = document.getElementById("loan-period-text");
-    var loan_period_slider_month = document.getElementById("loan-period-month");
-    var loan_period_text_month = document.getElementById("loan-period-month-text");
+    int_rate_slider = document.getElementById("interest-rate");
+    int_rate_text = document.getElementById("interest-rate-text");
+    loan_period_slider = document.getElementById("loan-period");
+    loan_period_text = document.getElementById("loan-period-text");
+    loan_period_slider_month = document.getElementById("loan-period-month");
+    loan_period_text_month = document.getElementById("loan-period-month-text");
 
     loan_amt_slider.addEventListener("change", (self) => {
         loan_amt_text.value = self.target.value;
