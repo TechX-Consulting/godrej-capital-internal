@@ -5,21 +5,18 @@ export default async function decorate() {
     const element = document.createElement(type);
     Object.entries(attributes).forEach(([key, value]) => {
       element.setAttribute(key, value);
-    });
-      
+    });  
     children.forEach((child) => {
       if (typeof child === 'string') {
         element.appendChild(document.createTextNode(child));
       } else {
         element.appendChild(child);
       }
-    });
-      
+    });   
     return element;
   }
 
-  const header = createElement(
-    'div', 
+  const header = createElement('div', 
     { class: 'header' },
     createElement('h1', {}, 'Loan Calculator'),
     createElement('button', {},
