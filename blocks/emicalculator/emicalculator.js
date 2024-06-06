@@ -7,18 +7,19 @@ export default async function decorate() {
       element.setAttribute(key, value);
     });
       
-    children.forEach(child => {
-        if (typeof child === 'string') {
-          element.appendChild(document.createTextNode(child));
-        } else {
-          element.appendChild(child);
-        }
-      });
+    children.forEach((child) => {
+      if (typeof child === 'string') {
+        element.appendChild(document.createTextNode(child));
+      } else {
+        element.appendChild(child);
+      }
+    });
       
     return element;
   }
 
-    const header = createElement('div', { class: 'header' },
+  const header = createElement(
+    'div', { class: 'header' },
     createElement('h1', {}, 'Loan Calculator'),
     createElement('button', {},
       createElement('i', { class: 'bi bi-list' })
