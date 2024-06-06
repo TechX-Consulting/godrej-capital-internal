@@ -290,15 +290,15 @@ export default async function decorate() {
     const m = parseFloat(M);
     const totalMonths = n * 12 + m;
 
-    const num = P * r * Math.pow(1 + r, totalMonths);
-    const denom = Math.pow(1 + r, totalMonths) - 1;
+    const num = P * r * (1 + r) ** totalMonths;
+    const denom = (1 + r) ** totalMonths - 1;
     const emi = num / denom;
 
     const payableInterest = calculateLoanDetails(P, r, emi, n, m);
 
     const opts = { style: 'currency', currency: 'INR' };
 
-    document.querySelector('#cp').innerText = P.toLocaleString("en-IN", opts);
+    document.querySelector('#cp').innerText = P.toLocaleString('en-IN', opts);
     document.querySelector('#ci').innerText = payableInterest.toLocaleString('en-IN', opts);
     document.querySelector('#ct').innerText = (P + payableInterest).toLocaleString('en-IN', opts);
     document.querySelector('#price').innerText = emi.toLocaleString('en-IN', opts);
