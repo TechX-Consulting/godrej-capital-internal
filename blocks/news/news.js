@@ -3,7 +3,7 @@ export default async function decorate(block) {
   // This will be your API response data
   let responseData = [];
 
-// Function for get authored label data
+  // Function for get authored label data
   function getDataAttributeValueByName(name) {
     const element = document.querySelector(`[data-${name}]`);
     return element ? element.getAttribute(`data-${name}`) : null;
@@ -57,44 +57,44 @@ export default async function decorate(block) {
   optionOldToNew.value = 'oldToNew';
   optionOldToNew.textContent = 'Old to New';
 
-sortDropdown.appendChild(optionNewToOld);
-sortDropdown.appendChild(optionOldToNew);
+  sortDropdown.appendChild(optionNewToOld);
+  sortDropdown.appendChild(optionOldToNew);
 
-controlsContainer.appendChild(searchInput);
-controlsContainer.appendChild(sortDropdown);
-container.appendChild(controlsContainer);
+  controlsContainer.appendChild(searchInput);
+  controlsContainer.appendChild(sortDropdown);
+  container.appendChild(controlsContainer);
 
-block.appendChild(container);
+  block.appendChild(container);
 
-// Create content sections
-const newsContent = document.createElement('div');
-const pressReleaseContent = document.createElement('div');
+  // Create content sections
+  const newsContent = document.createElement('div');
+  const pressReleaseContent = document.createElement('div');
 
-newsContent.id = 'newsContent';
-newsContent.className = 'content active';
-newsContent.innerHTML = `<h2>News Content</h2><p>Content for News.</p>`;
+  newsContent.id = 'newsContent';
+  newsContent.className = 'content active';
+  newsContent.innerHTML = `<h2>News Content</h2><p>Content for News.</p>`;
 
-pressReleaseContent.id = 'pressReleaseContent';
-pressReleaseContent.className = 'content';
-pressReleaseContent.innerHTML = `<h2>Press Release Content</h2><p>Content for Press Release.</p>`;
+  pressReleaseContent.id = 'pressReleaseContent';
+  pressReleaseContent.className = 'content';
+  pressReleaseContent.innerHTML = `<h2>Press Release Content</h2><p>Content for Press Release.</p>`;
 
-block.appendChild(newsContent);
-block.appendChild(pressReleaseContent);
+  block.appendChild(newsContent);
+  block.appendChild(pressReleaseContent);
 
-// News Tab Event Listener
-newsTab.addEventListener('click', function () {
+  // News Tab Event Listener
+  newsTab.addEventListener('click', function () {
     setActiveTab('news');
     // Call the function in which for api response and render data on news tab click event.
     getApiResponse();
-});
+  });
 
-// Press Release Tab Event Listener
-pressReleaseTab.addEventListener('click', function () {
+  // Press Release Tab Event Listener
+  pressReleaseTab.addEventListener('click', function () {
     setActiveTab('pressRelease');
-});
+  });
 
-// Function for active tabs
-function setActiveTab(tab) {
+  // Function for active tabs
+  function setActiveTab(tab) {
     if (tab === 'news') {
         newsTab.classList.add('active');
         pressReleaseTab.classList.remove('active');
@@ -106,10 +106,10 @@ function setActiveTab(tab) {
         newsContent.classList.remove('active');
         pressReleaseContent.classList.add('active');
     }
-}
+  }
 
-// Function for an api call
-function getApiResponse() {
+  // Function for an api call
+  function getApiResponse() {
     fetch('https://main--eds-site--24shrishti.hlx.page/query-index.json', {
         method: 'GET'
     })
@@ -126,10 +126,10 @@ function getApiResponse() {
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
-}
+  }
 
-// Function to render news items
-function getResponseData(filteredData) {
+  // Function to render news items
+  function getResponseData(filteredData) {
     newsContent.innerHTML = '';
 
     if (filteredData.length === 0) {
@@ -151,20 +151,20 @@ function getResponseData(filteredData) {
             newsContent.appendChild(newsContainerData);
         });
     }
-}
+  }
 
-// Add event listener to the search input
-searchInput.addEventListener('input', function (event) {
+  // Add event listener to the search input
+  searchInput.addEventListener('input', function (event) {
     const searchText = event.target.value.toLowerCase();
 
     const filteredData = responseData.filter(item => {
         return item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);
     });
     getResponseData(filteredData);
-});
+  });
 
 }
 
-// Use the decorate function
-const blockElement = document.getElementById('block');
-decorate(blockElement);
+  // Use the decorate function
+  const blockElement = document.getElementById('block');
+  decorate(blockElement);
