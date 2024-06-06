@@ -118,7 +118,7 @@ export default async function decorate() {
   const view = createElement('div', { class: 'view' }, details, footer);
 
   const breakup = createElement('div', { class: 'breakup' },
-    createElement('canvas', { id: 'pieChart' })
+    createElement('canvas', { id: 'pieChart' }),
   );
 
   const subContainer = createElement('div', { class: 'sub-container' }, view, breakup);
@@ -132,7 +132,9 @@ export default async function decorate() {
       createElement('p', { style: 'color: #9088D2' }, 'Interest'),
       createElement('p', { id: 'ci', style: 'color: #130F31; font-size: 17px;' }),
     ),
-    createElement('div', { class: 'chart-details' },
+    createElement(
+      'div',
+      { class: 'chart-details' },
       createElement('p', { style: 'color: #9088D2' }, 'Total Payable'),
       createElement('p', { id: 'ct', style: 'color: #130F31; font-size: 17px;' }),
     ),
@@ -360,10 +362,10 @@ export default async function decorate() {
             ticks: {
               callback(val) {
                 return val.toLocaleString('en-IN', {
-                    style: 'currency',
-                    currency: 'INR',
+                  style: 'currency',
+                  currency: 'INR',
                 });
-            }
+              }
             },
           },
         },
