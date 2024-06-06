@@ -269,7 +269,7 @@ export default async function decorate() {
     }
   });
 
-  //error for year
+  //  error for year
   loanPeriodText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(tenureMinYearvalue) || parseFloat(this.value) > parseFloat(tenureMaxYearvalue)) {
       loanPeriodError.style.display = 'block';
@@ -278,7 +278,7 @@ export default async function decorate() {
     }
   });
 
-  //error for month
+  //  error for month
   loanPeriodTextMonth.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(tenureMinMonthvalue) || parseFloat(this.value) > parseFloat(tenureMaxMonthvalue)) {
       loanPeriodMonthError.style.display = 'block';
@@ -295,7 +295,7 @@ export default async function decorate() {
     let year = 1;
     let [counter, principal, interest] = [0, 0, 0];
     const totalMonths = n * 12 + m;
-    for (let i = 0; i < totalMonths; i+=1) {
+    for (let i = 0; i < totalMonths; i += 1) {
       const monthlyInterest = p * r;
       p -= (emi - monthlyInterest);
       totalInterest += monthlyInterest;
