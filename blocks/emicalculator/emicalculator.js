@@ -302,12 +302,13 @@ export default async function decorate() {
       totalInterest += monthlyInterest;
       principal += emi - monthlyInterest;
       interest += monthlyInterest;
-      if (++counter === 12) {
-        years.push(year);
-        year++;
-        yearlyInterest.push(parseInt(interest, 10));
-        yearPrincipal.push(parseInt(principal, 10));
-        counter = 0;
+      counter += 1;
+      if (counter === 12) {
+          years.push(year);
+          year += 1;
+          yearlyInterest.push(parseInt(interest, 10));
+          yearPrincipal.push(parseInt(principal, 10));
+          counter = 0;
       }
     }
     line.data.datasets[0].data = yearPrincipal;
