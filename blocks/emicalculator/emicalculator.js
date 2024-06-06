@@ -103,8 +103,13 @@ export default async function decorate() {
       createElement('p', { class: 'max-value', style: 'float: right;' }, tenureMaxMonthvalue + ' Month')),
   );
 
-  const details = createElement('div', { class: 'details' },
-    amountDetail, interestDetail, tenureYearsDetail, tenureMonthsDetail
+  const details = createElement(
+    'div',
+    { class: 'details' },
+    amountDetail,
+    interestDetail,
+    tenureYearsDetail,
+    tenureMonthsDetail
   );
 
   const footer = createElement(
