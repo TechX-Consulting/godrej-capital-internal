@@ -102,9 +102,10 @@ export default async function decorate() {
       createElement('p', { class: 'min-value' }, tenureMinMonthvalue + ' Month'),
       createElement(
         'p',
-        { class: 'max-value', style: 'float: right;' }, tenureMaxMonthvalue + ' Month'
+        { class: 'max-value', style: 'float: right;' },
+        tenureMaxMonthvalue + ' Month',
       ),
-      ),
+    ),
   );
 
   const details = createElement(
