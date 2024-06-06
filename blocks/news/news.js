@@ -98,7 +98,7 @@ export default async function decorate(block) {
 
   // Function to render news items
   function getResponseData(filteredData) {
-    newsContent.innerHTML = '';    
+    newsContent.innerHTML = '';
     if (filteredData.length === 0) {
       newsContent.innerHTML = '<p>No results found</p>';
     } else {
@@ -118,13 +118,13 @@ export default async function decorate(block) {
 
   // Function for an api call
   function getApiResponse() {
-        fetch('https://main--eds-site--24shrishti.hlx.page/query-index.json', {
-            method: 'GET'
-        })
-            .then(response => {
-                if (!response.ok) {
+    fetch('https://main--eds-site--24shrishti.hlx.page/query-index.json', {
+      method: 'GET',
+    })
+      .then(response => {
+        if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);
-                }
+        }
                 return response.json();
             })
             .then(response => {
