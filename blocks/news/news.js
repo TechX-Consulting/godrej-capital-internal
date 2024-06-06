@@ -121,19 +121,19 @@ export default async function decorate(block) {
     fetch('https://main--eds-site--24shrishti.hlx.page/query-index.json', {
       method: 'GET',
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+          throw new Error(response.statusText);
         }
-                return response.json();
-            })
-            .then(response => {
-                getResponseData(response.data);
-                responseData = response.data;
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        return response.json();
+      })
+      .then((response) => {
+        getResponseData(response.data);
+        responseData = response.data;
+      })
+      .catch(error => {
+       // console.error(error);
+      });
   }
 
   // News Tab Event Listener
