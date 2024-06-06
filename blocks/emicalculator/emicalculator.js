@@ -126,15 +126,15 @@ export default async function decorate() {
   const loanDetails = createElement('div', { class: 'loan-details' },
     createElement('div', { class: 'chart-details' },
       createElement('p', { style: 'color: #9088D2' }, 'Principal'),
-      createElement('p', { id: 'cp', style: 'color: #130F31; font-size: 17px;' })
+      createElement('p', { id: 'cp', style: 'color: #130F31; font-size: 17px;' }),
     ),
     createElement('div', { class: 'chart-details' },
       createElement('p', { style: 'color: #9088D2' }, 'Interest'),
-      createElement('p', { id: 'ci', style: 'color: #130F31; font-size: 17px;' })
+      createElement('p', { id: 'ci', style: 'color: #130F31; font-size: 17px;' }),
     ),
     createElement('div', { class: 'chart-details' },
       createElement('p', { style: 'color: #9088D2' }, 'Total Payable'),
-      createElement('p', { id: 'ct', style: 'color: #130F31; font-size: 17px;' })
+      createElement('p', { id: 'ct', style: 'color: #130F31; font-size: 17px;' }),
     ),
   );
   loanDetails.appendChild(footer);
