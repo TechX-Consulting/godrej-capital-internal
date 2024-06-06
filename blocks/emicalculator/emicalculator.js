@@ -271,8 +271,8 @@ export default async function decorate() {
 
   //  error for year
   loanPeriodText.addEventListener('input', function () {
-    if (parseFloat(this.value) < parseFloat(tenureMinYearvalue) ||
-     parseFloat(this.value) > parseFloat(tenureMaxYearvalue)) {
+    if (parseFloat(this.value) < parseFloat(tenureMinYearvalue)
+      || parseFloat(this.value) > parseFloat(tenureMaxYearvalue)) {
       loanPeriodError.style.display = 'block';
     } else {
       loanPeriodError.style.display = 'none';
@@ -281,8 +281,8 @@ export default async function decorate() {
 
   //  error for month
   loanPeriodTextMonth.addEventListener('input', function () {
-    if (parseFloat(this.value) < parseFloat(tenureMinMonthvalue) ||
-    parseFloat(this.value) > parseFloat(tenureMaxMonthvalue)) {
+    if (parseFloat(this.value) < parseFloat(tenureMinMonthvalue)
+      || parseFloat(this.value) > parseFloat(tenureMaxMonthvalue)) {
       loanPeriodMonthError.style.display = 'block';
     } else {
       loanPeriodMonthError.style.display = 'none';
