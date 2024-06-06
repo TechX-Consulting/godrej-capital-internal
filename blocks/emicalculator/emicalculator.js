@@ -358,12 +358,12 @@ export default async function decorate() {
         scales: {
           y: {
             ticks: {
-              callback: function (val) {
+              callback(val) {
                 return val.toLocaleString('en-IN', {
-                  style: 'currency',
-                  currency: 'INR',
+                    style: 'currency',
+                    currency: 'INR',
                 });
-              },
+            }
             },
           },
         },
