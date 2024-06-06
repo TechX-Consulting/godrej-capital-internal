@@ -36,12 +36,6 @@ export default async function decorate(block) {
         )
     );
 
-    // Get the meta value from the meta tag
-    // function getMetaContentByName(name) {
-    //     const metaTag = document.querySelector(`meta[name="${name}"]`);
-    //     return metaTag ? metaTag.getAttribute('content') : null;
-    // }
-
     function getDataAttributeValueByName(name) {
         const element = document.querySelector(`[data-${name}]`);
         return element ? element.getAttribute(`data-${name}`) : null;
