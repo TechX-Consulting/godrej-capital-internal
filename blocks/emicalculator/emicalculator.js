@@ -253,7 +253,8 @@ export default async function decorate() {
 
   //  error for loan amount
   loanAmtText.addEventListener('input', function () {
-    if (parseFloat(this.value) < parseFloat(loanAmountMinValue) || parseFloat(this.value) > parseFloat(loanAmountMaxValue)) {
+    if (parseFloat(this.value) < parseFloat(loanAmountMinValue)
+      || parseFloat(this.value) > parseFloat(loanAmountMaxValue)) {
       loanAmtError.style.display = 'block';
     } else {
       loanAmtError.style.display = 'none';
@@ -262,7 +263,8 @@ export default async function decorate() {
 
   //  error for loan amount
   intRateText.addEventListener('input', function () {
-    if (parseFloat(this.value) < parseFloat(interestrateMinvalue) || parseFloat(this.value) > parseFloat(interestrateMaxvalue)) {
+    if (parseFloat(this.value) < parseFloat(interestrateMinvalue)
+      || parseFloat(this.value) > parseFloat(interestrateMaxvalue)) {
       interestRateError.style.display = 'block';
     } else {
       interestRateError.style.display = 'none';
