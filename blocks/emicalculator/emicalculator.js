@@ -273,8 +273,8 @@ export default async function decorate() {
       interest += monthlyInterest;
       if (++counter == 12) {
         years.push(year++);
-        yearlyInterest.push(parseInt(interest));
-        yearPrincipal.push(parseInt(principal));
+        yearlyInterest.push(parseInt(interest,10));
+        yearPrincipal.push(parseInt(principal,10));
         counter = 0;
       }
     }
