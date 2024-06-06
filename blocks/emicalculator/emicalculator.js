@@ -26,7 +26,7 @@ export default async function decorate() {
 
   // Get the meta value from the meta tag
   // function getMetaContentByName(name) {
-  //     const metaTag = document.querySelector(`meta[name="${name}"]`);
+  //     const metaTag = document.querySelector(`meta[name='${name}']`);
   //     return metaTag ? metaTag.getAttribute('content') : null;
   // }
 
@@ -52,7 +52,7 @@ export default async function decorate() {
     createElement('div', { class: 'detail' },
       createElement('p', { style: 'color: #9088D2' }, laonamountTitle),
             createElement('div', { class: 'inputDetail' },
-        createElement('span', { class: "rupeeSpan" }, "Rs"),
+        createElement('span', { class: 'rupeeSpan' }, 'Rs'),
         createElement('input', { id: 'loan-amt-text', type: 'number', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000', style: 'color: #6258A8' })
       )),
     createElement('input', { type: 'range', id: 'loan-amount', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000' }),
@@ -65,28 +65,28 @@ export default async function decorate() {
     createElement('div', { class: 'detail' },
       createElement('p', { style: 'color: #9088D2' }, interestrateTitle),
       createElement('div', { class: 'inputDetail' },
-        createElement('span', { class: 'percentSpan' }, "%"),
+        createElement('span', { class: 'percentSpan' }, '%'),
         createElement('input', { id: 'interest-rate-text', type: 'number', min: interestrateMinvalue, max: interestrateMaxvalue, step: '0.5', style: 'color: #6258A8' }),
       ),
     ),
     createElement('input', { type: 'range', id: 'interest-rate', min: interestrateMinvalue, max: interestrateMaxvalue, step: '0.5' }),
     createElement('div', { class: 'range-values' },
-      createElement('p', { class: 'min-value' }, interestrateMinvalue + "%"),
-      createElement('p', { class: 'max-value', style: 'float: right;' }, interestrateMaxvalue + "%"))
+      createElement('p', { class: 'min-value' }, interestrateMinvalue + '%'),
+      createElement('p', { class: 'max-value', style: 'float: right;' }, interestrateMaxvalue + '%'))
   );
 
   const tenureYearsDetail = createElement('div', {},
     createElement('div', { class: 'detail' },
       createElement('p', { style: 'color: #9088D2' }, tenureTitleYear),
       createElement('div', { class: 'inputDetail' },
-        createElement('span', { class: 'yearSpan' }, "Yrs."),
+        createElement('span', { class: 'yearSpan' }, 'Yrs.'),
         createElement('input', { id: 'loan-period-text', type: 'number', min: tenureMinYearvalue, max: tenureMaxYearvalue, step: '1', style: 'color: #6258A8' })
       ),
         ),
     createElement('input', { type: 'range', id: 'loan-period', min: tenureMinYearvalue, max: tenureMaxYearvalue, step: '1' }),
     createElement('div', { class: 'range-values' },
-      createElement('p', { class: 'min-value' }, tenureMinYearvalue + " Year"),
-      createElement('p', { class: 'max-value', style: 'float: right;' }, tenureMaxYearvalue + " Year")),
+      createElement('p', { class: 'min-value' }, tenureMinYearvalue + ' Year'),
+      createElement('p', { class: 'max-value', style: 'float: right;' }, tenureMaxYearvalue + ' Year')),
   );
 
   const tenureMonthsDetail = createElement('div', {},
@@ -99,8 +99,8 @@ export default async function decorate() {
     ),
     createElement('input', { type: 'range', id: 'loan-period-month', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1' }),
     createElement('div', { class: 'range-values' },
-      createElement('p', { class: 'min-value' }, tenureMinMonthvalue + " Month"),
-      createElement('p', { class: 'max-value', style: 'float: right;' }, tenureMaxMonthvalue + " Month")),
+      createElement('p', { class: 'min-value' }, tenureMinMonthvalue + ' Month'),
+      createElement('p', { class: 'max-value', style: 'float: right;' }, tenureMaxMonthvalue + ' Month')),
   );
 
   const details = createElement('div', { class: 'details' },
@@ -109,7 +109,7 @@ export default async function decorate() {
 
   const footer = createElement('div', { class: 'footer' },
     createElement('div', { style: 'chart-detail' },
-      createElement('p', { id: 'price-container-emi' }, "Your Monthly Emi",
+      createElement('p', { id: 'price-container-emi' }, 'Your Monthly Emi',
         createElement('p', { id: 'price' }, '0'),
       )
     )
@@ -142,59 +142,59 @@ export default async function decorate() {
   container.append(header, subContainer, loanDetails);
 
   let P, R, N, M, pie, line;
-  const loanAmtSlider = document.getElementById("loan-amount");
-  const loanAmtText = document.getElementById("loan-amt-text");
-  const intRateSlider = document.getElementById("interest-rate");
-  const intRateText = document.getElementById("interest-rate-text");
-  const loanPeriodSlider = document.getElementById("loan-period");
-  const loanPeriodText = document.getElementById("loan-period-text");
-  const loanPeriodSliderMonth = document.getElementById("loan-period-month");
-  const loanPeriodTextMonth = document.getElementById("loan-period-month-text");
+  const loanAmtSlider = document.getElementById('loan-amount');
+  const loanAmtText = document.getElementById('loan-amt-text');
+  const intRateSlider = document.getElementById('interest-rate');
+  const intRateText = document.getElementById('interest-rate-text');
+  const loanPeriodSlider = document.getElementById('loan-period');
+  const loanPeriodText = document.getElementById('loan-period-text');
+  const loanPeriodSliderMonth = document.getElementById('loan-period-month');
+  const loanPeriodTextMonth = document.getElementById('loan-period-month-text');
 
 
-  loanAmtSlider.addEventListener("change", (self) => {
+  loanAmtSlider.addEventListener('change', (self) => {
     loanAmtText.value = self.target.value;
     P = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loanAmtText.addEventListener("blur", (self) => {
+  loanAmtText.addEventListener('blur', (self) => {
     loanAmtSlider.value = self.target.value;
     P = parseFloat(self.target.value);
     displayDetails();
   });
 
-  intRateSlider.addEventListener("change", (self) => {
+  intRateSlider.addEventListener('change', (self) => {
     intRateText.value = self.target.value;
     R = parseFloat(self.target.value);
     displayDetails();
   });
 
-  intRateText.addEventListener("blur", (self) => {
+  intRateText.addEventListener('blur', (self) => {
     intRateSlider.value = self.target.value;
     R = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loanPeriodSlider.addEventListener("change", (self) => {
+  loanPeriodSlider.addEventListener('change', (self) => {
     loanPeriodText.value = self.target.value;
     N = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loanPeriodText.addEventListener("blur", (self) => {
+  loanPeriodText.addEventListener('blur', (self) => {
     loanPeriodSlider.value = self.target.value;
     N = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loanPeriodSliderMonth.addEventListener("change", (self) => {
+  loanPeriodSliderMonth.addEventListener('change', (self) => {
     loanPeriodTextMonth.value = self.target.value;
     M = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loanPeriodTextMonth.addEventListener("blur", (self) => {
+  loanPeriodTextMonth.addEventListener('blur', (self) => {
     loanPeriodSliderMonth.value = self.target.value;
     M = parseFloat(self.target.value);
     displayDetails();
@@ -207,10 +207,10 @@ export default async function decorate() {
   }
 
   // Error message spans
-  const loanAmtError = createErrorSpan("Value should be between " + loanAmountMinValue + " and " + loanAmountMaxValue);
-  const interestRateError = createErrorSpan("Value should be between " + interestrateMinvalue + "% and " + interestrateMaxvalue + "%");
-  const loanPeriodError = createErrorSpan("Value should be between " + tenureMinYearvalue + " and " + tenureMaxYearvalue);
-  const loanPeriodMonthError = createErrorSpan("Value should be between " + tenureMinMonthvalue + " and " + tenureMaxMonthvalue);
+  const loanAmtError = createErrorSpan('Value should be between ' + loanAmountMinValue + ' and ' + loanAmountMaxValue);
+  const interestRateError = createErrorSpan('Value should be between ' + interestrateMinvalue + '% and ' + interestrateMaxvalue + '%');
+  const loanPeriodError = createErrorSpan('Value should be between ' + tenureMinYearvalue + ' and ' + tenureMaxYearvalue);
+  const loanPeriodMonthError = createErrorSpan('Value should be between ' + tenureMinMonthvalue + ' and ' + tenureMaxMonthvalue);
 
   // Append error message spans to their respective input containers
   amountDetail.appendChild(loanAmtError);
@@ -221,38 +221,38 @@ export default async function decorate() {
   // Event listeners for input elements to validate input values
 
   //error for loan amount
-  loanAmtText.addEventListener("input", function () {
+  loanAmtText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(loanAmountMinValue) || parseFloat(this.value) > parseFloat(loanAmountMaxValue)) {
-      loanAmtError.style.display = "block";
+      loanAmtError.style.display = 'block';
     } else {
-      loanAmtError.style.display = "none";
+      loanAmtError.style.display = 'none';
       }
   });
 
   //error for loan amount
-  intRateText.addEventListener("input", function () {
+  intRateText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(interestrateMinvalue) || parseFloat(this.value) > parseFloat(interestrateMaxvalue)) {
-      interestRateError.style.display = "block";
+      interestRateError.style.display = 'block';
     } else {
-      interestRateError.style.display = "none";
+      interestRateError.style.display = 'none';
     }
   });
 
   //error for year
-  loanPeriodText.addEventListener("input", function () {
+  loanPeriodText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(tenureMinYearvalue) || parseFloat(this.value) > parseFloat(tenureMaxYearvalue)) {
-       loanPeriodError.style.display = "block";
+       loanPeriodError.style.display = 'block';
     } else {
-      loanPeriodError.style.display = "none";
+      loanPeriodError.style.display = 'none';
     }
   });
 
   //error for month
-  loanPeriodTextMonth.addEventListener("input", function () {
+  loanPeriodTextMonth.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(tenureMinMonthvalue) || parseFloat(this.value) > parseFloat(tenureMaxMonthvalue)) {
-      loanPeriodMonthError.style.display = "block";
+      loanPeriodMonthError.style.display = 'block';
     } else {
-      loanPeriodMonthError.style.display = "none";
+      loanPeriodMonthError.style.display = 'none';
     }
   });
 
