@@ -141,13 +141,13 @@ export default async function decorate() {
 
   container.append(header, subContainer, loanDetails);
 
-  let P,
-   R,
-   N,
-   M, 
-   pie, 
-   line;
-   
+  let P;
+  let R;
+  let N;
+  let M;
+  let pie; 
+  let line;
+
   const loanAmtSlider = document.getElementById('loan-amount');
   const loanAmtText = document.getElementById('loan-amt-text');
   const intRateSlider = document.getElementById('interest-rate');
