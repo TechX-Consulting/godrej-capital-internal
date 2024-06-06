@@ -4,58 +4,58 @@ export default async function decorate(block) {
   let responseData = [];
 
 // Function for get authored label data
-function getDataAttributeValueByName(name) {
+  function getDataAttributeValueByName(name) {
     const element = document.querySelector(`[data-${name}]`);
     return element ? element.getAttribute(`data-${name}`) : null;
-}
+  }
 
-const newsTabLabel = getDataAttributeValueByName('newsTabLabel');
-const pressReleaseLabel = getDataAttributeValueByName('pressReleaseLabel');
-const inputFieldPlaceholder = getDataAttributeValueByName('inputFieldPlaceholder');
-// const sortByLabel = getDataAttributeValueByName('sortByLabel');
-// const latestToOldestLabel = getDataAttributeValueByName('latestToOldestLabel');
-// const oldestToLatestLabel = getDataAttributeValueByName('oldestToLatestLabel');
+  const newsTabLabel = getDataAttributeValueByName('newsTabLabel');
+  const pressReleaseLabel = getDataAttributeValueByName('pressReleaseLabel');
+  const inputFieldPlaceholder = getDataAttributeValueByName('inputFieldPlaceholder');
+  // const sortByLabel = getDataAttributeValueByName('sortByLabel');
+  // const latestToOldestLabel = getDataAttributeValueByName('latestToOldestLabel');
+  // const oldestToLatestLabel = getDataAttributeValueByName('oldestToLatestLabel');
 
-// Create container
-const container = document.createElement('div');
-container.className = 'container';
+  // Create container
+  const container = document.createElement('div');
+  container.className = 'container';
 
-// Create tabs container
-const tabsContainer = document.createElement('div');
-tabsContainer.className = 'tabs';
+  // Create tabs container
+  const tabsContainer = document.createElement('div');
+  tabsContainer.className = 'tabs';
 
-const newsTab = document.createElement('div');
-const pressReleaseTab = document.createElement('div');
+  const newsTab = document.createElement('div');
+  const pressReleaseTab = document.createElement('div');
 
-newsTab.id = 'newsTab';
-newsTab.className = 'tab active';
-newsTab.textContent = newsTabLabel;
+  newsTab.id = 'newsTab';
+  newsTab.className = 'tab active';
+  newsTab.textContent = newsTabLabel;
 
-pressReleaseTab.id = 'pressReleaseTab';
-pressReleaseTab.className = 'tab';
-pressReleaseTab.textContent = pressReleaseLabel;
+  pressReleaseTab.id = 'pressReleaseTab';
+  pressReleaseTab.className = 'tab';
+  pressReleaseTab.textContent = pressReleaseLabel;
 
-tabsContainer.appendChild(newsTab);
-tabsContainer.appendChild(pressReleaseTab);
-container.appendChild(tabsContainer);
+  tabsContainer.appendChild(newsTab);
+  tabsContainer.appendChild(pressReleaseTab);
+  container.appendChild(tabsContainer);
 
-// Create controls container
-const controlsContainer = document.createElement('div');
-controlsContainer.className = 'controls';
+  // Create controls container
+  const controlsContainer = document.createElement('div');
+  controlsContainer.className = 'controls';
 
-const searchInput = document.createElement('input');
-searchInput.type = 'text';
-searchInput.id = 'searchInput';
-searchInput.placeholder = inputFieldPlaceholder;
+  const searchInput = document.createElement('input');
+  searchInput.type = 'text';
+  searchInput.id = 'searchInput';
+  searchInput.placeholder = inputFieldPlaceholder;
 
-const sortDropdown = document.createElement('select');
-sortDropdown.id = 'sortDropdown';
-const optionNewToOld = document.createElement('option');
-optionNewToOld.value = 'newToOld';
-optionNewToOld.textContent = 'New to Old';
-const optionOldToNew = document.createElement('option');
-optionOldToNew.value = 'oldToNew';
-optionOldToNew.textContent = 'Old to New';
+  const sortDropdown = document.createElement('select');
+  sortDropdown.id = 'sortDropdown';
+  const optionNewToOld = document.createElement('option');
+  optionNewToOld.value = 'newToOld';
+  optionNewToOld.textContent = 'New to Old';
+  const optionOldToNew = document.createElement('option');
+  optionOldToNew.value = 'oldToNew';
+  optionOldToNew.textContent = 'Old to New';
 
 sortDropdown.appendChild(optionNewToOld);
 sortDropdown.appendChild(optionOldToNew);
