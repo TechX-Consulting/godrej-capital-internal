@@ -272,9 +272,10 @@ export default async function decorate() {
       principal += emi - monthlyInterest;
       interest += monthlyInterest;
       if (++counter == 12) {
-        years.push(year++);
-        yearlyInterest.push(parseInt(interest,10));
-        yearPrincipal.push(parseInt(principal,10));
+        years.push(year);
+        year++;
+        yearlyInterest.push(parseInt(interest, 10));
+        yearPrincipal.push(parseInt(principal, 10));
         counter = 0;
       }
     }
