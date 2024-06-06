@@ -110,10 +110,13 @@ export default async function decorate() {
   const footer = createElement(
     'div',
     { class: 'footer' },
-    createElement('div', { style: 'chart-detail' },
+    createElement(
+      'div',
+      { style: 'chart-detail' },
       createElement(
         'p',
-        { id: 'price-container-emi' }, 'Your Monthly Emi',
+        { id: 'price-container-emi' },
+        'Your Monthly Emi',
         createElement('p', { id: 'price' }, '0'),
       ),
     ),
