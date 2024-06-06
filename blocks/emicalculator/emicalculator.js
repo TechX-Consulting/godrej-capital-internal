@@ -16,9 +16,11 @@ export default async function decorate() {
     return element;
   }
 
-  const header = createElement('div', 
+  const header = createElement(
+    'div', 
     { class: 'header' },
-    createElement('h1', {}, 'Loan Calculator'),
+    createElement(
+    'h1', {}, 'Loan Calculator'),
     createElement('button', {},
       createElement('i', { class: 'bi bi-list' })
     )
