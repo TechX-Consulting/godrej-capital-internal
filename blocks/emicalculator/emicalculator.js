@@ -124,12 +124,14 @@ export default async function decorate() {
   const breakup = createElement(
     'div',
     { class: 'breakup' },
-    createElement('canvas', { id: 'pieChart' }),
+    createElement('canvas',
+      { id: 'pieChart' }),
   );
 
   const subContainer = createElement(
     'div',
-    { class: 'sub-container' }, view, breakup);
+    { class: 'sub-container' },
+    view, breakup);
 
   const loanDetails = createElement(
     'div',
