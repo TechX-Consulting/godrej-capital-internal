@@ -232,7 +232,7 @@ export default async function decorate() {
   });
 
 
-    //error message
+    //  error message
   function createErrorSpan(message) {
     return createElement('span', { class: 'error-message', style: 'color: red; display: none;' }, message);
   }
