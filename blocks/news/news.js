@@ -83,16 +83,41 @@ export default async function decorate(block) {
 
   // Function for active tabs
   function setActiveTab(tab) {
-        if (tab === 'news') {
-            newsTab.classList.add('active');
-            pressReleaseTab.classList.remove('active');
-            newsContent.classList.add('active');
-            pressReleaseContent.classList.remove('active');
+    if (tab === 'news') {
+      newsTab.classList.add('active');
+      pressReleaseTab.classList.remove('active');
+      newsContent.classList.add('active');
+      pressReleaseContent.classList.remove('active');
+    } else {
+       newsTab.classList.remove('active');
+       pressReleaseTab.classList.add('active');
+       newsContent.classList.remove('active');
+       pressReleaseContent.classList.add('active');
+    }
+  }
+
+  // Function to render news items
+  function getResponseData(filteredData) {
+        newsContent.innerHTML = '';
+    
+        if (filteredData.length === 0) {
+            newsContent.innerHTML = '<p>No results found</p>';
         } else {
-            newsTab.classList.remove('active');
-            pressReleaseTab.classList.add('active');
-            newsContent.classList.remove('active');
-            pressReleaseContent.classList.add('active');
+            filteredData.forEach(item => {
+                const newsContainerData = document.createElement('div');
+                newsContainerData.className = 'newsContainer';
+    
+                const titleElement = document.createElement('h3');
+                titleElement.textContent = item.title;
+    
+                const descriptionElement = document.createElement('p');
+                descriptionElement.textContent = item.description;
+    
+                newsContainerData.appendChild(titleElement);
+                newsContainerData.appendChild(descriptionElement);
+    
+                newsContent.appendChild(newsContainerData);
+            });
         }
   }
 
@@ -112,7 +137,7 @@ export default async function decorate(block) {
                 responseData = response.data;
             })
             .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
+                console.error(error);
             });
   }
 
@@ -128,33 +153,8 @@ export default async function decorate(block) {
     setActiveTab('pressRelease');
   });
 
-  // Function to render news items
-  function getResponseData(filteredData) {
-    newsContent.innerHTML = '';
-
-    if (filteredData.length === 0) {
-        newsContent.innerHTML = '<p>No results found</p>';
-    } else {
-        filteredData.forEach(item => {
-            const newsContainerData = document.createElement('div');
-            newsContainerData.className = 'newsContainer';
-
-            const titleElement = document.createElement('h3');
-            titleElement.textContent = item.title;
-
-            const descriptionElement = document.createElement('p');
-            descriptionElement.textContent = item.description;
-
-            newsContainerData.appendChild(titleElement);
-            newsContainerData.appendChild(descriptionElement);
-
-            newsContent.appendChild(newsContainerData);
-        });
-    }
-  }
-
   // Add event listener to the search input
-  searchInput.addEventListener('input', function (event) {
+  searchInput.addEventListener('input', function handleSearchInput(event) {
     const searchText = event.target.value.toLowerCase();
 
     const filteredData = responseData.filter(item => {
