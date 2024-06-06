@@ -4,16 +4,17 @@ export default async function decorate() {
   function createElement(type, attributes = {}, ...children) {
     const element = document.createElement(type);
     Object.entries(attributes).forEach(([key, value]) => {
-        element.setAttribute(key, value);
+      element.setAttribute(key, value);
+    });
+      
+    children.forEach(child => {
+        if (typeof child === 'string') {
+          element.appendChild(document.createTextNode(child));
+        } else {
+          element.appendChild(child);
+        }
       });
       
-    for (const child of children) {
-      if (typeof child === 'string') {
-        element.appendChild(document.createTextNode(child));
-      } else {
-        element.appendChild(child);
-      }
-    }
     return element;
   }
 
