@@ -207,10 +207,10 @@ export default async function decorate() {
   }
 
   // Error message spans
-  const loanAmtError = createErrorSpan('Value should be between ' + loanAmountMinValue + ' and ' + loanAmountMaxValue);
-  const interestRateError = createErrorSpan('Value should be between ' + interestrateMinvalue + '% and ' + interestrateMaxvalue + '%');
-  const loanPeriodError = createErrorSpan('Value should be between ' + tenureMinYearvalue + ' and ' + tenureMaxYearvalue);
-  const loanPeriodMonthError = createErrorSpan('Value should be between ' + tenureMinMonthvalue + ' and ' + tenureMaxMonthvalue);
+  const loanAmtError = createErrorSpan(`Value should be between ${loanAmountMinValue} and ${loanAmountMaxValue}`);
+  const interestRateError = createErrorSpan(`Value should be between ${interestrateMinvalue} % and  ${interestrateMaxvalue}%`);
+  const loanPeriodError = createErrorSpan(`Value should be between ${tenureMinYearvalue} and ${tenureMaxYearvalue}`);
+  const loanPeriodMonthError = createErrorSpan(`Value should be between ${tenureMinMonthvalue} and ${tenureMaxMonthvalue}`);
 
   // Append error message spans to their respective input containers
   amountDetail.appendChild(loanAmtError);
