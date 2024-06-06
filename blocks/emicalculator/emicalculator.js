@@ -152,6 +152,31 @@ export default async function decorate() {
   const loanPeriodTextMonth = document.getElementById('loan-period-month-text');
 
 
+  function displayDetails() {
+    const r = parseFloat(R) / 1200;
+    const n = parseFloat(N);
+    const m = parseFloat(M);
+    const totalMonths = n * 12 + m;
+
+    const num = P * r * (1 + r) ** totalMonths;
+    const denom = (1 + r) ** totalMonths - 1;
+    const emi = num / denom;
+
+    const payableInterest = calculateLoanDetails(P, r, emi, n, m);
+
+    const opts = { style: 'currency', currency: 'INR' };
+
+    document.querySelector('#cp').innerText = P.toLocaleString('en-IN', opts);
+    document.querySelector('#ci').innerText = payableInterest.toLocaleString('en-IN', opts);
+    document.querySelector('#ct').innerText = (P + payableInterest).toLocaleString('en-IN', opts);
+    document.querySelector('#price').innerText = emi.toLocaleString('en-IN', opts);
+
+    pie.data.datasets[0].data[0] = P;
+    pie.data.datasets[0].data[1] = payableInterest;
+    pie.update();
+    line.update();
+  }
+
   loanAmtSlider.addEventListener('change', (self) => {
     loanAmtText.value = self.target.value;
     P = parseFloat(self.target.value);
@@ -241,7 +266,7 @@ export default async function decorate() {
   //error for year
   loanPeriodText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(tenureMinYearvalue) || parseFloat(this.value) > parseFloat(tenureMaxYearvalue)) {
-       loanPeriodError.style.display = 'block';
+      loanPeriodError.style.display = 'block';
     } else {
       loanPeriodError.style.display = 'none';
     }
@@ -285,30 +310,6 @@ export default async function decorate() {
     return totalInterest;
   }
 
-  function displayDetails() {
-    const r = parseFloat(R) / 1200;
-    const n = parseFloat(N);
-    const m = parseFloat(M);
-    const totalMonths = n * 12 + m;
-
-    const num = P * r * (1 + r) ** totalMonths;
-    const denom = (1 + r) ** totalMonths - 1;
-    const emi = num / denom;
-
-    const payableInterest = calculateLoanDetails(P, r, emi, n, m);
-
-    const opts = { style: 'currency', currency: 'INR' };
-
-    document.querySelector('#cp').innerText = P.toLocaleString('en-IN', opts);
-    document.querySelector('#ci').innerText = payableInterest.toLocaleString('en-IN', opts);
-    document.querySelector('#ct').innerText = (P + payableInterest).toLocaleString('en-IN', opts);
-    document.querySelector('#price').innerText = emi.toLocaleString('en-IN', opts);
-
-    pie.data.datasets[0].data[0] = P;
-    pie.data.datasets[0].data[1] = payableInterest;
-    pie.update();
-    line.update();
-  }
 
   function initialize() {
     loanAmtSlider.value = loanAmountMinValue;
