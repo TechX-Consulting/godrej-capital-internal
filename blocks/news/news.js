@@ -72,61 +72,61 @@ export default async function decorate(block) {
 
   newsContent.id = 'newsContent';
   newsContent.className = 'content active';
-  newsContent.innerHTML = `<h2>News Content</h2><p>Content for News.</p>`;
+  newsContent.innerHTML = '<h2>News Content</h2><p>Content for News.</p>';
 
   pressReleaseContent.id = 'pressReleaseContent';
   pressReleaseContent.className = 'content';
-  pressReleaseContent.innerHTML = `<h2>Press Release Content</h2><p>Content for Press Release.</p>`;
+  pressReleaseContent.innerHTML = '<h2>Press Release Content</h2><p>Content for Press Release.</p>';
 
   block.appendChild(newsContent);
   block.appendChild(pressReleaseContent);
 
-  // News Tab Event Listener
-  newsTab.addEventListener('click', function () {
-    setActiveTab('news');
-    // Call the function in which for api response and render data on news tab click event.
-    getApiResponse();
-  });
-
-  // Press Release Tab Event Listener
-  pressReleaseTab.addEventListener('click', function () {
-    setActiveTab('pressRelease');
-  });
-
   // Function for active tabs
   function setActiveTab(tab) {
-    if (tab === 'news') {
-        newsTab.classList.add('active');
-        pressReleaseTab.classList.remove('active');
-        newsContent.classList.add('active');
-        pressReleaseContent.classList.remove('active');
-    } else {
-        newsTab.classList.remove('active');
-        pressReleaseTab.classList.add('active');
-        newsContent.classList.remove('active');
-        pressReleaseContent.classList.add('active');
-    }
+        if (tab === 'news') {
+            newsTab.classList.add('active');
+            pressReleaseTab.classList.remove('active');
+            newsContent.classList.add('active');
+            pressReleaseContent.classList.remove('active');
+        } else {
+            newsTab.classList.remove('active');
+            pressReleaseTab.classList.add('active');
+            newsContent.classList.remove('active');
+            pressReleaseContent.classList.add('active');
+        }
   }
 
   // Function for an api call
   function getApiResponse() {
-    fetch('https://main--eds-site--24shrishti.hlx.page/query-index.json', {
-        method: 'GET'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
+        fetch('https://main--eds-site--24shrishti.hlx.page/query-index.json', {
+            method: 'GET'
         })
-        .then(response => {
-            getResponseData(response.data);
-            responseData = response.data;
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(response => {
+                getResponseData(response.data);
+                responseData = response.data;
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
   }
+
+  // News Tab Event Listener
+  newsTab.addEventListener('click', function handleNewsTabClick() {
+    setActiveTab('news');
+    // Call the function to get API response and render data on news tab click event.
+    getApiResponse();
+  });
+  
+  // Press Release Tab Event Listener
+  pressReleaseTab.addEventListener('click', function handlePressReleaseTabClick() {
+    setActiveTab('pressRelease');
+  });
 
   // Function to render news items
   function getResponseData(filteredData) {
