@@ -1,7 +1,7 @@
 export default async function decorate(block) {
 
-// This will be your API response data
-let responseData = [];
+  // This will be your API response data
+  let responseData = [];
 
 // Function for get authored label data
 function getDataAttributeValueByName(name) {
