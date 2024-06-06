@@ -251,7 +251,7 @@ export default async function decorate() {
   // Event listeners for input elements to validate input values
 
   //  error for loan amount
-  loanAmtText.addEventListener('input', function () {
+  loanAmtText.addEventListener('input', function handleLoanAmountInput() {
     if (parseFloat(this.value) < parseFloat(loanAmountMinValue)
       || parseFloat(this.value) > parseFloat(loanAmountMaxValue)) {
       loanAmtError.style.display = 'block';
@@ -261,7 +261,7 @@ export default async function decorate() {
   });
 
   //  error for loan amount
-  intRateText.addEventListener('input', function () {
+  intRateText.addEventListener('input', function handleInterestRateInput() {
     if (parseFloat(this.value) < parseFloat(interestrateMinvalue)
       || parseFloat(this.value) > parseFloat(interestrateMaxvalue)) {
       interestRateError.style.display = 'block';
@@ -271,7 +271,7 @@ export default async function decorate() {
   });
 
   //  error for year
-  loanPeriodText.addEventListener('input', function () {
+  loanPeriodText.addEventListener('input', function handleYearInput() {
     if (parseFloat(this.value) < parseFloat(tenureMinYearvalue)
       || parseFloat(this.value) > parseFloat(tenureMaxYearvalue)) {
       loanPeriodError.style.display = 'block';
@@ -281,7 +281,7 @@ export default async function decorate() {
   });
 
   //  error for month
-  loanPeriodTextMonth.addEventListener('input', function () {
+  loanPeriodTextMonth.addEventListener('input', function handleMonthInput() {
     if (parseFloat(this.value) < parseFloat(tenureMinMonthvalue)
       || parseFloat(this.value) > parseFloat(tenureMaxMonthvalue)) {
       loanPeriodMonthError.style.display = 'block';
