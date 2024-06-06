@@ -103,15 +103,15 @@ export default async function decorate(block) {
       newsContent.innerHTML = '<p>No results found</p>';
     } else {
       filteredData.forEach(item => {
-      const newsContainerData = document.createElement('div');
-      newsContainerData.className = 'newsContainer';
-      const titleElement = document.createElement('h3');
-      titleElement.textContent = item.title;
-      const descriptionElement = document.createElement('p');
-      descriptionElement.textContent = item.description;
-      newsContainerData.appendChild(titleElement);
-      newsContainerData.appendChild(descriptionElement);
-      newsContent.appendChild(newsContainerData);
+        const newsContainerData = document.createElement('div');
+        newsContainerData.className = 'newsContainer';
+        const titleElement = document.createElement('h3');
+        titleElement.textContent = item.title;
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = item.description;
+        newsContainerData.appendChild(titleElement);
+        newsContainerData.appendChild(descriptionElement);
+        newsContent.appendChild(newsContainerData);
       });
     }
   }
