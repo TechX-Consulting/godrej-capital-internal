@@ -111,7 +111,9 @@ export default async function decorate() {
     'div',
     { class: 'footer' },
     createElement('div', { style: 'chart-detail' },
-      createElement('p', { id: 'price-container-emi' }, 'Your Monthly Emi',
+      createElement(
+        'p',
+        { id: 'price-container-emi' }, 'Your Monthly Emi',
         createElement('p', { id: 'price' }, '0'),
       ),
     ),
@@ -129,7 +131,7 @@ export default async function decorate() {
     { class: 'breakup' },
     createElement(
       'canvas',
-      { id: 'pieChart' }
+      { id: 'pieChart' },
     ),
   );
 
