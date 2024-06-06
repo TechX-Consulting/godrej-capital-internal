@@ -259,19 +259,19 @@ export default async function decorate() {
 
   function calculateLoanDetails(p, r, emi, n, m) {
     let totalInterest = 0;
-    let yearlyInterest = [];
-    let yearPrincipal = [];
-    let years = [];
+    const yearlyInterest = [];
+    const yearPrincipal = [];
+    const years = [];
     let year = 1;
     let [counter, principal, interest] = [0, 0, 0];
-    let totalMonths = n * 12 + m;
+    const totalMonths = n * 12 + m;
     for (let i = 0; i < totalMonths; i++) {
-      let monthlyInterest = p * r;
+      const monthlyInterest = p * r;
       p = p - (emi - monthlyInterest);
       totalInterest += monthlyInterest;
       principal += emi - monthlyInterest;
       interest += monthlyInterest;
-      if (++counter == 12) {
+      if (++counter === 12) {
         years.push(year);
         year++;
         yearlyInterest.push(parseInt(interest, 10));
