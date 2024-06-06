@@ -304,11 +304,11 @@ export default async function decorate() {
       interest += monthlyInterest;
       counter += 1;
       if (counter === 12) {
-          years.push(year);
-          year += 1;
-          yearlyInterest.push(parseInt(interest, 10));
-          yearPrincipal.push(parseInt(principal, 10));
-          counter = 0;
+        years.push(year);
+        year += 1;
+        yearlyInterest.push(parseInt(interest, 10));
+        yearPrincipal.push(parseInt(principal, 10));
+        counter = 0;
       }
     }
     line.data.datasets[0].data = yearPrincipal;
@@ -316,8 +316,7 @@ export default async function decorate() {
     line.data.labels = years;
     return totalInterest;
   }
-
-
+  
   function initialize() {
     loanAmtSlider.value = loanAmountMinValue;
     loanAmtText.value = loanAmountMinValue;
