@@ -1,21 +1,22 @@
-export default async function decorate(block) {
-  var container = document.querySelector('.loaneligibility');
-  var selectProduct; 
-  var optionsArray;
-  var i;
-  var option;
-  var applyButton;
-  var P, R, N, M, E, pie, line,
-    loan_amt_slider,
-    loan_amt_text,
-    loan_period_text_month,
-    loan_period_slider_month,
-    loan_period_text,
-    loan_period_slider,
-    int_rate_text,
-    int_rate_slider,
-    exisiting_emi_amount_slider,
-    exisiting_emi_text;
+export default async function decorate() {
+    const container = document.querySelector('.loaneligibility');
+    let selectProduct;
+    let optionsArray;
+    let i;
+    let option;
+    let applyButton;
+    let P;
+    var R, N, M, E, pie, line,
+        loan_amt_slider,
+        loan_amt_text,
+        loan_period_text_month,
+        loan_period_slider_month,
+        loan_period_text,
+        loan_period_slider,
+        int_rate_text,
+        int_rate_slider,
+        exisiting_emi_amount_slider,
+        exisiting_emi_text;
 
     function createElement(type, attributes = {}, ...children) {
         const element = document.createElement(type);
