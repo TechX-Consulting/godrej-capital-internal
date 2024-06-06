@@ -102,7 +102,7 @@ export default async function decorate(block) {
     if (filteredData.length === 0) {
       newsContent.innerHTML = '<p>No results found</p>';
     } else {
-      filteredData.forEach(item => {
+      filteredData.forEach((item) => {
         const newsContainerData = document.createElement('div');
         newsContainerData.className = 'newsContainer';
         const titleElement = document.createElement('h3');
@@ -131,8 +131,8 @@ export default async function decorate(block) {
         getResponseData(response.data);
         responseData = response.data;
       })
-      .catch(error => {
-       // console.error(error);
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -142,7 +142,7 @@ export default async function decorate(block) {
     // Call the function to get API response and render data on news tab click event.
     getApiResponse();
   });
-  
+
   // Press Release Tab Event Listener
   pressReleaseTab.addEventListener('click', function handlePressReleaseTabClick() {
     setActiveTab('pressRelease');
@@ -152,7 +152,7 @@ export default async function decorate(block) {
   searchInput.addEventListener('input', function handleSearchInput(event) {
     const searchText = event.target.value.toLowerCase();
 
-    const filteredData = responseData.filter(item => {
+    const filteredData = responseData.filter((item) => {
         return item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);
     });
     getResponseData(filteredData);
