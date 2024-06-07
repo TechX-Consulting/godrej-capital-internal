@@ -30,7 +30,7 @@ export default async function decorate() {
       element.setAttribute(key, value);
     });
 
-    children.forEach(child => {
+    children.forEach((child) => {
       if (typeof child === 'string') {
         element.appendChild(document.createTextNode(child));
       } else {
@@ -41,7 +41,9 @@ export default async function decorate() {
     return element;
   }
 
-  const header = createElement('div', { class: 'header' },
+  const header = createElement(
+    'div',
+    { class: 'header' },
     createElement('h1', {}, 'Loan Eligibility  Calculator'),
     createElement('button', {},
       createElement('i', { class: 'bi bi-list' })
@@ -73,13 +75,13 @@ export default async function decorate() {
   const redirectionPath = getDataAttributeValueByName('redirectionPath');
   const product_list = getDataAttributeValueByName('product-list');
 
-  // Create a select element
+  //  Create a select element
   selectProduct = document.createElement('select');
 
-  // Split the string into an array of loan options
+  //  Split the string into an array of loan options
   optionsArray = product_list.split(',');
 
-  // Loop through the array and create option elements
+  //   Loop through the array and create option elements
   for (i = 0; i < optionsArray.length; i++) {
     option = document.createElement('option');
     option.value = optionsArray[i].toLowerCase().replace(/ /g, '-');
@@ -302,28 +304,28 @@ export default async function decorate() {
     displayDetails();
   });
 
-  //error message
+  //  error message
   function createErrorSpan(message) {
     return createElement('span', { class: 'error-message', style: 'color: red; display: none;' }, message);
   }
 
-  // Error message spans
+  //   Error message spans
   const loanAmtError = createErrorSpan('Value should be between ' + loanAmountMinValue + ' and ' + loanAmountMaxValue);
   const interestRateError = createErrorSpan('Value should be between ' + interestrate_minvalue + '% and ' + interestrate_maxvalue + '%');
   const exisitingEmiError = createErrorSpan('Value should be between' + existing_emi_min + 'and ' + existing_emi_max);
   const loanPeriodError = createErrorSpan('Value should be between ' + tenure_min_yearvalue + ' and ' + tenure_max_yearvalue);
   const loanPeriodMonthError = createErrorSpan('Value should be between ' + tenure_min_monthvalue + ' and ' + tenure_max_monthvalue);
 
-  // Append error message spans to their respective input containers
+  //   Append error message spans to their respective input containers
   amountDetail.appendChild(loanAmtError);
   interestDetail.appendChild(interestRateError);
   tenureYearsDetail.appendChild(loanPeriodError);
   tenureMonthsDetail.appendChild(loanPeriodMonthError);
   existing_emi.appendChild(exisitingEmiError);
 
-  // Event listeners for input elements to validate input values
+  //   Event listeners for input elements to validate input values
 
-  //error for loan amount
+  //  error for loan amount
   loanAmtText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(loanAmountMinValue) || parseFloat(this.value) > parseFloat(loanAmountMaxValue)) {
       loanAmtError.style.display = 'block';
@@ -332,7 +334,7 @@ export default async function decorate() {
     }
   });
 
-  //error for existing emi
+  //  error for existing emi
   exisitingEmiText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(existing_emi_min) || parseFloat(this.value) > parseFloat(existing_emi_max)) {
       exisitingEmiError.style.display = 'block';
@@ -341,7 +343,7 @@ export default async function decorate() {
     }
   })
 
-  //error for interest amount
+  //  error for interest amount
   intRateText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(interestrate_minvalue) || parseFloat(this.value) > parseFloat(interestrate_maxvalue)) {
       interestRateError.style.display = 'block';
@@ -350,7 +352,7 @@ export default async function decorate() {
     }
   });
 
-  //error for year
+  //  error for year
   loanPeriodText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(tenure_min_yearvalue) || parseFloat(this.value) > parseFloat(tenure_max_yearvalue)) {
       loanPeriodError.style.display = 'block';
@@ -359,7 +361,7 @@ export default async function decorate() {
     }
   });
 
-  //error for month
+  // error for month
   loanPeriodTextMonth.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(tenure_min_monthvalue) || parseFloat(this.value) > parseFloat(tenure_max_monthvalue)) {
       loanPeriodMonthError.style.display = 'block';
@@ -368,7 +370,7 @@ export default async function decorate() {
     }
   });
 
-  //Set the product type in the apply button data attributes. 
+  // Set the product type in the apply button data attributes. 
   selectProduct.addEventListener('input', function () {
 
     var selectedValue = this.value;
@@ -377,7 +379,7 @@ export default async function decorate() {
 
   });
 
-  // Handle button click event to redirect with query parameter
+  //  Handle button click event to redirect with query parameter
   document.getElementById('apply-btn').addEventListener('click', function () {
     var productValue = this.getAttribute('data-product');
     if (productValue) {
@@ -424,7 +426,7 @@ export default async function decorate() {
   }
 
   function initialize() {
-    // Set input values to their minimum values
+    //  Set input values to their minimum values
     loanAmtSlider.value = loanAmountMinValue;
     loanAmtText.value = loanAmountMinValue;
     P = parseFloat(loanAmountMinValue);
