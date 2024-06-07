@@ -62,7 +62,7 @@ export default async function decorate(block) {
     const itemsPerPage = 2;
     let currentPage = 1;
 
-     // Function to create cards
+    // Function to create cards
     function createCards(data) {
       cardContainer.innerHTML = '';
       data.forEach(entry => {
