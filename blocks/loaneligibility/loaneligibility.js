@@ -7,16 +7,16 @@ export default async function decorate() {
   let applyButton;
   let P;
   var R, N, M, E, pie, line,
-    loan_amt_slider,
-    loan_amt_text,
-    loan_period_text_month,
-    loan_period_slider_month,
-    loan_period_text,
-    loan_period_slider,
-    int_rate_text,
-    int_rate_slider,
-    exisiting_emi_amount_slider,
-    exisiting_emi_text;
+    loanAmtSlider,
+    loanAmtText,
+    loanPeriodTextMonth,
+    loanPeriodSliderMonth,
+    loanPeriodText,
+    loanPeriodSlider,
+    intRateText,
+    intRateSlider,
+    exisitingEmiAmountSlider,
+    exisitingEmiAmountSlider;
 
   function createElement(type, attributes = {}, ...children) {
     const element = document.createElement(type);
@@ -192,75 +192,75 @@ export default async function decorate() {
 
   container.append(header, subContainer, loanDetails);
 
-  loan_amt_slider = document.getElementById('loan-amount');
-  loan_amt_text = document.getElementById('loan-amt-text');
+  loanAmtSlider = document.getElementById('loan-amount');
+  loanAmtText = document.getElementById('loan-amt-text');
 
-  exisiting_emi_text = document.getElementById('exisiting-emi-text');
-  exisiting_emi_amount_slider = document.getElementById('exisiting-emi-amount');
+  exisitingEmiAmountSlider = document.getElementById('exisiting-emi-text');
+  exisitingEmiAmountSlider = document.getElementById('exisiting-emi-amount');
 
-  int_rate_slider = document.getElementById('interest-rate');
-  int_rate_text = document.getElementById('interest-rate-text');
-  loan_period_slider = document.getElementById('loan-period');
-  loan_period_text = document.getElementById('loan-period-text');
-  loan_period_slider_month = document.getElementById('loan-period-month');
-  loan_period_text_month = document.getElementById('loan-period-month-text');
+  intRateSlider = document.getElementById('interest-rate');
+  intRateText = document.getElementById('interest-rate-text');
+  loanPeriodSlider = document.getElementById('loan-period');
+  loanPeriodText = document.getElementById('loan-period-text');
+  loanPeriodSliderMonth = document.getElementById('loan-period-month');
+  loanPeriodTextMonth = document.getElementById('loan-period-month-text');
 
-  loan_amt_slider.addEventListener('change', (self) => {
-    loan_amt_text.value = self.target.value;
+  loanAmtSlider.addEventListener('change', (self) => {
+    loanAmtText.value = self.target.value;
     P = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loan_amt_text.addEventListener('blur', (self) => {
-    loan_amt_slider.value = self.target.value;
+  loanAmtText.addEventListener('blur', (self) => {
+    loanAmtSlider.value = self.target.value;
     P = parseFloat(self.target.value);
     displayDetails();
   });
 
-  exisiting_emi_amount_slider.addEventListener('change', (self) => {
-    exisiting_emi_text.value = self.target.value;
+  exisitingEmiAmountSlider.addEventListener('change', (self) => {
+    exisitingEmiAmountSlider.value = self.target.value;
     E = parseFloat(self.target.value);
     displayDetails();
   });
 
-  exisiting_emi_text.addEventListener('blur', (self) => {
-    exisiting_emi_amount_slider.value = self.target.value;
+  exisitingEmiAmountSlider.addEventListener('blur', (self) => {
+    exisitingEmiAmountSlider.value = self.target.value;
     E = parseFloat(self.target.value);
     displayDetails();
   });
 
-  int_rate_slider.addEventListener('change', (self) => {
-    int_rate_text.value = self.target.value;
+  intRateSlider.addEventListener('change', (self) => {
+    intRateText.value = self.target.value;
     R = parseFloat(self.target.value);
     displayDetails();
   });
 
-  int_rate_text.addEventListener('blur', (self) => {
-    int_rate_slider.value = self.target.value;
+  intRateText.addEventListener('blur', (self) => {
+    intRateSlider.value = self.target.value;
     R = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loan_period_slider.addEventListener('change', (self) => {
-    loan_period_text.value = self.target.value;
+  loanPeriodSlider.addEventListener('change', (self) => {
+    loanPeriodText.value = self.target.value;
     N = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loan_period_text.addEventListener('blur', (self) => {
-    loan_period_slider.value = self.target.value;
+  loanPeriodText.addEventListener('blur', (self) => {
+    loanPeriodSlider.value = self.target.value;
     N = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loan_period_slider_month.addEventListener('change', (self) => {
-    loan_period_text_month.value = self.target.value;
+  loanPeriodSliderMonth.addEventListener('change', (self) => {
+    loanPeriodTextMonth.value = self.target.value;
     M = parseFloat(self.target.value);
     displayDetails();
   });
 
-  loan_period_text_month.addEventListener('blur', (self) => {
-    loan_period_slider_month.value = self.target.value;
+  loanPeriodTextMonth.addEventListener('blur', (self) => {
+    loanPeriodSliderMonth.value = self.target.value;
     M = parseFloat(self.target.value);
     displayDetails();
   });
@@ -287,7 +287,7 @@ export default async function decorate() {
   // Event listeners for input elements to validate input values
 
   //error for loan amount
-  loan_amt_text.addEventListener('input', function () {
+  loanAmtText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(loanAmountMinValue) || parseFloat(this.value) > parseFloat(loanAmountMaxValue)) {
       loanAmtError.style.display = 'block';
     } else {
@@ -296,7 +296,7 @@ export default async function decorate() {
   });
 
   //error for existing emi
-  exisiting_emi_text.addEventListener('input', function () {
+  exisitingEmiAmountSlider.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(existing_emi_min) || parseFloat(this.value) > parseFloat(existing_emi_max)) {
       exisitingEmiError.style.display = 'block';
     } else {
@@ -305,7 +305,7 @@ export default async function decorate() {
   })
 
   //error for interest amount
-  int_rate_text.addEventListener('input', function () {
+  intRateText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(interestrate_minvalue) || parseFloat(this.value) > parseFloat(interestrate_maxvalue)) {
       interestRateError.style.display = 'block';
     } else {
@@ -314,7 +314,7 @@ export default async function decorate() {
   });
 
   //error for year
-  loan_period_text.addEventListener('input', function () {
+  loanPeriodText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(tenure_min_yearvalue) || parseFloat(this.value) > parseFloat(tenure_max_yearvalue)) {
       loanPeriodError.style.display = 'block';
     } else {
@@ -323,7 +323,7 @@ export default async function decorate() {
   });
 
   //error for month
-  loan_period_text_month.addEventListener('input', function () {
+  loanPeriodTextMonth.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(tenure_min_monthvalue) || parseFloat(this.value) > parseFloat(tenure_max_monthvalue)) {
       loanPeriodMonthError.style.display = 'block';
     } else {
@@ -418,20 +418,20 @@ export default async function decorate() {
 
   function initialize() {
     // Set input values to their minimum values
-    loan_amt_slider.value = loanAmountMinValue;
-    loan_amt_text.value = loanAmountMinValue;
+    loanAmtSlider.value = loanAmountMinValue;
+    loanAmtText.value = loanAmountMinValue;
     P = parseFloat(loanAmountMinValue);
 
-    int_rate_slider.value = interestrate_minvalue;
-    int_rate_text.value = interestrate_minvalue;
+    intRateSlider.value = interestrate_minvalue;
+    intRateText.value = interestrate_minvalue;
     R = parseFloat(interestrate_minvalue);
 
-    loan_period_slider.value = tenure_min_yearvalue;
-    loan_period_text.value = tenure_min_yearvalue;
+    loanPeriodSlider.value = tenure_min_yearvalue;
+    loanPeriodText.value = tenure_min_yearvalue;
     N = parseFloat(tenure_min_yearvalue);
 
-    loan_period_slider_month.value = tenure_min_monthvalue;
-    loan_period_text_month.value = tenure_min_monthvalue;
+    loanPeriodSliderMonth.value = tenure_min_monthvalue;
+    loanPeriodTextMonth.value = tenure_min_monthvalue;
     M = parseFloat(tenure_min_monthvalue);
 
     line = new Chart(document.getElementById('lineChart'), {
