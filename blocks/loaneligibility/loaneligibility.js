@@ -6,17 +6,22 @@ export default async function decorate() {
   let option;
   let applyButton;
   let P;
-  var R, N, M, E, pie, line,
-    loanAmtSlider,
-    loanAmtText,
-    loanPeriodTextMonth,
-    loanPeriodSliderMonth,
-    loanPeriodText,
-    loanPeriodSlider,
-    intRateText,
-    intRateSlider,
-    exisitingEmiAmountSlider,
-    exisitingEmiAmountSlider;
+  let R;
+  let N;
+  let M;
+  let E; 
+  let pie;
+  let line;
+  let loanAmtSlider;
+  let loanAmtText;
+  let loanPeriodTextMonth;
+  let loanPeriodSliderMonth;
+  let loanPeriodText;
+  let loanPeriodSlider;
+  let intRateText;
+  let intRateSlider;
+  let exisitingEmiAmountSlider;
+  let exisitingEmiText;
 
   function createElement(type, attributes = {}, ...children) {
     const element = document.createElement(type);
@@ -195,7 +200,7 @@ export default async function decorate() {
   loanAmtSlider = document.getElementById('loan-amount');
   loanAmtText = document.getElementById('loan-amt-text');
 
-  exisitingEmiAmountSlider = document.getElementById('exisiting-emi-text');
+  exisitingEmiText = document.getElementById('exisiting-emi-text');
   exisitingEmiAmountSlider = document.getElementById('exisiting-emi-amount');
 
   intRateSlider = document.getElementById('interest-rate');
@@ -247,12 +252,12 @@ export default async function decorate() {
   });
 
   exisitingEmiAmountSlider.addEventListener('change', (self) => {
-    exisitingEmiAmountSlider.value = self.target.value;
+    exisitingEmiText.value = self.target.value;
     E = parseFloat(self.target.value);
     displayDetails();
   });
 
-  exisitingEmiAmountSlider.addEventListener('blur', (self) => {
+  exisitingEmiText.addEventListener('blur', (self) => {
     exisitingEmiAmountSlider.value = self.target.value;
     E = parseFloat(self.target.value);
     displayDetails();
@@ -325,7 +330,7 @@ export default async function decorate() {
   });
 
   //error for existing emi
-  exisitingEmiAmountSlider.addEventListener('input', function () {
+  exisitingEmiText.addEventListener('input', function () {
     if (parseFloat(this.value) < parseFloat(existing_emi_min) || parseFloat(this.value) > parseFloat(existing_emi_max)) {
       exisitingEmiError.style.display = 'block';
     } else {
