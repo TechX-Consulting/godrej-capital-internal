@@ -1,5 +1,4 @@
 export default async function decorate(block) {
-    console.log(block);
     const mainContainer = document.createElement('div');
     mainContainer.className = 'container';
     block.appendChild(mainContainer);
