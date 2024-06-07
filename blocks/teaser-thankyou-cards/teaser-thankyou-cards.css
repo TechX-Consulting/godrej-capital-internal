@@ -44,7 +44,7 @@
 
 .block.teaser-thankyou-cards h2 {
     letter-spacing: 3.6px;
-    
+
     /* font-family: ; */
     font-size: 14px;
     line-height: 1em;
@@ -119,8 +119,6 @@
 }
 
 @media (min-width: 768px) {
-
-    /* first row div */
     .block.teaser-thankyou-cards>div,
     .block.teaser-cards.link-list-on-mobile>div {
         flex-flow: row;
@@ -188,7 +186,7 @@
 
     .teaser-cards-1 .block.teaser-thankyou-cards a {
         background-color: rgb(255 255 255 / 80%);
-        border-color: var(--c-white);
+        border-color: #fff;
     }
 
     .teaser-cards-1 .block.teaser-thankyou-cards a:hover {
