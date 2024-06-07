@@ -10,6 +10,28 @@ export default async function decorate(block) {
   inputField.placeholder = 'Enter text';
   mainContainer.appendChild(inputField);
 
+  // Function to create dropdowns
+  function createDropdown(parent, className, placeholderText, optionsArray) {
+    const dropdown = document.createElement('select');
+    dropdown.className = className;
+
+    const placeholderOption = document.createElement('option');
+    placeholderOption.textContent = placeholderText;
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    dropdown.appendChild(placeholderOption);
+
+    optionsArray.forEach(optionText => {
+      const option = document.createElement('option');
+      option.value = optionText.toLowerCase().replace(/ /g, '');
+      option.textContent = optionText;
+      dropdown.appendChild(option);
+    });
+
+    parent.appendChild(dropdown);
+    return dropdown;
+  }
+
   try {
     const responseData = await fetch('https://main--eds--aryanjha12.hlx.page/blogs/query-index.json');
     const dataObj = await responseData.json();
@@ -40,29 +62,7 @@ export default async function decorate(block) {
     const itemsPerPage = 2;
     let currentPage = 1;
 
-    // Function to create dropdowns
-    function createDropdown(parent, className, placeholderText, optionsArray) {
-      const dropdown = document.createElement('select');
-      dropdown.className = className;
-
-      const placeholderOption = document.createElement('option');
-      placeholderOption.textContent = placeholderText;
-      placeholderOption.disabled = true;
-      placeholderOption.selected = true;
-      dropdown.appendChild(placeholderOption);
-
-      optionsArray.forEach(optionText => {
-        const option = document.createElement('option');
-        option.value = optionText.toLowerCase().replace(/ /g, '');
-        option.textContent = optionText;
-        dropdown.appendChild(option);
-      });
-
-      parent.appendChild(dropdown);
-      return dropdown;
-    }
-
-    // Function to create cards
+     // Function to create cards
     function createCards(data) {
       cardContainer.innerHTML = '';
       data.forEach(entry => {
