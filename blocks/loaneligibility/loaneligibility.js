@@ -205,6 +205,35 @@ export default async function decorate() {
   loanPeriodSliderMonth = document.getElementById('loan-period-month');
   loanPeriodTextMonth = document.getElementById('loan-period-month-text');
 
+  function displayDetails() {
+    let r = parseFloat(R) / 1200;
+    let n = parseFloat(N);
+    let m = parseFloat(M);
+    let totalMonths = n * 12 + m;
+
+    const emi = (P * r * Math.pow((1 + r), totalMonths)) / (Math.pow((1 + r), totalMonths) - 1);
+    const payableInterest = calculateLoanDetails(P, r, n, m);
+
+    let opts = { style: 'currency', currency: 'INR' };
+
+    document.querySelector('#cp').innerText =
+      P.toLocaleString('en-IN', opts);
+
+    document.querySelector('#ci').innerText =
+      payableInterest.toLocaleString('en-IN', opts);
+
+    document.querySelector('#ct').innerText =
+      (P + payableInterest).toLocaleString('en-IN', opts);
+
+    document.querySelector('#price').innerText =
+      emi.toLocaleString('en-IN', opts);
+
+    pie.data.datasets[0].data[0] = P;
+    pie.data.datasets[0].data[1] = payableInterest;
+    pie.update();
+    line.update();
+  }
+
   loanAmtSlider.addEventListener('change', (self) => {
     loanAmtText.value = self.target.value;
     P = parseFloat(self.target.value);
@@ -384,36 +413,6 @@ export default async function decorate() {
     line.data.datasets[1].data = yearlyInterest;
     line.data.labels = years;
     return totalInterest;
-  }
-
-
-  function displayDetails() {
-    let r = parseFloat(R) / 1200;
-    let n = parseFloat(N);
-    let m = parseFloat(M);
-    let totalMonths = n * 12 + m;
-
-    const emi = (P * r * Math.pow((1 + r), totalMonths)) / (Math.pow((1 + r), totalMonths) - 1);
-    const payableInterest = calculateLoanDetails(P, r, n, m);
-
-    let opts = { style: 'currency', currency: 'INR' };
-
-    document.querySelector('#cp').innerText =
-      P.toLocaleString('en-IN', opts);
-
-    document.querySelector('#ci').innerText =
-      payableInterest.toLocaleString('en-IN', opts);
-
-    document.querySelector('#ct').innerText =
-      (P + payableInterest).toLocaleString('en-IN', opts);
-
-    document.querySelector('#price').innerText =
-      emi.toLocaleString('en-IN', opts);
-
-    pie.data.datasets[0].data[0] = P;
-    pie.data.datasets[0].data[1] = payableInterest;
-    pie.update();
-    line.update();
   }
 
   function initialize() {
