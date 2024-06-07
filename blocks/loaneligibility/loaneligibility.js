@@ -9,7 +9,7 @@ export default async function decorate() {
   let R;
   let N;
   let M;
-  let E; 
+  let E;
   let pie;
   let line;
   let loanAmtSlider;
@@ -25,16 +25,19 @@ export default async function decorate() {
 
   function createElement(type, attributes = {}, ...children) {
     const element = document.createElement(type);
-    for (const [key, value] of Object.entries(attributes)) {
+
+    Object.entries(attributes).forEach(([key, value]) => {
       element.setAttribute(key, value);
-    }
-    for (const child of children) {
+    });
+
+    children.forEach(child => {
       if (typeof child === 'string') {
         element.appendChild(document.createTextNode(child));
       } else {
         element.appendChild(child);
       }
-    }
+    });
+
     return element;
   }
 
