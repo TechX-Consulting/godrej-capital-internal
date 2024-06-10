@@ -12,10 +12,10 @@ export default async function decorate(block) {
   const newsTabLabel = getDataAttributeValueByName('newsTabLabel');
   const pressReleaseLabel = getDataAttributeValueByName('pressReleaseLabel');
   const inputFieldPlaceholder = getDataAttributeValueByName('inputFieldPlaceholder');
-  const sortByLabel = getDataAttributeValueByName('sortByLabel');
+  //const sortByLabel = getDataAttributeValueByName('sortByLabel');
   const latestToOldestLabel = getDataAttributeValueByName('latestToOldestLabel');
   const oldestToLatestLabel = getDataAttributeValueByName('oldestToLatestLabel');
-  const itemsPerPage = parseInt(getDataAttributeValueByName('itemsPerPage'));
+  const itemsPerPage = const itemsPerPage = parseInt(getDataAttributeValueByName('itemsPerPage'), 10);
   const noResultFoundMessage = getDataAttributeValueByName('noResultFoundMessage');
   const newsApi = 'https://main--eds-site--24shrishti.hlx.page/news/query-index.json';
   const pressReleaseApi = 'https://main--eds-site--24shrishti.hlx.page/pressrelease/query-index.json';
@@ -90,20 +90,9 @@ export default async function decorate(block) {
   // Append main container to block
   block.appendChild(container);
 
-  // Function for active tabs
-  function setActiveTab(tab) {
-    if (tab === 'news') {
-      newsTab.classList.add('active');
-      pressReleaseTab.classList.remove('active');
-    } else {
-      newsTab.classList.remove('active');
-      pressReleaseTab.classList.add('active');
-    }
-    getApiResponse(tab === 'news' ? newsApi : pressReleaseApi);
-  }
+// Function to render news items
 
-  // Function to render news items
-  function getResponseData(filteredData) {
+ function getResponseData(filteredData) {
     contentContainer.innerHTML = '';
     const paginationDiv = document.querySelector('.pagination');
     if (filteredData.length === 0) {
@@ -126,38 +115,51 @@ export default async function decorate(block) {
         contentContainer.appendChild(newsContainerData);
       });
     }
+  // Function for active tabs
+  function setActiveTab(tab) {
+    if (tab === 'news') {
+      newsTab.classList.add('active');
+      pressReleaseTab.classList.remove('active');
+    } else {
+      newsTab.classList.remove('active');
+      pressReleaseTab.classList.add('active');
+    }
+    getApiResponse(tab === 'news' ? newsApi : pressReleaseApi);
   }
 
+
+
   // Function to render pagination buttons
+  // Adjust the indentation to use 4 spaces instead of 6
   function renderPagination() {
       paginationContainer.innerHTML = '';
       const totalPages = Math.ceil(responseData.length / itemsPerPage);
       // Only show pagination buttons if there are more items than the items per page limit
       if (responseData.length > itemsPerPage) {
-        for (let i = 1; i <= totalPages; i++) {
-          const pageButton = document.createElement('button');
-          pageButton.textContent = i;
-          pageButton.className = 'page-button';
-          if (i === currentPage)
-          {
-            pageButton.classList.add('active');
+          for (let i = 1; i <= totalPages; i++) {
+              const pageButton = document.createElement('button');
+              pageButton.textContent = i;
+              pageButton.className = 'page-button';
+              if (i === currentPage) {
+                  pageButton.classList.add('active');
+              }
+              pageButton.addEventListener('click', () => {
+                  currentPage = i;
+                  renderPage();
+              });
+              paginationContainer.appendChild(pageButton);
           }
-          pageButton.addEventListener('click', () => {
-            currentPage = i;
-            renderPage();
-          });
-          paginationContainer.appendChild(pageButton);
-        }
       }
   }
 
+
   // Function to render items on the current page
   function renderPage() {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const currentData = responseData.slice(start, end);
-    getResponseData(currentData);
-    renderPagination();
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const currentData = responseData.slice(start, end);
+      getResponseData(currentData);
+      renderPagination();
   }
 
   // On load api call function call
