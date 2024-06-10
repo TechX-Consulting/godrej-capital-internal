@@ -121,13 +121,14 @@ export default async function decorate(block) {
     const totalPages = Math.ceil(responseData.length / itemsPerPage);
     // Only show pagination buttons if there are more items than the items per page limit
     if (responseData.length > itemsPerPage) {
-      for (let i = 1; i <= totalPages; i++) {
+      for (let i = 1; i <= totalPages; i += 1) {
         const pageButton = document.createElement('button');
         pageButton.textContent = i;
         pageButton.className = 'page-button';
         if (i === currentPage) {
           pageButton.classList.add('active');
         }
+        // Capture the current page number to avoid closure issues
         pageButton.addEventListener('click', () => {
           currentPage = i;
           renderPage();
@@ -147,7 +148,7 @@ export default async function decorate(block) {
   }
 
   // Function for an api call
-  const getApiResponse = async (api) => {
+  async function getApiResponse(api) {
     try {
       const response = await fetch(api, { method: 'GET' });
       if (!response.ok) {
@@ -161,7 +162,17 @@ export default async function decorate(block) {
     } catch (error) {
       console.error(error);
     }
-  };
+  }
+
+  // Function to sort data based on the selected option
+  function sortData() {
+    const selectedOption = sortDropdown.value;
+    if (selectedOption === 'newToOld') {
+      responseData.sort((a, b) => new Date(b.publishdate) - new Date(a.publishdate));
+    } else if (selectedOption === 'oldToNew') {
+      responseData.sort((a, b) => new Date(a.publishdate) - new Date(b.publishdate));
+    }
+  }
 
   // Function for active tabs
   function setActiveTab(tab) {
@@ -179,37 +190,22 @@ export default async function decorate(block) {
   getApiResponse(newsApi);
 
   // News Tab Event Listener
-  newsTab.addEventListener('click', function handleNewsTabClick() {
-    setActiveTab('news');
-  });
+  newsTab.addEventListener('click', () => setActiveTab('news'));
 
   // Press Release Tab Event Listener
-  pressReleaseTab.addEventListener('click', function handlePressReleaseTabClick() {
-    setActiveTab('pressRelease');
-  });
+  pressReleaseTab.addEventListener('click', () => setActiveTab('pressRelease'));
 
-  function handleSearchInput(event) {
+  // Handle search input
+  searchInput.addEventListener('input', (event) => {
     const searchText = event.target.value.toLowerCase();
     const filteredData = responseData.filter((item) => {
       return item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);
     });
     getResponseData(filteredData);
-  }
-
-  searchInput.addEventListener('input', handleSearchInput);
-
-  // Function to sort data based on the selected option
-  function sortData() {
-    const selectedOption = sortDropdown.value;
-    if (selectedOption === 'newToOld') {
-      responseData.sort((a, b) => new Date(b.publishdate) - new Date(a.publishdate));
-    } else if (selectedOption === 'oldToNew') {
-      responseData.sort((a, b) => new Date(a.publishdate) - new Date(b.publishdate));
-    }
-  }
+  });
 
   // Add event listener to the sort dropdown
-  sortDropdown.addEventListener('change', function () {
+  sortDropdown.addEventListener('change', () => {
     sortData();
     renderPage();
   });
