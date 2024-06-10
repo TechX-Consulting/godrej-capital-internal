@@ -194,9 +194,9 @@ export default async function decorate(block) {
   // Handle search input
   searchInput.addEventListener('input', (event) => {
     const searchText = event.target.value.toLowerCase();
-    const filteredData = responseData.filter((item) => {
-      return item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);
-    });
+    const filteredData = responseData.filter((item) =>
+      item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);
+    );
     getResponseData(filteredData);
   });
 
