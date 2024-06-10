@@ -118,8 +118,16 @@ export default async function decorate() {
         ),
       ),
     ),
-    createElement('input', { type: 'range', id: 'loan-period-month', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1'
-    }),
+    createElement(
+      'input',
+      {
+        type: 'range',
+        id: 'loan-period-month',
+        min: tenureMinMonthvalue,
+        max: tenureMaxMonthvalue,
+        step: '1',
+    },
+  ),
     createElement(
       'div',
       { class: 'range-values' },
