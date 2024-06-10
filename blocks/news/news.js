@@ -120,7 +120,7 @@ export default async function decorate(block) {
     const totalPages = Math.ceil(responseData.length / itemsPerPage);
     // Only show pagination buttons if there are more items than the items per page limit
     if (responseData.length > itemsPerPage) {
-      for (let i = 1; i <= totalPages; i+=1) {
+      for (let i = 1; i <= totalPages; i += 1) {
         const pageButton = document.createElement('button');
         pageButton.textContent = i;
         pageButton.className = 'page-button';
