@@ -61,18 +61,65 @@ export default async function decorate() {
       createElement('p', { class: 'max-value', style: 'float: right;' }, loanAmountMaxValue)),
   );
 
-  const interestDetail = createElement('div', {},
-    createElement('div', { class: 'detail' },
-      createElement('p', { style: 'color: #9088D2' }, interestrateTitle),
-      createElement('div', { class: 'inputDetail' },
-        createElement('span', { class: 'percentSpan' }, '%'),
-        createElement('input', { id: 'interest-rate-text', type: 'number', min: interestrateMinvalue, max: interestrateMaxvalue, step: '0.5', style: 'color: #6258A8' }),
+  const interestDetail = createElement(
+    'div',
+    {},
+    createElement(
+      'div',
+      { class: 'detail' },
+      createElement(
+        'p',
+        { style: 'color: #9088D2' },
+        interestrateTitle,
+      ),
+      createElement(
+        'div',
+        { class: 'inputDetail' },
+        createElement(
+          'span',
+          { class: 'percentSpan' },
+          '%',
+        ),
+        createElement(
+          'input',
+          {
+            id: 'interest-rate-text',
+            type: 'number',
+            min: interestrateMinvalue,
+            max: interestrateMaxvalue,
+            step: '0.5',
+            style: 'color: #6258A8',
+          },
+        ),
       ),
     ),
-    createElement('input', { type: 'range', id: 'interest-rate', min: interestrateMinvalue, max: interestrateMaxvalue, step: '0.5' }),
-    createElement('div', { class: 'range-values' },
-      createElement('p', { class: 'min-value' }, interestrateMinvalue + '%'),
-      createElement('p', { class: 'max-value', style: 'float: right;' }, interestrateMaxvalue + '%'))
+    createElement(
+      'input',
+      {
+        type: 'range',
+        id: 'interest-rate',
+        min: interestrateMinvalue,
+        max: interestrateMaxvalue,
+        step: '0.5',
+      },
+    ),
+    createElement(
+      'div',
+      { class: 'range-values' },
+      createElement(
+        'p',
+        { class: 'min-value' },
+        `${interestrateMinvalue}'%'`,
+      ),
+      createElement(
+        'p',
+        {
+          class: 'max-value',
+          style: 'float: right;',
+        },
+        `${interestrateMaxvalue}'%'`,
+      ),
+    ),
   );
 
   const tenureYearsDetail = createElement(
@@ -92,7 +139,7 @@ export default async function decorate() {
         createElement(
           'span',
           { class: 'yearSpan' },
-          'Yrs.'
+          'Yrs.',
         ),
         createElement(
           'input',
@@ -106,7 +153,7 @@ export default async function decorate() {
           },
         ),
       ),
-        ),
+    ),
     createElement(
       'input',
       {
@@ -123,7 +170,7 @@ export default async function decorate() {
       createElement(
         'p',
         { class: 'min-value' },
-        tenureMinYearvalue + ' Year',
+        `${tenureMinYearvalue} Year`,
       ),
       createElement(
         'p',
@@ -131,7 +178,7 @@ export default async function decorate() {
           class: 'max-value',
           style: 'float: right;',
         },
-        tenureMaxYearvalue + ' Year',
+        `${tenureMaxYearvalue} Year`,
       ),
     ),
   );
