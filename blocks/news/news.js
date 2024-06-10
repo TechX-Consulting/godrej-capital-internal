@@ -122,7 +122,6 @@ export default async function decorate(block) {
     // Only show pagination buttons if there are more items than the items per page limit
     if (responseData.length > itemsPerPage) {
       for (let i = 1; i <= totalPages; ++i) {
-        const pageButton = document.createElement
         const pageButton = document.createElement('button');
         pageButton.textContent = i;
         pageButton.className = 'page-button';
@@ -130,6 +129,7 @@ export default async function decorate(block) {
           pageButton.classList.add('active');
         }
         // Capture the current page number to avoid closure issues
+        page
         pageButton.addEventListener('click', () => {
           currentPage = i;
           renderPage();
