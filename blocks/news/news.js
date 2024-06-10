@@ -129,7 +129,6 @@ export default async function decorate(block) {
           pageButton.classList.add('active');
         }
         // Capture the current page number to avoid closure issues
-        page
         pageButton.addEventListener('click', () => {
           currentPage = i;
           renderPage();
@@ -161,7 +160,7 @@ export default async function decorate(block) {
       sortData(); // Ensure data is sorted initially
       renderPage();
     } catch (error) {
-      console.error(error);
+      //console.error(error);
     }
   }
 
