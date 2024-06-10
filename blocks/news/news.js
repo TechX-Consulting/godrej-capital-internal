@@ -12,7 +12,6 @@ export default async function decorate(block) {
   const newsTabLabel = getDataAttributeValueByName('newsTabLabel');
   const pressReleaseLabel = getDataAttributeValueByName('pressReleaseLabel');
   const inputFieldPlaceholder = getDataAttributeValueByName('inputFieldPlaceholder');
-  const sortByLabel = getDataAttributeValueByName('sortByLabel');
   const latestToOldestLabel = getDataAttributeValueByName('latestToOldestLabel');
   const oldestToLatestLabel = getDataAttributeValueByName('oldestToLatestLabel');
   const itemsPerPage = parseInt(getDataAttributeValueByName('itemsPerPage'), 10); // Corrected line
@@ -90,18 +89,6 @@ export default async function decorate(block) {
   // Append main container to block
   block.appendChild(container);
 
-  // Function for active tabs
-  function setActiveTab(tab) {
-    if (tab === 'news') {
-      newsTab.classList.add('active');
-      pressReleaseTab.classList.remove('active');
-    } else {
-      newsTab.classList.remove('active');
-      pressReleaseTab.classList.add('active');
-    }
-    getApiResponse(tab === 'news' ? newsApi : pressReleaseApi);
-  }
-
   // Function to render news items
   function getResponseData(filteredData) {
     contentContainer.innerHTML = '';
@@ -169,12 +156,24 @@ export default async function decorate(block) {
       const data = await response.json();
       responseData = data.data;
       currentPage = 1;
-      sortData();  // Ensure data is sorted initially
+      sortData(); // Ensure data is sorted initially
       renderPage();
     } catch (error) {
       console.error(error);
     }
   };
+
+  // Function for active tabs
+  function setActiveTab(tab) {
+    if (tab === 'news') {
+      newsTab.classList.add('active');
+      pressReleaseTab.classList.remove('active');
+    } else {
+      newsTab.classList.remove('active');
+      pressReleaseTab.classList.add('active');
+    }
+    getApiResponse(tab === 'news' ? newsApi : pressReleaseApi);
+  }
 
   // On load api call function call
   getApiResponse(newsApi);
@@ -182,13 +181,11 @@ export default async function decorate(block) {
   // News Tab Event Listener
   newsTab.addEventListener('click', function handleNewsTabClick() {
     setActiveTab('news');
-    getApiResponse(newsApi);
   });
 
   // Press Release Tab Event Listener
   pressReleaseTab.addEventListener('click', function handlePressReleaseTabClick() {
     setActiveTab('pressRelease');
-    getApiResponse(pressReleaseApi);
   });
 
   function handleSearchInput(event) {
@@ -212,7 +209,7 @@ export default async function decorate(block) {
   }
 
   // Add event listener to the sort dropdown
-  sortDropdown.addEventListener('change', function() {
+  sortDropdown.addEventListener('change', function () {
     sortData();
     renderPage();
   });
