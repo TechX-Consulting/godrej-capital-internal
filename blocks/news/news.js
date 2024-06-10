@@ -1,5 +1,4 @@
 export default async function decorate(block) {
-
   // This will be your API response data
   let responseData = [];
   let currentPage = 1;
@@ -18,8 +17,8 @@ export default async function decorate(block) {
   const oldestToLatestLabel = getDataAttributeValueByName('oldestToLatestLabel');
   const itemsPerPage = parseInt(getDataAttributeValueByName('itemsPerPage'));
   const noResultFoundMessage = getDataAttributeValueByName('noResultFoundMessage');
-  const newsApi = "https://main--eds-site--24shrishti.hlx.page/news/query-index.json";
-  const pressReleaseApi = "https://main--eds-site--24shrishti.hlx.page/pressrelease/query-index.json";
+  const newsApi = 'https://main--eds-site--24shrishti.hlx.page/news/query-index.json';
+  const pressReleaseApi = 'https://main--eds-site--24shrishti.hlx.page/pressrelease/query-index.json';
 
   // Create container
   const container = document.createElement('div');
@@ -139,7 +138,8 @@ export default async function decorate(block) {
           const pageButton = document.createElement('button');
           pageButton.textContent = i;
           pageButton.className = 'page-button';
-          if (i === currentPage) {
+          if (i === currentPage)
+          {
             pageButton.classList.add('active');
           }
           pageButton.addEventListener('click', () => {
@@ -178,42 +178,43 @@ export default async function decorate(block) {
   function handleSearchInput(event) {
     const searchText = event.target.value.toLowerCase();
     const filteredData = responseData.filter((item) => {
-      return item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);});
-      getResponseData(filteredData);
+      return item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText);
+    });
+    getResponseData(filteredData);
   }
 
   searchInput.addEventListener('input', handleSearchInput);
 
   // Function to sort data based on the selected option
   function sortData() {
-      const selectedOption = sortDropdown.value;
-      if (selectedOption === 'newToOld') {
-        responseData.sort((a, b) => new Date(b.publishdate) - new Date(a.publishdate));
-      } else if (selectedOption === 'oldToNew') {
-        responseData.sort((a, b) => new Date(a.publishdate) - new Date(b.publishdate));
-      }
+    const selectedOption = sortDropdown.value;
+    if (selectedOption === 'newToOld') {
+      responseData.sort((a, b) => new Date(b.publishdate) - new Date(a.publishdate));
+    } else if (selectedOption === 'oldToNew') {
+      responseData.sort((a, b) => new Date(a.publishdate) - new Date(b.publishdate));
+    }
   }
 
   // Function for an api call
   function getApiResponse(api) {
-        fetch(api, {
-          method: 'GET',
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(response.statusText);
-            }
-            return response.json();
-          })
-          .then((response) => {
-            responseData = response.data;
-            currentPage = 1;
-            sortData();  // Ensure data is sorted initially
-            renderPage();
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+    fetch(api, {
+      method: 'GET',
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then((response) => {
+      responseData = response.data;
+      currentPage = 1;
+      sortData();  // Ensure data is sorted initially
+      renderPage();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   // Add event listener to the sort dropdown
@@ -221,9 +222,7 @@ export default async function decorate(block) {
     sortData();
     renderPage();
   });
-  
 }
 
-// Use the decorate function
 const blockElement = document.getElementById('block');
 decorate(blockElement);
