@@ -85,11 +85,25 @@ export default async function decorate() {
         ),
     createElement('input', { type: 'range', id: 'loan-period', min: tenureMinYearvalue, max: tenureMaxYearvalue, step: '1' }),
     createElement('div', { class: 'range-values' },
-      createElement('p', { class: 'min-value' }, tenureMinYearvalue + ' Year'),
-      createElement('p', { class: 'max-value', style: 'float: right;' }, tenureMaxYearvalue + ' Year')),
+      createElement(
+        'p',
+        { class: 'min-value' },
+        tenureMinYearvalue + ' Year',
+      ),
+      createElement(
+        'p',
+        {
+          class: 'max-value',
+          style: 'float: right;',
+        },
+        tenureMaxYearvalue + ' Year',
+      ),
+    ),
   );
 
-  const tenureMonthsDetail = createElement('div', {},
+  const tenureMonthsDetail = createElement(
+    'div',
+    {},
     createElement(
       'div',
       { class: 'detail' },
@@ -104,7 +118,7 @@ export default async function decorate() {
         createElement(
           'span',
           {
-            class: 'monthSpan'
+            class: 'monthSpan',
           },
           'Mos.',
         ),
@@ -119,7 +133,8 @@ export default async function decorate() {
             style: 'color: #6258A8',
           },
         ),
-      ),),
+      ),
+    ),
     createElement(
       'input',
       {
@@ -129,7 +144,7 @@ export default async function decorate() {
         max: tenureMaxMonthvalue,
         step: '1',
       },
-  ),
+    ),
     createElement(
       'div',
       { class: 'range-values' },
