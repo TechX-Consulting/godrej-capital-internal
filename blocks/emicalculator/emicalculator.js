@@ -107,7 +107,9 @@ export default async function decorate() {
       ),
       createElement(
         'p',
-        { class: 'max-value', style: 'float: right;' },
+        { 
+          class: 'max-value', style: 'float: right;', 
+        },
         `${tenureMaxMonthvalue} Month`,
       ),
     ),
