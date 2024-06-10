@@ -18,9 +18,19 @@ export default async function decorate() {
 
   const header = createElement(
     'div',
-    { class: 'header' }, createElement('h1', {}, 'Loan Calculator'),
-    createElement('button', {},
-      createElement('i', { class: 'bi bi-list' }),
+    { class: 'header' },
+    createElement(
+      'h1',
+      {},
+      'Loan Calculator',
+    ),
+    createElement(
+      'button',
+      {},
+      createElement(
+        'i',
+        { class: 'bi bi-list' },
+      ),
     ),
   );
 
@@ -59,9 +69,9 @@ export default async function decorate() {
         { style: 'color: #9088D2' },
         laonamountTitle,
       ),
-            createElement(
-              'div',
-              { class: 'inputDetail' },
+      createElement(
+        'div',
+        { class: 'inputDetail' },
         createElement(
           'span',
           { class: 'rupeeSpan' },
@@ -75,8 +85,9 @@ export default async function decorate() {
             min: loanAmountMinValue,
             max: loanAmountMaxValue,
             step: '50000',
-            style: 'color: #6258A8' },
-          ),
+            style: 'color: #6258A8'
+          },
+        ),
       ),
     ),
     createElement(
