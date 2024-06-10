@@ -118,7 +118,7 @@ export default async function decorate(block) {
   function renderPagination() {
     paginationContainer.innerHTML = '';
     const totalPages = Math.ceil(responseData.length / itemsPerPage);
-      // Only show pagination buttons if there are more items than the items per page limit
+  // Only show pagination buttons if there are more items than the items per page limit
     if (responseData.length > itemsPerPage) {
       for (let i = 1; i <= totalPages; i++) {
         const pageButton = document.createElement('button');
@@ -127,10 +127,10 @@ export default async function decorate(block) {
         if (i === currentPage) {
           pageButton.classList.add('active');
         }
-      // Capture the current page number to avoid closure issues
+  // Capture the current page number to avoid closure issues
         pageButton.addEventListener('click', () => {
           currentPage = i;
-            renderPage();
+          renderPage();
           });
           paginationContainer.appendChild(pageButton);
       }
