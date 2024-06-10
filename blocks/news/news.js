@@ -189,6 +189,7 @@ export default async function decorate(block) {
   // On load api call function call
   getApiResponse(newsApi);
 
+  //
   // News Tab Event Listener
   newsTab.addEventListener('click', () => setActiveTab('news'));
 
