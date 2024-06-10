@@ -3,7 +3,7 @@ export default async function decorate(block) {
   let responseData = [];
   let currentPage = 1;
 
-  // Function for get authored label data
+  // Function to get authored label data
   function getDataAttributeValueByName(name) {
     const element = document.querySelector(`[data-${name}]`);
     return element ? element.getAttribute(`data-${name}`) : null;
@@ -160,25 +160,20 @@ export default async function decorate(block) {
   }
 
   // Function for an api call
-  const getApiResponse = (api) => {
-    fetch(api, {
-      method: 'GET',
-    })
-    .then((response) => {
+  const getApiResponse = async (api) => {
+    try {
+      const response = await fetch(api, { method: 'GET' });
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      return response.json();
-    })
-    .then((response) => {
-      responseData = response.data;
+      const data = await response.json();
+      responseData = data.data;
       currentPage = 1;
       sortData();  // Ensure data is sorted initially
       renderPage();
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error(error);
-    });
+    }
   };
 
   // On load api call function call
@@ -223,5 +218,6 @@ export default async function decorate(block) {
   });
 }
 
+// Initialize the block
 const blockElement = document.getElementById('block');
 decorate(blockElement);
