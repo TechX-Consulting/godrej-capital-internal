@@ -126,13 +126,13 @@ export default async function decorate(block) {
         pageButton.className = 'page-button';
         if (i === currentPage) {
           pageButton.classList.add('active');
-          }
-          // Capture the current page number to avoid closure issues
-          pageButton.addEventListener('click', () => {
-            currentPage = i;
-            renderPage();
+        }
+      // Capture the current page number to avoid closure issues
+        pageButton.addEventListener('click', () => {
+          currentPage = i;
+          renderPage();
           });
-          paginationContainer.appendChild(pageButton);
+        paginationContainer.appendChild(pageButton);
       }
     }
   }
