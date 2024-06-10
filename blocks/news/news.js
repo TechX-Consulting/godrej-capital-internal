@@ -115,7 +115,7 @@ export default async function decorate(block) {
     }
   };
   // Function to render pagination buttons
-  function renderPagination() {
+ function renderPagination() {
     paginationContainer.innerHTML = '';
     const totalPages = Math.ceil(responseData.length / itemsPerPage);
     // Only show pagination buttons if there are more items than the items per page limit
