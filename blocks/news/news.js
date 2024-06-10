@@ -114,7 +114,14 @@ export default async function decorate(block) {
       });
     }
   }
-
+  // Function to render items on the current page
+  function renderPage() {
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const currentData = responseData.slice(start, end);
+      getResponseData(currentData);
+      renderPagination();
+  }
   // Function to render pagination buttons
   function renderPagination() {
     paginationContainer.innerHTML = '';
@@ -137,18 +144,7 @@ export default async function decorate(block) {
       }
     }
   }
-
-  // Function to render items on the current page
-  function renderPage() {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const currentData = responseData.slice(start, end);
-    getResponseData(currentData);
-    renderPagination();
-  }
-
   // Function to sort data based on the selected option
-
   function sortData() {
     const selectedOption = sortDropdown.value;
     if (selectedOption === 'newToOld') {
@@ -157,8 +153,6 @@ export default async function decorate(block) {
       responseData.sort((a, b) => new Date(a.publishdate) - new Date(b.publishdate));
     }
   }
-
-
   // Function for an API call
   async function getApiResponse(api) {
     try {
@@ -175,9 +169,6 @@ export default async function decorate(block) {
       contentContainer.innerHTML = noResultFoundMessage;
     }
   }
-
-
-
   // Function for active tabs
   function setActiveTab(tab) {
     if (tab === 'news') {
