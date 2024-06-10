@@ -551,7 +551,7 @@ export default async function decorate() {
       loanPeriodMonthError.style.display = 'none';
     }
   });
-  
+
   function initialize() {
     loanAmtSlider.value = loanAmountMinValue;
     loanAmtText.value = loanAmountMinValue;
