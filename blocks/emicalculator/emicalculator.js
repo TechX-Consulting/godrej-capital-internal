@@ -48,17 +48,64 @@ export default async function decorate() {
   const tenureMinMonthvalue = getDataAttributeValueByName('tenure-min-monthvalue');
   const tenureMaxMonthvalue = getDataAttributeValueByName('tenure-max-monthvalue');
 
-  const amountDetail = createElement('div', {},
-    createElement('div', { class: 'detail' },
-      createElement('p', { style: 'color: #9088D2' }, laonamountTitle),
-            createElement('div', { class: 'inputDetail' },
-        createElement('span', { class: 'rupeeSpan' }, 'Rs'),
-        createElement('input', { id: 'loan-amt-text', type: 'number', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000', style: 'color: #6258A8' })
-      )),
-    createElement('input', { type: 'range', id: 'loan-amount', min: loanAmountMinValue, max: loanAmountMaxValue, step: '50000' }),
-    createElement('div', { class: 'range-values' },
-      createElement('p', { class: 'min-value' }, loanAmountMinValue),
-      createElement('p', { class: 'max-value', style: 'float: right;' }, loanAmountMaxValue)),
+  const amountDetail = createElement(
+    'div',
+    {},
+    createElement(
+      'div',
+      { class: 'detail' },
+      createElement(
+        'p',
+        { style: 'color: #9088D2' },
+        laonamountTitle,
+      ),
+            createElement(
+              'div',
+              { class: 'inputDetail' },
+        createElement(
+          'span',
+          { class: 'rupeeSpan' },
+          'Rs',
+        ),
+        createElement(
+          'input',
+          {
+            id: 'loan-amt-text',
+            type: 'number',
+            min: loanAmountMinValue,
+            max: loanAmountMaxValue,
+            step: '50000',
+            style: 'color: #6258A8' },
+          ),
+      ),
+    ),
+    createElement(
+      'input',
+      {
+        type: 'range',
+        id: 'loan-amount',
+        min: loanAmountMinValue,
+        max: loanAmountMaxValue,
+        step: '50000',
+      },
+    ),
+    createElement(
+      'div',
+      { class: 'range-values' },
+      createElement(
+        'p',
+        { class: 'min-value' },
+        loanAmountMinValue,
+      ),
+      createElement(
+        'p',
+        {
+          class: 'max-value',
+          style: 'float: right;',
+        },
+        loanAmountMaxValue,
+      ),
+    ),
   );
 
   const interestDetail = createElement(
