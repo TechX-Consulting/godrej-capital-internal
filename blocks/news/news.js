@@ -131,8 +131,8 @@ export default async function decorate(block) {
         pageButton.addEventListener('click', () => {
           currentPage = i;
           renderPage();
-          });
-          paginationContainer.appendChild(pageButton);
+        });
+        paginationContainer.appendChild(pageButton);
       }
     }
   }
@@ -144,8 +144,6 @@ export default async function decorate(block) {
     getResponseData(currentData);
     renderPagination();
   }
-
-
 
   // Function to sort data based on the selected option
   function sortData() {
