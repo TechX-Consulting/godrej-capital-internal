@@ -85,7 +85,7 @@ export default async function decorate() {
             min: loanAmountMinValue,
             max: loanAmountMaxValue,
             step: '50000',
-            style: 'color: #6258A8'
+            style: 'color: #6258A8',
           },
         ),
       ),
@@ -392,6 +392,34 @@ export default async function decorate() {
   const loanPeriodSliderMonth = document.getElementById('loan-period-month');
   const loanPeriodTextMonth = document.getElementById('loan-period-month-text');
 
+  function calculateLoanDetails(p, r, emi, n, m) {
+    let totalInterest = 0;
+    const yearlyInterest = [];
+    const yearPrincipal = [];
+    const years = [];
+    let year = 1;
+    let [counter, principal, interest] = [0, 0, 0];
+    const totalMonths = n * 12 + m;
+    for (let i = 0; i < totalMonths; i += 1) {
+      const monthlyInterest = p * r;
+      p -= (emi - monthlyInterest);
+      totalInterest += monthlyInterest;
+      principal += emi - monthlyInterest;
+      interest += monthlyInterest;
+      counter += 1;
+      if (counter === 12) {
+        years.push(year);
+        year += 1;
+        yearlyInterest.push(parseInt(interest, 10));
+        yearPrincipal.push(parseInt(principal, 10));
+        counter = 0;
+      }
+    }
+    line.data.datasets[0].data = yearPrincipal;
+    line.data.datasets[1].data = yearlyInterest;
+    line.data.labels = years;
+    return totalInterest;
+  }
   function displayDetails() {
     const r = parseFloat(R) / 1200;
     const n = parseFloat(N);
@@ -523,36 +551,7 @@ export default async function decorate() {
       loanPeriodMonthError.style.display = 'none';
     }
   });
-
-  function calculateLoanDetails(p, r, emi, n, m) {
-    let totalInterest = 0;
-    const yearlyInterest = [];
-    const yearPrincipal = [];
-    const years = [];
-    let year = 1;
-    let [counter, principal, interest] = [0, 0, 0];
-    const totalMonths = n * 12 + m;
-    for (let i = 0; i < totalMonths; i += 1) {
-      const monthlyInterest = p * r;
-      p -= (emi - monthlyInterest);
-      totalInterest += monthlyInterest;
-      principal += emi - monthlyInterest;
-      interest += monthlyInterest;
-      counter += 1;
-      if (counter === 12) {
-        years.push(year);
-        year += 1;
-        yearlyInterest.push(parseInt(interest, 10));
-        yearPrincipal.push(parseInt(principal, 10));
-        counter = 0;
-      }
-    }
-    line.data.datasets[0].data = yearPrincipal;
-    line.data.datasets[1].data = yearlyInterest;
-    line.data.labels = years;
-    return totalInterest;
-  }
-
+  
   function initialize() {
     loanAmtSlider.value = loanAmountMinValue;
     loanAmtText.value = loanAmountMinValue;
