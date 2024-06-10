@@ -392,7 +392,8 @@ export default async function decorate() {
   const loanPeriodSliderMonth = document.getElementById('loan-period-month');
   const loanPeriodTextMonth = document.getElementById('loan-period-month-text');
 
-  function calculateLoanDetails(p, r, emi, n, m) {
+  function calculateLoanDetails(initialPrincipal, r, emi, n, m) {
+    let p=initialPrincipal;
     let totalInterest = 0;
     const yearlyInterest = [];
     const yearPrincipal = [];
