@@ -90,11 +90,29 @@ export default async function decorate() {
   );
 
   const tenureMonthsDetail = createElement('div', {},
-    createElement('div', { class: 'detail' },
-      createElement('p', { style: 'color: #9088D2' }, tenureTitleMonths),
-      createElement('div', { class: 'inputDetail' },
-        createElement('span', { class: 'monthSpan' }, 'Mos.'),
-        createElement('input', { id: 'loan-period-month-text', type: 'number', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1', style: 'color: #6258A8'
+    createElement(
+      'div',
+      { class: 'detail' },
+      createElement(
+        'p',
+        { style: 'color: #9088D2' },
+        tenureTitleMonths,
+      ),
+      createElement(
+        'div',
+        { class: 'inputDetail' },
+        createElement(
+          'span',
+          { class: 'monthSpan' }, 'Mos.',
+        ),
+        createElement(
+          'input',
+          { id: 'loan-period-month-text',
+            type: 'number',
+            min: tenureMinMonthvalue,
+            max: tenureMaxMonthvalue,
+            step: '1',
+            style: 'color: #6258A8',
         }),
       ),
     ),
