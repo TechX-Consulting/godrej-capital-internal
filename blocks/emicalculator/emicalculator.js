@@ -103,11 +103,14 @@ export default async function decorate() {
         { class: 'inputDetail' },
         createElement(
           'span',
-          { class: 'monthSpan' }, 'Mos.',
+          {
+            class: 'monthSpan'
+          },
+          'Mos.',
         ),
         createElement(
           'input',
-          { 
+          {
             id: 'loan-period-month-text',
             type: 'number',
             min: tenureMinMonthvalue,
@@ -116,8 +119,7 @@ export default async function decorate() {
             style: 'color: #6258A8',
           },
         ),
-      ),
-    ),
+      ),),
     createElement(
       'input',
       {
@@ -126,7 +128,7 @@ export default async function decorate() {
         min: tenureMinMonthvalue,
         max: tenureMaxMonthvalue,
         step: '1',
-    },
+      },
   ),
     createElement(
       'div',
