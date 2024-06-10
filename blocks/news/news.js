@@ -127,7 +127,7 @@ export default async function decorate(block) {
         if (i === currentPage) {
           pageButton.classList.add('active');
         }
-    // Capture the current page number to avoid closure issues
+        // Capture the current page number to avoid closure issues
         pageButton.addEventListener('click', () => {
           currentPage = i;
           renderPage();
