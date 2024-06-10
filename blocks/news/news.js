@@ -122,6 +122,7 @@ export default async function decorate(block) {
     // Only show pagination buttons if there are more items than the items per page limit
     if (responseData.length > itemsPerPage) {
       for (let i = 1; i <= totalPages; ++i) {
+        const pageButton = document.createElement
         const pageButton = document.createElement('button');
         pageButton.textContent = i;
         pageButton.className = 'page-button';
@@ -147,7 +148,7 @@ export default async function decorate(block) {
     renderPagination();
   }
 
-  // Function for an api call
+  // Function for an API call
   async function getApiResponse(api) {
     try {
       const response = await fetch(api, { method: 'GET' });
@@ -186,10 +187,9 @@ export default async function decorate(block) {
     getApiResponse(tab === 'news' ? newsApi : pressReleaseApi);
   }
 
-  // On load api call function call
+  // On load API call function call
   getApiResponse(newsApi);
 
-  //
   // News Tab Event Listener
   newsTab.addEventListener('click', () => setActiveTab('news'));
 
