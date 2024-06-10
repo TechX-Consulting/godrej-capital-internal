@@ -107,13 +107,15 @@ export default async function decorate() {
         ),
         createElement(
           'input',
-          { id: 'loan-period-month-text',
+          { 
+            id: 'loan-period-month-text',
             type: 'number',
             min: tenureMinMonthvalue,
             max: tenureMaxMonthvalue,
             step: '1',
             style: 'color: #6258A8',
-        }),
+          },
+        ),
       ),
     ),
     createElement('input', { type: 'range', id: 'loan-period-month', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1'
