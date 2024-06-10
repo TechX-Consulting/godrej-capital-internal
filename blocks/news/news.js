@@ -114,14 +114,6 @@ export default async function decorate(block) {
       });
     }
   }
-  // Function to render items on the current page
-  function renderPage() {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const currentData = responseData.slice(start, end);
-    getResponseData(currentData);
-    renderPagination();
-  }
   // Function to render pagination buttons
   function renderPagination() {
     paginationContainer.innerHTML = '';
@@ -144,6 +136,15 @@ export default async function decorate(block) {
       }
     }
   }
+  // Function to render items on the current page
+  function renderPage() {
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const currentData = responseData.slice(start, end);
+    getResponseData(currentData);
+    renderPagination();
+  }
+
 
 
   // Function to sort data based on the selected option
