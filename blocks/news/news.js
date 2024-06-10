@@ -90,7 +90,7 @@ export default async function decorate(block) {
   block.appendChild(container);
 
   // Function to render news items
-  function getResponseData=(filteredData)=> {
+  const getResponseData=(filteredData)=> {
     contentContainer.innerHTML = '';
     const paginationDiv = document.querySelector('.pagination');
     if (filteredData.length === 0) {
