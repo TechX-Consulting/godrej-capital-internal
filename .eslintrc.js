@@ -2,8 +2,8 @@ module.exports = {
   root: true,
   extends: 'airbnb-base',
   globals: {
-        google: "readonly"
-    },
+    google: 'readonly',
+  },
   env: {
     browser: true,
   },
