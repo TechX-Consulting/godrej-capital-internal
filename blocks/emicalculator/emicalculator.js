@@ -393,7 +393,7 @@ export default async function decorate() {
   const loanPeriodTextMonth = document.getElementById('loan-period-month-text');
 
   function calculateLoanDetails(initialPrincipal, r, emi, n, m) {
-    let p=initialPrincipal;
+    let p = initialPrincipal;
     let totalInterest = 0;
     const yearlyInterest = [];
     const yearPrincipal = [];
