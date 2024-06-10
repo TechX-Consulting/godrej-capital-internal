@@ -4,7 +4,7 @@ export default async function decorate(block) {
   let currentPage = 1;
 
   // Function for get authored label data
-      function getDataAttributeValueByName(name) {
+  function getDataAttributeValueByName(name) {
     const element = document.querySelector(`[data-${name}]`);
     return element ? element.getAttribute(`data-${name}`) : null;
   }
@@ -12,10 +12,10 @@ export default async function decorate(block) {
   const newsTabLabel = getDataAttributeValueByName('newsTabLabel');
   const pressReleaseLabel = getDataAttributeValueByName('pressReleaseLabel');
   const inputFieldPlaceholder = getDataAttributeValueByName('inputFieldPlaceholder');
-  //const sortByLabel = getDataAttributeValueByName('sortByLabel');
+  const sortByLabel = getDataAttributeValueByName('sortByLabel');
   const latestToOldestLabel = getDataAttributeValueByName('latestToOldestLabel');
   const oldestToLatestLabel = getDataAttributeValueByName('oldestToLatestLabel');
-  const itemsPerPage = const itemsPerPage = parseInt(getDataAttributeValueByName('itemsPerPage'), 10);
+  const itemsPerPage = parseInt(getDataAttributeValueByName('itemsPerPage'), 10); // Corrected line
   const noResultFoundMessage = getDataAttributeValueByName('noResultFoundMessage');
   const newsApi = 'https://main--eds-site--24shrishti.hlx.page/news/query-index.json';
   const pressReleaseApi = 'https://main--eds-site--24shrishti.hlx.page/pressrelease/query-index.json';
@@ -90,9 +90,20 @@ export default async function decorate(block) {
   // Append main container to block
   block.appendChild(container);
 
-// Function to render news items
+  // Function for active tabs
+  function setActiveTab(tab) {
+    if (tab === 'news') {
+      newsTab.classList.add('active');
+      pressReleaseTab.classList.remove('active');
+    } else {
+      newsTab.classList.remove('active');
+      pressReleaseTab.classList.add('active');
+    }
+    getApiResponse(tab === 'news' ? newsApi : pressReleaseApi);
+  }
 
- function getResponseData(filteredData) {
+  // Function to render news items
+  function getResponseData(filteredData) {
     contentContainer.innerHTML = '';
     const paginationDiv = document.querySelector('.pagination');
     if (filteredData.length === 0) {
@@ -115,52 +126,60 @@ export default async function decorate(block) {
         contentContainer.appendChild(newsContainerData);
       });
     }
-  // Function for active tabs
-  function setActiveTab(tab) {
-    if (tab === 'news') {
-      newsTab.classList.add('active');
-      pressReleaseTab.classList.remove('active');
-    } else {
-      newsTab.classList.remove('active');
-      pressReleaseTab.classList.add('active');
-    }
-    getApiResponse(tab === 'news' ? newsApi : pressReleaseApi);
   }
-
-
 
   // Function to render pagination buttons
-  // Adjust the indentation to use 4 spaces instead of 6
   function renderPagination() {
-      paginationContainer.innerHTML = '';
-      const totalPages = Math.ceil(responseData.length / itemsPerPage);
-      // Only show pagination buttons if there are more items than the items per page limit
-      if (responseData.length > itemsPerPage) {
-          for (let i = 1; i <= totalPages; i++) {
-              const pageButton = document.createElement('button');
-              pageButton.textContent = i;
-              pageButton.className = 'page-button';
-              if (i === currentPage) {
-                  pageButton.classList.add('active');
-              }
-              pageButton.addEventListener('click', () => {
-                  currentPage = i;
-                  renderPage();
-              });
-              paginationContainer.appendChild(pageButton);
-          }
+    paginationContainer.innerHTML = '';
+    const totalPages = Math.ceil(responseData.length / itemsPerPage);
+    // Only show pagination buttons if there are more items than the items per page limit
+    if (responseData.length > itemsPerPage) {
+      for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.className = 'page-button';
+        if (i === currentPage) {
+          pageButton.classList.add('active');
+        }
+        pageButton.addEventListener('click', () => {
+          currentPage = i;
+          renderPage();
+        });
+        paginationContainer.appendChild(pageButton);
       }
+    }
   }
-
 
   // Function to render items on the current page
   function renderPage() {
-      const start = (currentPage - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      const currentData = responseData.slice(start, end);
-      getResponseData(currentData);
-      renderPagination();
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const currentData = responseData.slice(start, end);
+    getResponseData(currentData);
+    renderPagination();
   }
+
+  // Function for an api call
+  const getApiResponse = (api) => {
+    fetch(api, {
+      method: 'GET',
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then((response) => {
+      responseData = response.data;
+      currentPage = 1;
+      sortData();  // Ensure data is sorted initially
+      renderPage();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  };
 
   // On load api call function call
   getApiResponse(newsApi);
@@ -195,28 +214,6 @@ export default async function decorate(block) {
     } else if (selectedOption === 'oldToNew') {
       responseData.sort((a, b) => new Date(a.publishdate) - new Date(b.publishdate));
     }
-  }
-
-  // Function for an api call
-  function getApiResponse(api) {
-    fetch(api, {
-      method: 'GET',
-    })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      return response.json();
-    })
-    .then((response) => {
-      responseData = response.data;
-      currentPage = 1;
-      sortData();  // Ensure data is sorted initially
-      renderPage();
-    })
-    .catch((error) => {
-      console.error(error);
-    });
   }
 
   // Add event listener to the sort dropdown
