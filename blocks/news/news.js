@@ -4,7 +4,7 @@ export default async function decorate(block) {
   let currentPage = 1;
 
   // Function for get authored label data
-  function getDataAttributeValueByName(name) {
+      function getDataAttributeValueByName(name) {
     const element = document.querySelector(`[data-${name}]`);
     return element ? element.getAttribute(`data-${name}`) : null;
   }
