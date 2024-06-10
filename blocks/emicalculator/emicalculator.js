@@ -94,21 +94,24 @@ export default async function decorate() {
       createElement('p', { style: 'color: #9088D2' }, tenureTitleMonths),
       createElement('div', { class: 'inputDetail' },
         createElement('span', { class: 'monthSpan' }, 'Mos.'),
-        createElement('input', { id: 'loan-period-month-text', type: 'number', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1', style: 'color: #6258A8' }),
+        createElement('input', { id: 'loan-period-month-text', type: 'number', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1', style: 'color: #6258A8'
+        }),
       ),
     ),
-    createElement('input', { type: 'range', id: 'loan-period-month', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1' }),
+    createElement('input', { type: 'range', id: 'loan-period-month', min: tenureMinMonthvalue, max: tenureMaxMonthvalue, step: '1'
+    }),
     createElement(
       'div',
       { class: 'range-values' },
-      createElement('p',
+      createElement(
+        'p',
         { class: 'min-value' },
         `${tenureMinMonthvalue} Month`,
       ),
       createElement(
         'p',
-        { 
-          class: 'max-value', style: 'float: right;', 
+        {
+          class: 'max-value', style: 'float: right;',
         },
         `${tenureMaxMonthvalue} Month`,
       ),
