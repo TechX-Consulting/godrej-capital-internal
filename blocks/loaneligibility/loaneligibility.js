@@ -411,8 +411,8 @@ export default async function decorate() {
       p = p - (emi - interest);
       principal += emi - interest;
       interes += interest;
-      if (++counter == 12) {
-        years.push(year++);
+      if (counter + 1 === 12) {
+        years.push(year + 1);
         yearlyInterest.push(parseInt(interes));
         yearPrincipal.push(parseInt(principal));
         counter = 0;
