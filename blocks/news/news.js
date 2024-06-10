@@ -146,15 +146,18 @@ export default async function decorate(block) {
     getResponseData(currentData);
     renderPagination();
   }
+
   // Function to sort data based on the selected option
-    function sortData() {
-      const selectedOption = sortDropdown.value;
-      if (selectedOption === 'newToOld') {
-        responseData.sort((a, b) => new Date(b.publishdate) - new Date(a.publishdate));
-      } else if (selectedOption === 'oldToNew') {
-        responseData.sort((a, b) => new Date(a.publishdate) - new Date(b.publishdate));
-      }
+
+  function sortData() {
+    const selectedOption = sortDropdown.value;
+    if (selectedOption === 'newToOld') {
+      responseData.sort((a, b) => new Date(b.publishdate) - new Date(a.publishdate));
+    } else if (selectedOption === 'oldToNew') {
+      responseData.sort((a, b) => new Date(a.publishdate) - new Date(b.publishdate));
     }
+  }
+
 
   // Function for an API call
   async function getApiResponse(api) {
