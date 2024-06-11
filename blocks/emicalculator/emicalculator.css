@@ -7,6 +7,7 @@
 	margin: 50px 0;
 	background-image: linear-gradient(to bottom left, #e4dfec, white, white);
 }
+
 .sub-container {
 	display: flex;
 	width: 100%;
@@ -41,6 +42,7 @@
 .breakup {
 	width: 50%;
 }
+
 .details input {
 	width: 100%;
 }
@@ -55,7 +57,6 @@
 	justify-content: space-between;
 }
 
-/*----- Styling the sliders ----*/
 input[type="range"] {
 	-webkit-appearance: none;
 	margin: 10px 0;
