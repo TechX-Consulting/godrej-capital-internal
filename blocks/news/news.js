@@ -135,10 +135,12 @@ export default async function decorate(block) {
             pageButton.classList.add('active');
           }
           // Capture the current page number to avoid closure issues
-          pageButton.addEventListener('click', () => {
-            currentPage = i;
-            renderPage();
-          });
+          pageButton.addEventListener('click', (function(i) {
+              return function() {
+                currentPage = i;
+                renderPage();
+              };
+            })(i));
           paginationContainer.appendChild(pageButton);
         }
       }
