@@ -75,9 +75,16 @@ export default async function decorate() {
   const redirectionPath = getDataAttributeValueByName('redirectionPath');
   const productList = getDataAttributeValueByName('product-list');
 
+  const selectProductPlaceHolder = getDataAttributeValueByName('select-product-place-holder');
+
   //  Create a select element
   selectProduct = document.createElement('select');
 
+    //   Loop through the array and create option elements
+    option = document.createElement('option');
+    option.text = selectProductPlaceHolder;
+    selectProduct.appendChild(option);
+    
   //  Split the string into an array of loan options
   optionsArray = productList.split(',');
 
