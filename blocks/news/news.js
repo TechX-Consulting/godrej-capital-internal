@@ -16,8 +16,8 @@ export default async function decorate(block) {
   const oldestToLatestLabel = getDataAttributeValueByName('oldestToLatestLabel');
   const itemsPerPage = parseInt(getDataAttributeValueByName('itemsPerPage'), 10); // Corrected line
   const noResultFoundMessage = getDataAttributeValueByName('noResultFoundMessage');
-  const newsApi = 'https://main--eds-site--24shrishti.hlx.page/news/query-index.json';
-  const pressReleaseApi = 'https://main--eds-site--24shrishti.hlx.page/pressrelease/query-index.json';
+  const newsApi = getDataAttributeValueByName('newsApi');
+  const pressReleaseApi = getDataAttributeValueByName('pressApi');
 
   // Create container
   const container = document.createElement('div');
@@ -115,33 +115,34 @@ export default async function decorate(block) {
     }
   };
   // Function to render pagination buttons
-  function renderPagination() {
-    paginationContainer.innerHTML = '';
-    const totalPages = Math.ceil(responseData.length / itemsPerPage);
-    // Only show pagination buttons if there are more items than the items per page limit
-    if (responseData.length > itemsPerPage) {
-      for (let i = 1; i <= totalPages; i += 1) {
-        const pageButton = document.createElement('button');
-        pageButton.textContent = i;
-        pageButton.className = 'page-button';
-        if (i === currentPage) {
-          pageButton.classList.add('active');
-        }
-        // Capture the current page number to avoid closure issues
-        pageButton.addEventListener('click', () => {
-          currentPage = i;
-          renderPage();
-        });
-        paginationContainer.appendChild(pageButton);
-      }
-    }
-  }
+
   // Function to render items on the current page
   function renderPage() {
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const currentData = responseData.slice(start, end);
     getResponseData(currentData);
+    const renderPagination = () => {
+        paginationContainer.innerHTML = '';
+        const totalPages = Math.ceil(responseData.length / itemsPerPage);
+        // Only show pagination buttons if there are more items than the items per page limit
+        if (responseData.length > itemsPerPage) {
+          for (let i = 1; i <= totalPages; i += 1) {
+            const pageButton = document.createElement('button');
+            pageButton.textContent = i;
+            pageButton.className = 'page-button';
+            if (i === currentPage) {
+              pageButton.classList.add('active');
+            }
+            // Capture the current page number to avoid closure issues
+            pageButton.addEventListener('click', () => {
+              currentPage = i;
+              renderPage();
+            });
+            paginationContainer.appendChild(pageButton);
+          }
+        }
+    };
     renderPagination();
   }
 
