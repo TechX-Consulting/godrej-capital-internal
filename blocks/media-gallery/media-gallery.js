@@ -1,8 +1,8 @@
 function createAndAppendElement(parent, elementType, attributes = {}) {
   const element = document.createElement(elementType);
-  for (const key of Object.keys(attributes)) {
-    element.setAttribute(key, attributes[key]);
-  }
+  Object.keys(attributes).forEach((key) => {
+      element.setAttribute(key, attributes[key]);
+  });
   parent.appendChild(element);
   return element;
 }
@@ -13,8 +13,7 @@ function truncateText(text, maxLength) {
 
 function truncateDescription(text) {
   const maxLength = 150;
-  const truncatedText =
-    text.length > maxLength ? text.substring(0, maxLength) + '…' : text;
+  const truncatedText = text.length > maxLength ? text.substring(0, maxLength) + '…' : text;
   return truncatedText.split('\n').slice(0, 3).join('\n');
 }
 
@@ -140,7 +139,7 @@ function createVideoCards(data, container) {
   });
 }
 
-//Display Slides in picture gallery
+// Display Slides in picture gallery
 async function fetchAndDisplayHtml(url, container, categoryDiv) {
   const response = await fetch(url);
   const html = await response.text();
@@ -149,12 +148,6 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
   const album = doc.querySelector('.myalbum');
-
-  // Check if the myalbum div is found
-  if (!album) {
-    console.error('myalbum div not found in the fetched HTML');
-    return;
-  }
 
   // Append the myalbum div to the container
   container.innerHTML = '';
