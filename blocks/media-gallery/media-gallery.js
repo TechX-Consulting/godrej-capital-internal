@@ -1,9 +1,3 @@
-let currentPage = 1;
-
-function renderPage(data, container, page, createCardsFunction) {
-    createCardsFunction(data, container);
-}
-
 function createAndAppendElement(parent, elementType, attributes = {}) {
     const element = document.createElement(elementType);
     for (let key in attributes) {
@@ -369,34 +363,34 @@ function handleSorting(dropdownSelector, data, container, createCards) {
 }
 
 export default async function decorate(block) {
-    const mediatabWrapper = document.querySelector('.media-gallery-wrapper');
+  const mediatabWrapper = document.querySelector('.media-gallery-wrapper');
 
-    const { videoTab, pictureTab, dropdownSelector } = createControls(mediatabWrapper);
+  const { videoTab, pictureTab, dropdownSelector } = createControls(mediatabWrapper);
 
-    const videoContent = createAndAppendElement(mediatabWrapper, 'div', { class: 'tab-content', 'data-tab-content': 'video', style: 'display: block;' });
-    const videoCardsContainer = createAndAppendElement(videoContent, 'div', { class: 'cards-container' });
+  const videoContent = createAndAppendElement(mediatabWrapper, 'div', { class: 'tab-content', 'data-tab-content': 'video', style: 'display: block;' });
+  const videoCardsContainer = createAndAppendElement(videoContent, 'div', { class: 'cards-container' });
 
-    const pictureContent = createAndAppendElement(mediatabWrapper, 'div', { class: 'tab-content', 'data-tab-content': 'picture', style: 'display: none;' });
-    const pictureCardsContainer = createAndAppendElement(pictureContent, 'div', { class: 'cards-container' });
+  const pictureContent = createAndAppendElement(mediatabWrapper, 'div', { class: 'tab-content', 'data-tab-content': 'picture', style: 'display: none;' });
+  const pictureCardsContainer = createAndAppendElement(pictureContent, 'div', { class: 'cards-container' });
 
-    const videoData = await fetchData('https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/mediagallery-video.json');
-    createVideoCards(videoData.data,videoCardsContainer);
+  const videoData = await fetchData('https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/mediagallery-video.json');
+  createVideoCards(videoData.data,videoCardsContainer);
     
-    const pictureData = await fetchData('https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/mediagallery-picture.json');
+  const pictureData = await fetchData('https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/mediagallery-picture.json');
 
-    pictureTab.addEventListener('click', async () => {
-        if (pictureCardsContainer.children.length === 0) {
-            createPictureCards(pictureData.data, pictureCardsContainer);
-        }
-    });
+  pictureTab.addEventListener('click', async () => {
+    if (pictureCardsContainer.children.length === 0) {
+        createPictureCards(pictureData.data, pictureCardsContainer);
+    }
+  });
 
-    handleSorting(dropdownSelector, videoData.data, videoCardsContainer, createVideoCards);
-    handleSorting(dropdownSelector, pictureData.data, pictureCardsContainer, createPictureCards);
+  handleSorting(dropdownSelector, videoData.data, videoCardsContainer, createVideoCards);
+  handleSorting(dropdownSelector, pictureData.data, pictureCardsContainer, createPictureCards);
 
-    const tabs = document.querySelectorAll('.tab');
-    const contents = document.querySelectorAll('.tab-content');
-    handleTabSwitching(tabs, contents);
+  const tabs = document.querySelectorAll('.tab');
+  const contents = document.querySelectorAll('.tab-content');
+  handleTabSwitching(tabs, contents);
 
-    handleSearch(document.querySelector('.search-field'), videoCardsContainer);
-    handleSearch(document.querySelector('.search-field'), pictureCardsContainer);
+  handleSearch(document.querySelector('.search-field'), videoCardsContainer);
+  handleSearch(document.querySelector('.search-field'), pictureCardsContainer);
 }
