@@ -1,6 +1,5 @@
 export default function loadContentFromURL() {
   document.addEventListener('DOMContentLoaded', () => {
-
     if (!document.querySelector('.fragmentcards')) {
       return;
     }

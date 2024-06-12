@@ -106,13 +106,3 @@ export default function loadBoardContentFromURL() {
     });
   });
 }
-
-
-
-
-
-
-
-
-
-
