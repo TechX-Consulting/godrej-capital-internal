@@ -1,23 +1,18 @@
-  export function loadBoardContentFromURL() {
-        document.addEventListener('DOMContentLoaded', function() {
-            const boardMembersElements = document.querySelectorAll('.boardmembers');
-    
-            if (boardMembersElements.length === 0) {
-                console.log('No elements with class "boardmembers" found.');
-                return;
-            }
-    
-            boardMembersElements.forEach(boardMembersElement => {
+export function loadBoardContentFromURL() {
+  document.addEventListener('DOMContentLoaded', function(){
+    const boardMembersElements = document.querySelectorAll('.boardmembers');    
+     if (boardMembersElements.length === 0) {
+      return;
+            }   
+       boardMembersElements.forEach(boardMembersElement => {
                 const anchors = boardMembersElement.querySelectorAll('.button.primary');
                 if (anchors.length === 0) {
-                    console.log('No anchor with class "button primary" found in the boardmembers element.');
                     return;
                 }
     
                 anchors.forEach(anchor => {
                     const url = anchor.getAttribute('href');
                     if (!url) {
-                        console.log('No href found on the anchor element.');
                         return;
                     }
     
@@ -43,14 +38,12 @@
                             // Find the profile picture and associated description div
                             const profilePicture = buttonContainer.querySelector('.profiles picture img');
                             if (!profilePicture) {
-                                console.log('No profile picture found in the fetched HTML.');
                                 return;
                             }
     
                             const profileBlock = profilePicture.closest('.profiles');
                             const descriptionDiv = profileBlock.querySelector('div:nth-child(2)');
                             if (!descriptionDiv) {
-                                console.log('No description div found.');
                                 return;
                             }
     
