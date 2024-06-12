@@ -235,7 +235,7 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
       video.style.display = 'block';
     }
 
-      // Highlight the active thumbnail
+    // Highlight the active thumbnail
     const thumbnails = document.querySelectorAll('.thumbnail');
     thumbnails.forEach((thumbnail, index) => {
       if (index === slideIndex) {
@@ -278,25 +278,27 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   });
 
   showSlides(slideIndex);
+  function handlePrevButtonClick() {
+    showSlides(slideIndex -= 1);
+  }
 
+  function handleNextButtonClick() {
+    showSlides(slideIndex += 1);
+  }
+  
   // Create navigation buttons
   const prevButton = document.createElement('a');
   prevButton.classList.add('prev');
   prevButton.innerHTML = '&#10094;';
-  prevButton.addEventListener('click', function () {
-    showSlides((slideIndex -= 1));
-  });
-
+  prevButton.addEventListener('click', handlePrevButtonClick);
+  
   const nextButton = document.createElement('a');
   nextButton.classList.add('next');
   nextButton.innerHTML = '&#10095;';
-  nextButton.addEventListener('click', function () {
-    showSlides((slideIndex += 1));
-  });
+  nextButton.addEventListener('click', handleNextButtonClick);
 
   album.appendChild(prevButton);
   album.appendChild(nextButton);
-
 }
 
 function createPictureCards(data, container) {
@@ -346,7 +348,6 @@ function createPictureCardsOnClick(data, container, fullData) {
   });
   fetchAndDisplayHtml(data.album_doc, cardContainer, categoryDiv);
 }
-
 
 function handleTabSwitching(tabs, contents) {
   tabs.forEach((tab) => {
