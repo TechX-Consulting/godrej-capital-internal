@@ -204,6 +204,10 @@ export default async function decorate() {
       createElement('p', { style: 'color: #9088D2' }, 'Total Payable'),
       createElement('p', { id: 'ct', style: 'color: #130F31; font-size: 17px;' })
     ),
+    createElement('div', { class: 'chart-details' },
+      createElement('p', { style: 'color: #9088D2' }, 'Loan eligibility'),
+      createElement('p', { id: 'le', style: 'color: #130F31; font-size: 17px;' })
+    ),
   );
   loanDetails.appendChild(footer);
 
@@ -229,7 +233,7 @@ export default async function decorate() {
     let totalMonths = n * 12 + m;
 
     const emi = (P * r * Math.pow((1 + r), totalMonths)) / (Math.pow((1 + r), totalMonths) - 1);
-    const payableInterest = calculateLoanDetails(P, r, n, m);
+     const payableInterest = calculateLoanDetails(P, r, n, m);
 
     let opts = { style: 'currency', currency: 'INR' };
 
@@ -244,6 +248,8 @@ export default async function decorate() {
 
     document.querySelector('#price').innerText =
       emi.toLocaleString('en-IN', opts);
+
+      document.querySelector('#le').innerText =`₹ ${Math.max(0, P - E).toLocaleString()}`;
 
     pie.data.datasets[0].data[0] = P;
     pie.data.datasets[0].data[1] = payableInterest;
