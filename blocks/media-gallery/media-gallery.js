@@ -1,19 +1,19 @@
 function createAndAppendElement(parent, elementType, attributes = {}) {
   const element = document.createElement(elementType);
   Object.keys(attributes).forEach((key) => {
-      element.setAttribute(key, attributes[key]);
+    element.setAttribute(key, attributes[key]);
   });
   parent.appendChild(element);
   return element;
 }
 
 function truncateText(text, maxLength) {
-  return text.length > maxLength ? text.substring(0, maxLength) + '…' : text;
+  return text.length > maxLength ? `${text.substring(0, maxLength)}…` : text;
 }
 
 function truncateDescription(text) {
   const maxLength = 150;
-  const truncatedText = text.length > maxLength ? text.substring(0, maxLength) + '…' : text;
+  const truncatedText = text.length > maxLength ? `${text.substring(0, maxLength)}…` : text;
   return truncatedText.split('\n').slice(0, 3).join('\n');
 }
 
@@ -115,7 +115,7 @@ function createControls(parent) {
 
 async function fetchData(url) {
   const response = await fetch(url);
-  return await response.json();
+  return response.json();
 }
 
 function createVideoCards(data, container) {
@@ -178,9 +178,9 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   let videoCount = 0;
   childDivs.forEach((div) => {
     if (div.querySelector('img')) {
-      imageCount++;
+      imageCount += 1;
     } else if (div.querySelector('a')) {
-      videoCount++;
+      videoCount += 1;
     }
   });
 
@@ -194,6 +194,61 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   const thumbnailContainer = document.createElement('div');
   thumbnailContainer.classList.add('thumbnail-container');
   album.appendChild(thumbnailContainer);
+
+  function showSlides(n) {
+    const slides = document.querySelectorAll('.myalbum-child');
+
+    if (n >= slides.length) {
+      slideIndex = 0;
+    }
+    if (n < 0) {
+      slideIndex = slides.length - 1;
+    }
+
+    slides.forEach((slide) => {
+      slide.classList.remove('active');
+      const img = slide.querySelector('img');
+      const video = slide.querySelector('video'); // Change to video tag
+      if (img) img.style.display = 'none';
+      if (video) video.style.display = 'none';
+    });
+
+    const activeSlide = slides[slideIndex];
+    activeSlide.classList.add('active');
+
+    const img = activeSlide.querySelector('img');
+    const link = activeSlide.querySelector('a');
+
+    if (img) {
+      img.style.display = 'block';
+    } else if (link) {
+      let video = activeSlide.querySelector('video'); // Change to video tag
+      if (!video) {
+        video = document.createElement('video'); // Change to video tag
+        video.src = link.href;
+        video.controls = true;
+        video.width = 640;
+        video.height = 360;
+        activeSlide.appendChild(video);
+      }
+      video.style.display = 'block';
+    }
+
+      // Highlight the active thumbnail
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach((thumbnail, index) => {
+      if (index === slideIndex) {
+        thumbnail.style.opacity = '0.6';
+        thumbnail.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+          inline: 'center',
+        });
+      } else {
+        thumbnail.style.opacity = '1';
+      }
+    });
+  }
 
   // Add thumbnails to the container
   childDivs.forEach((div, index) => {
@@ -243,60 +298,6 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   album.appendChild(prevButton);
   album.appendChild(nextButton);
 
-  function showSlides(n) {
-    const slides = document.querySelectorAll('.myalbum-child');
-
-    if (n >= slides.length) {
-      slideIndex = 0;
-    }
-    if (n < 0) {
-      slideIndex = slides.length - 1;
-    }
-
-    slides.forEach((slide) => {
-      slide.classList.remove('active');
-      const img = slide.querySelector('img');
-      const video = slide.querySelector('video'); // Change to video tag
-      if (img) img.style.display = 'none';
-      if (video) video.style.display = 'none';
-    });
-
-    const activeSlide = slides[slideIndex];
-    activeSlide.classList.add('active');
-
-    const img = activeSlide.querySelector('img');
-    const link = activeSlide.querySelector('a');
-
-    if (img) {
-      img.style.display = 'block';
-    } else if (link) {
-      let video = activeSlide.querySelector('video'); // Change to video tag
-      if (!video) {
-        video = document.createElement('video'); // Change to video tag
-        video.src = link.href;
-        video.controls = true;
-        video.width = 640;
-        video.height = 360;
-        activeSlide.appendChild(video);
-      }
-      video.style.display = 'block';
-    }
-
-    // Highlight the active thumbnail
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach((thumbnail, index) => {
-      if (index === slideIndex) {
-        thumbnail.style.opacity = '0.6';
-        thumbnail.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-          inline: 'center',
-        });
-      } else {
-        thumbnail.style.opacity = '1';
-      }
-    });
-  }
 }
 
 function createPictureCardsOnClick(data, container, fullData) {
