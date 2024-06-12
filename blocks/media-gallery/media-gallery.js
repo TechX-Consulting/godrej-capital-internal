@@ -195,6 +195,7 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   thumbnailContainer.classList.add('thumbnail-container');
   album.appendChild(thumbnailContainer);
 
+  let slideIndex = 0;
   function showSlides(n) {
     const slides = document.querySelectorAll('.myalbum-child');
 
@@ -276,8 +277,6 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
     }
   });
 
-  // Initialize the slideshow
-  let slideIndex = 0;
   showSlides(slideIndex);
 
   // Create navigation buttons
@@ -411,12 +410,12 @@ export default async function decorate(block) {
   });
 
   const videoData = await fetchData(
-    'https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/mediagallery-video.json'
+    'https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/mediagallery-video.json',
   );
   createVideoCards(videoData.data, videoCardsContainer);
 
   const pictureData = await fetchData(
-    'https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/mediagallery-picture.json'
+    'https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/mediagallery-picture.json',
   );
 
   pictureTab.addEventListener('click', async () => {
