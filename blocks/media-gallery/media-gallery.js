@@ -299,6 +299,26 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
 
 }
 
+function createPictureCards(data, container) {
+  data.forEach((item) => {
+    const card = createAndAppendElement(container, 'div', { class: 'card' });
+
+    createAndAppendElement(card, 'img', {
+      src: item.img_url,
+      alt: item.category,
+      style: 'width: 100%; height: 200px;',
+    });
+
+    const heading = createAndAppendElement(card, 'h5');
+    heading.textContent = item.category.toUpperCase();
+
+    card.addEventListener('click', async () => {
+      container.innerHTML = '';
+      createPictureCardsOnClick(item, container, data);
+    });
+  });
+}
+
 function createPictureCardsOnClick(data, container, fullData) {
   const categoryDiv = createAndAppendElement(container, 'div', {
     class: 'category-div',
@@ -327,25 +347,6 @@ function createPictureCardsOnClick(data, container, fullData) {
   fetchAndDisplayHtml(data.album_doc, cardContainer, categoryDiv);
 }
 
-function createPictureCards(data, container) {
-  data.forEach((item) => {
-    const card = createAndAppendElement(container, 'div', { class: 'card' });
-
-    const image = createAndAppendElement(card, 'img', {
-      src: item.img_url,
-      alt: item.category,
-      style: 'width: 100%; height: 200px;',
-    });
-
-    const heading = createAndAppendElement(card, 'h5');
-    heading.textContent = item.category.toUpperCase();
-
-    card.addEventListener('click', async () => {
-      container.innerHTML = '';
-      createPictureCardsOnClick(item, container, data);
-    });
-  });
-}
 
 function handleTabSwitching(tabs, contents) {
   tabs.forEach((tab) => {
@@ -358,10 +359,7 @@ function handleTabSwitching(tabs, contents) {
       tab.classList.add('active');
       tab.style.color = 'white'; // Selected tab text color
       contents.forEach((content) => {
-        content.style.display =
-          content.getAttribute('data-tab-content') === tabName
-            ? 'block'
-            : 'none';
+        content.style.display = content.getAttribute('data-tab-content') === tabName ? 'block' : 'none';
       });
     });
   });
@@ -385,11 +383,11 @@ function handleSorting(dropdownSelector, data, container, createCards) {
   });
 }
 
-export default async function decorate(block) {
+export default async function decorate() {
+  
   const mediatabWrapper = document.querySelector('.media-gallery-wrapper');
 
-  const { videoTab, pictureTab, dropdownSelector } =
-    createControls(mediatabWrapper);
+  const { pictureTab, dropdownSelector } = createControls(mediatabWrapper);
 
   const videoContent = createAndAppendElement(mediatabWrapper, 'div', {
     class: 'tab-content',
@@ -428,13 +426,13 @@ export default async function decorate(block) {
     dropdownSelector,
     videoData.data,
     videoCardsContainer,
-    createVideoCards
+    createVideoCards,
   );
   handleSorting(
     dropdownSelector,
     pictureData.data,
     pictureCardsContainer,
-    createPictureCards
+    createPictureCards,
   );
 
   const tabs = document.querySelectorAll('.tab');
