@@ -1,5 +1,5 @@
-export function loadContentFromURL() {
-  document.addEventListener('DOMContentLoaded', function () {
+export default function loadContentFromURL() {
+  document.addEventListener('DOMContentLoaded', () => {
 
     if (!document.querySelector('.fragmentcards')) {
       return;
@@ -12,13 +12,13 @@ export function loadContentFromURL() {
 
     // Fetch the HTML content from the URL
     fetch(url)
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
+          throw new Error(`Network response was not ok ${response.statusText}`);
         }
         return response.text();
       })
-      .then(html => {
+      .then((html) => {
         // Create a temporary div to hold the fetched HTML
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
@@ -46,7 +46,7 @@ export function loadContentFromURL() {
         const buttonContainer = anchor.parentElement;
         buttonContainer.innerHTML = contentToInsert;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching the HTML:', error);
       });
   });

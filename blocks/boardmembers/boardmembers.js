@@ -1,29 +1,29 @@
-export function loadBoardContentFromURL() {
-  document.addEventListener('DOMContentLoaded', function () {
+export default function loadBoardContentFromURL() {
+  document.addEventListener('DOMContentLoaded', () => {
     const boardMembersElements = document.querySelectorAll('.boardmembers');
     if (boardMembersElements.length === 0) {
       return;
     }
-    boardMembersElements.forEach(boardMembersElement => {
+    boardMembersElements.forEach((boardMembersElement) => {
       const anchors = boardMembersElement.querySelectorAll('.button.primary');
       if (anchors.length === 0) {
         return;
       }
 
-      anchors.forEach(anchor => {
+      anchors.forEach((anchor) => {
         const url = anchor.getAttribute('href');
         if (!url) {
           return;
         }
 
         fetch(url)
-          .then(response => {
+          .then((response) => {
             if (!response.ok) {
-              throw new Error('Network response was not ok ' + response.statusText);
+              throw new Error(`Network response was not ok ${response.statusText}`);
             }
             return response.text();
           })
-          .then(html => {
+          .then((html) => {
             // Create a temporary container to parse the fetched HTML
             const tempContainer = document.createElement('div');
             tempContainer.innerHTML = html;
@@ -99,7 +99,7 @@ export function loadBoardContentFromURL() {
             // Add click event listener to the overlay to close the popup
             overlay.addEventListener('click', hidePopup);
           })
-          .catch(error => {
+          .catch((error) => {
             console.error('Error fetching the HTML:', error);
           });
       });

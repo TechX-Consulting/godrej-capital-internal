@@ -152,11 +152,11 @@ import {
   loadBlock, updateSectionsStatus,
 } from './lib-franklin.js';
 
-import { loadContentFromURL } from '../blocks/fragmentcards/fragmentcards.js';
+import loadContentFromURL from '../blocks/fragmentcards/fragmentcards.js';
 
 loadContentFromURL();
 
-import { loadBoardContentFromURL } from '../blocks/boardmembers/boardmembers.js';
+import loadBoardContentFromURL from '../blocks/boardmembers/boardmembers.js';
 loadBoardContentFromURL();
 
 // import { initializeProfilePopup } from '../blocks/profiles/profiles.js';
