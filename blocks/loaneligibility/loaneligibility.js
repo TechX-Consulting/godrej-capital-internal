@@ -1,7 +1,5 @@
 export default async function decorate() {
   const container = document.querySelector('.loaneligibility');
-  let selectProduct;
-  let optionsArray;
   let i;
   let option;
   let applyButton;
@@ -80,7 +78,7 @@ export default async function decorate() {
   const selectProductPlaceHolder = getDataAttributeValueByName('select-product-place-holder');
 
   //  Create a select element
-  selectProduct = document.createElement('select');
+  const selectProduct = document.createElement('select');
 
   //   Loop through the array and create option elements
   option = document.createElement('option');
@@ -88,7 +86,7 @@ export default async function decorate() {
   selectProduct.appendChild(option);
 
   //  Split the string into an array of loan options
-  optionsArray = productList.split(',');
+  const optionsArray = productList.split(',');
 
   //   Loop through the array and create option elements
   for (i = 0; i < optionsArray.length; i++) {
