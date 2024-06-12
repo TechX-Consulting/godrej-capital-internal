@@ -384,7 +384,6 @@ function handleSorting(dropdownSelector, data, container, createCards) {
 }
 
 export default async function decorate() {
-  
   const mediatabWrapper = document.querySelector('.media-gallery-wrapper');
 
   const { pictureTab, dropdownSelector } = createControls(mediatabWrapper);
