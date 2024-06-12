@@ -2,7 +2,6 @@ export function loadContentFromURL() {
     document.addEventListener('DOMContentLoaded', function() {
 
         if (!document.querySelector('.fragmentcards')) {
-            console.log('No element with class "fragmentcards" found.');
             return;
         }
         // Get the anchor tag
@@ -36,11 +35,9 @@ export function loadContentFromURL() {
                         if (firstChildDiv) {
                             contentToInsert = firstChildDiv.innerHTML;
                         } else {
-                            console.error('No suitable content found to insert.');
                             return;
                         }
                     } else {
-                        console.error('No body or main tag found.');
                         return;
                     }
                 }
