@@ -340,6 +340,7 @@ function createPictureCardsOnClick(data, container, fullData) {
     container.innerHTML = '';
     categoryDiv.remove();
     createPictureCards(fullData, container);
+    
   });
 
   const cardContainer = createAndAppendElement(container, 'div', {
