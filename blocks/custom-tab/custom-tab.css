@@ -1,0 +1,105 @@
+
+#tabs-list-dropdown
+{
+    background-color: red;
+}
+.tabs-list-wrapper {
+    background-color: rgb(204, 211, 206); /* Set background color of the wrapper div */
+    padding: 0; /* Remove padding */
+    position: relative; /* Position the wrapper relatively */
+}
+
+.tabs-list{
+    margin-left:10px;
+}
+
+.tabs .tabs-list {
+    display: flex;
+    justify-content: space-between;
+    max-width: calc(100% - 200px); /* Adjust the max-width to leave space for the dropdown */
+    overflow-x: auto;
+    padding: 0;
+    margin: 0; /* Remove margin */
+}
+
+.tabs .tabs-list button {
+    flex: 1; /* Make buttons take equal space */
+    margin: 5px; /* Add margin to create space between buttons */
+    padding: 0; /* Remove padding to make buttons square */
+    background-color: white; /* Default background color to white */
+    color: black; /* Default text color to black */
+    font-size: unset;
+    font-weight: bold;
+    line-height: unset;
+    text-align: center;
+    text-overflow: unset;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px; /* Ensure the buttons are square by setting a fixed height */
+    width: 100px; /* Ensure the buttons are square by setting a fixed width */
+}
+
+.tabs .tabs-list button:last-child {
+    border-right: 1px solid var(--dark-color); /* Add right border to the last button */
+}
+
+.tabs .tabs-list button[aria-selected="true"] {
+    background-color: rgb(48, 48, 228); /* Background color for the selected tab */
+    color: black; /* Text color for the selected tab */
+    cursor: initial;
+}
+
+.tabs .tabs-list button[aria-selected="false"]:hover,
+.tabs .tabs-list button[aria-selected="false"]:focus {
+    background-color:blue;
+    color: white /* Change text color to white when hovered or focused */
+}
+
+.tabs .tabs-panel {
+    margin-top: 10px;
+    padding: 20px; /* Add padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.tabs .tabs-panel[aria-hidden="true"] {
+    display: none;
+}
+
+.tabs-wrapper {
+    padding: 20px;
+    margin: 20px;
+}
+
+/* Reduce the size of the control buttons */
+.tabs-tab {
+    padding: 8px 12px; /* Adjust padding as needed */
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+/* Style the panels */
+.tabs-panel {
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style the dropdown */
+.tabs-dropdown {
+    position: absolute; /* Position the dropdown absolutely */
+    top: 11px; /* Adjust top position */
+    right: 5px; /* Adjust right position */
+    background-color:white; /* Green background color */
+    color:black(0, 0%, 100%); /* White text color */
+    text-decoration: solid;
+    padding: 10px; /* Add padding */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border radius */
+    cursor: pointer; /* Add cursor pointer */
+}
