@@ -5,7 +5,7 @@
 
 /* Set background color of the wrapper div */
 .tabs-list-wrapper {
-    background-color: color(srgb(204, 211, 206) / 100%); /* Set background color of the wrapper div */
+    background-color: rgba(204, 211, 206, 100%); /* Set background color of the wrapper div */
     padding: 0; /* Remove padding */
     position: relative; /* Position the wrapper relatively */
 }
