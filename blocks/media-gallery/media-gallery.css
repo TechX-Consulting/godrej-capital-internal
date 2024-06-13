@@ -88,7 +88,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (width >= 767px) {
     .card {
         width: calc(50% - 40px); /* 2 cards per row, including margin */
     }
