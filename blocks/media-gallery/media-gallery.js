@@ -310,7 +310,7 @@ function createPictureCards(data, container) {
       alt: item.category,
       style: 'width: 100%; height: 200px;',
     });
-
+    
     const heading = createAndAppendElement(card, 'h5');
     heading.textContent = item.category.toUpperCase();
 
