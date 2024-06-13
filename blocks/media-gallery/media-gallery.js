@@ -344,27 +344,27 @@ function createPictureCards(data, container) {
 
     card.addEventListener('click', async () => {
       container.innerHTML = '';
-      //createPictureCardsOnClick(item, container, data);
+      // createPictureCardsOnClick(item, container, data);
       const categoryDiv = createAndAppendElement(container, 'div', {
         class: 'category-div',
       });
-    
+
       const goBackButton = createAndAppendElement(categoryDiv, 'button', {
         class: 'go-back-button',
       });
       goBackButton.textContent = 'Go Back';
-    
+
       const categoryHeading = createAndAppendElement(categoryDiv, 'h5', {
         class: 'category-heading',
       });
       categoryHeading.textContent = item.category.toUpperCase();
-    
+
       goBackButton.addEventListener('click', () => {
         container.innerHTML = '';
         categoryDiv.remove();
         createPictureCards(data, container);
       });
-    
+
       const cardContainer = createAndAppendElement(container, 'div', {
         class: 'main-card-div',
         style: 'display: flex;',
