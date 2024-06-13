@@ -1,19 +1,19 @@
 async function fetchData(apiUrl) {
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-            throw new Error('Response is not JSON');
-        }
-        const responseData = await response.json();
-        return responseData.data; // Access the 'data' array
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return null; // or handle the error as needed
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Response is not JSON');
+    }
+    const responseData = await response.json();
+    return responseData.data; // Access the 'data' array
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return null; // or handle the error as needed
+  }
 }
 
 function renderData(data, tablist, tabpanel, dropdown) {
