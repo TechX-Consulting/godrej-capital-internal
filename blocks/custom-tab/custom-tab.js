@@ -81,7 +81,7 @@ function renderData(data, tablist, tabpanel, dropdown) {
       // Add some space between sections
       tabpanel.appendChild(document.createElement('hr'));
 
-      sectionIndex++;
+      sectionIndex=sectionIndex+1;
     }
   });
 }
