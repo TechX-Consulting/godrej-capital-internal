@@ -301,27 +301,7 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   album.appendChild(nextButton);
 }
 
-function createPictureCards(data, container) {
-  data.forEach((item) => {
-    const card = createAndAppendElement(container, 'div', { class: 'card' });
-
-    createAndAppendElement(card, 'img', {
-      src: item.img_url,
-      alt: item.category,
-      style: 'width: 100%; height: 200px;',
-    });
-
-    const heading = createAndAppendElement(card, 'h5');
-    heading.textContent = item.category.toUpperCase();
-
-    card.addEventListener('click', async () => {
-      container.innerHTML = '';
-      createPictureCardsOnClick(item, container, data);
-    });
-  });
-}
-
-function createPictureCardsOnClick(data, container, fullData) {
+const createPictureCardsOnClick = (data, container, fullData) => {
   const categoryDiv = createAndAppendElement(container, 'div', {
     class: 'category-div',
   });
@@ -340,7 +320,6 @@ function createPictureCardsOnClick(data, container, fullData) {
     container.innerHTML = '';
     categoryDiv.remove();
     createPictureCards(fullData, container);
-    
   });
 
   const cardContainer = createAndAppendElement(container, 'div', {
@@ -348,7 +327,27 @@ function createPictureCardsOnClick(data, container, fullData) {
     style: 'display: flex;',
   });
   fetchAndDisplayHtml(data.album_doc, cardContainer, categoryDiv);
-}
+};
+
+const createPictureCards = (data, container) => {
+  data.forEach((item) => {
+    const card = createAndAppendElement(container, 'div', { class: 'card' });
+
+    createAndAppendElement(card, 'img', {
+      src: item.img_url,
+      alt: item.category,
+      style: 'width: 100%; height: 200px;',
+    });
+
+    const heading = createAndAppendElement(card, 'h5');
+    heading.textContent = item.category.toUpperCase();
+
+    card.addEventListener('click', async () => {
+      container.innerHTML = '';
+      createPictureCardsOnClick(item, container, data);
+    });
+  });
+};
 
 function handleTabSwitching(tabs, contents) {
   tabs.forEach((tab) => {
