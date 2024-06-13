@@ -301,58 +301,53 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   album.appendChild(nextButton);
 }
 
-(function() {
-  function createPictureCardsOnClick(data, container, fullData) {
-    const categoryDiv = createAndAppendElement(container, 'div', {
-      class: 'category-div',
+function createPictureCardsOnClick(data, container, fullData) {
+  const categoryDiv = createAndAppendElement(container, 'div', {
+    class: 'category-div',
+  });
+
+  const goBackButton = createAndAppendElement(categoryDiv, 'button', {
+    class: 'go-back-button',
+  });
+  goBackButton.textContent = 'Go Back';
+
+  const categoryHeading = createAndAppendElement(categoryDiv, 'h5', {
+    class: 'category-heading',
+  });
+  categoryHeading.textContent = data.category.toUpperCase();
+
+  goBackButton.addEventListener('click', () => {
+    container.innerHTML = '';
+    categoryDiv.remove();
+    createPictureCards(fullData, container);
+  });
+
+  const cardContainer = createAndAppendElement(container, 'div', {
+    class: 'main-card-div',
+    style: 'display: flex;',
+  });
+  fetchAndDisplayHtml(data.album_doc, cardContainer, categoryDiv);
+}
+
+function createPictureCards(data, container) {
+  data.forEach((item) => {
+    const card = createAndAppendElement(container, 'div', { class: 'card' });
+
+    createAndAppendElement(card, 'img', {
+      src: item.img_url,
+      alt: item.category,
+      style: 'width: 100%; height: 200px;',
     });
 
-    const goBackButton = createAndAppendElement(categoryDiv, 'button', {
-      class: 'go-back-button',
-    });
-    goBackButton.textContent = 'Go Back';
+    const heading = createAndAppendElement(card, 'h5');
+    heading.textContent = item.category.toUpperCase();
 
-    const categoryHeading = createAndAppendElement(categoryDiv, 'h5', {
-      class: 'category-heading',
-    });
-    categoryHeading.textContent = data.category.toUpperCase();
-
-    goBackButton.addEventListener('click', () => {
+    card.addEventListener('click', async () => {
       container.innerHTML = '';
-      categoryDiv.remove();
-      createPictureCards(fullData, container);
+      createPictureCardsOnClick(item, container, data);
     });
-
-    const cardContainer = createAndAppendElement(container, 'div', {
-      class: 'main-card-div',
-      style: 'display: flex;',
-    });
-    fetchAndDisplayHtml(data.album_doc, cardContainer, categoryDiv);
-  }
-
-  function createPictureCards(data, container) {
-    data.forEach((item) => {
-      const card = createAndAppendElement(container, 'div', { class: 'card' });
-
-      createAndAppendElement(card, 'img', {
-        src: item.img_url,
-        alt: item.category,
-        style: 'width: 100%; height: 200px;',
-      });
-
-      const heading = createAndAppendElement(card, 'h5');
-      heading.textContent = item.category.toUpperCase();
-
-      card.addEventListener('click', async () => {
-        container.innerHTML = '';
-        createPictureCardsOnClick(item, container, data);
-      });
-    });
-  }
-
-  // Expose the createPictureCards function to the global scope
-  window.createPictureCards = createPictureCards;
-})();
+  });
+}
 
 function handleTabSwitching(tabs, contents) {
   tabs.forEach((tab) => {
