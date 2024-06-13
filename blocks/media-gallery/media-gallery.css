@@ -17,16 +17,14 @@
 .tab-selector {
     display: flex;
     background: #F4F4F4;
-    padding: 0px 10px;
+    padding: 0 10px;
     border-radius: 10px;
 }
 
 
 .tab {
     padding: 8px 12px;
-    
-
-    background-color: #FFFFFF;
+    background-color: #FFF;
     color: black; /* Unselected tab text color */
     border: 1px solid #ccc;
     border-bottom: none;
@@ -43,6 +41,7 @@
     background-color: #3CB8FF;
     color: white; /* Selected tab text color */
 }
+
 .search-field {
     padding: 8px;
     border: 1px solid #ccc;
