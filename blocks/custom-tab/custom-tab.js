@@ -14,12 +14,6 @@ async function fetchData(apiUrl) {
     return null; // or handle the error as needed
   }
 }
-  const apiUrl = 'https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/query-index.json';
-  const tabpanel = document.createElement('div');
-  tabpanel.className = 'tabs-panel';
-  tabpanel.id = 'tabpanel-tab';
-  tabpanel.setAttribute('aria-labelledby', 'tab-1');
-  tabpanel.setAttribute('role', 'tabpanel');
 
 function renderData(data, tablist, tabpanel, dropdown) {
   const selectedTabButton = tablist.querySelector('button[aria-selected="true"]');
@@ -34,7 +28,7 @@ function renderData(data, tablist, tabpanel, dropdown) {
     throw new Error('Selected tab or option is invalid.');
   }
 
-  const filteredData = data.filter(item => (
+  const filteredData = data.filter((item) => (
     item.tab === selectedTab && item.dropdown === selectedOption
   ));
 
@@ -46,7 +40,7 @@ function renderData(data, tablist, tabpanel, dropdown) {
   tabpanel.innerHTML = '';
 
   // Display the filtered data
-  filteredData.forEach(item => {
+  filteredData.forEach((item) => {
     let sectionIndex = 1;
 
     // Iterate through sections until no more titles are found
@@ -93,7 +87,22 @@ function renderData(data, tablist, tabpanel, dropdown) {
 }
 
 async function decorate(block) {
+  const apiUrl = 'https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/query-index.json';
+
+  let data = await fetchData(apiUrl);
+
+  if (!data) {
+    console.error('Data not available.');
+    return;
+  }
+
+  const tabpanel = document.createElement('div');
+  tabpanel.className = 'tabs-panel';
+  tabpanel.id = 'tabpanel-tab';
+  tabpanel.setAttribute('aria-labelledby', 'tab-1');
+  tabpanel.setAttribute('role', 'tabpanel');
   block.appendChild(tabpanel);
+
   const tabListWrapper = document.createElement('div');
   tabListWrapper.className = 'tabs-list-wrapper';
 
@@ -106,8 +115,6 @@ async function decorate(block) {
 
   const tabNames = ['KYC Documents', 'Income Documents', 'Property Documents'];
   const dropdownOptions = ['Indian Resident Salaried', 'Non-Resident Indian Salaried', 'Business Self Employed', 'Professional Self Employed'];
-
-  let data = [];
 
   tabNames.forEach((tabName, i) => {
     const button = document.createElement('button');
@@ -133,7 +140,7 @@ async function decorate(block) {
 
   dropdownOptions.forEach((option) => {
     const optionElement = document.createElement('option');
-    optionElement.text = option;
+    optionElement.textContent = option;
     dropdown.add(optionElement);
   });
 
@@ -144,12 +151,6 @@ async function decorate(block) {
   tabListWrapper.appendChild(dropdown);
   tabListWrapper.append(tablist);
   block.prepend(tabListWrapper);
-
-  data = await fetchData(apiUrl);
-
-  if (!data) {
-    return;
-  }
 
   renderData(data, tablist, tabpanel, dropdown);
 }
