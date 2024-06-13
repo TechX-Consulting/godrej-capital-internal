@@ -1,0 +1,74 @@
+.tabs-container {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 16px;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 16px;
+    color: #007BFF; /* Set default text color */
+    transition: color 0.3s; /* Add transition effect */
+}
+
+.tab:hover {
+    color: #fff; /* Change text color to white on hover */
+    background-color: #007BFF; /* Change background color to blue on hover */
+}
+
+.tab.active {
+    border-bottom: 2px solid #007BFF;
+    font-weight: bold;
+    color: #fff; /* Change text color to white when active */
+    background-color: #007BFF; /* Change background color to blue when active */
+}
+
+.content-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.loan-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: calc(33% - 32px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+
+.loan-card:hover {
+    transform: scale(1.05);
+}
+
+.loan-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.loan-content {
+    padding: 16px;
+}
+
+.loan-content h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.loan-content p {
+    margin: 0;
+    font-size: 16px;
+}
