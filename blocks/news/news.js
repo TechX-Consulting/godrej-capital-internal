@@ -1,6 +1,4 @@
 export default async function decorate(block) {
-
-<<<<<<< HEAD
     var title, description;
   
     let responseData = []; 
