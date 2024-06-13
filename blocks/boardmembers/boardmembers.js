@@ -29,7 +29,7 @@ export default function loadBoardContentFromURL() {
             tempContainer.innerHTML = html;
 
             // Extract content from the fetched HTML
-            let contentToInsert = tempContainer.innerHTML;
+            const contentToInsert = tempContainer.innerHTML;
 
             // Insert the content into the button container
             const buttonContainer = anchor.parentElement;
