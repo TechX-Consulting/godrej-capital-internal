@@ -63,13 +63,13 @@ function handleLoanTab(tabName, contentContainer, data) {
 
   if (filteredData.length > 0) {
     contentContainer.innerHTML = filteredData.map((item) => `
-            <div class="loan-card">
-                <img src="${item.image}" alt="${item.title}" class="loan-image"/>
-                <div class="loan-content">
-                    <h2>${item.title}</h2>
-                    <p>${item.description}</p>
-                </div>
-            </div>
+    <a href="${item.url}" class="loan-card">
+      <img src="${item.image}" alt="${item.title}" class="loan-image"/>
+        <div class="loan-content">
+           <h2 class="loanTitle">${item.title}</h2>
+           <p class="loanDescription">${item.description}</p>
+        </div>
+    </a>
         `).join('');
   } else {
     contentContainer.textContent = `No data available for ${tabName}.`;
