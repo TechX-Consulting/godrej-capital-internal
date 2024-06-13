@@ -40,7 +40,7 @@ function renderData(data, tablist, tabpanel, dropdown) {
   tabpanel.innerHTML = '';
 
   // Display the filtered data
-  filteredData.forEach(item => {
+  filteredData.forEach((item) => {
     let sectionIndex = 1;
 
     // Iterate through sections until no more titles are found
@@ -62,13 +62,13 @@ function renderData(data, tablist, tabpanel, dropdown) {
 
       // Render bullet points if available
       if (bulletPoints.trim() !== '') {
-        const bulletPointsList = bulletPoints.split('\n').map(bp => bp.trim()).filter(bp => bp !== '');
+        const bulletPointsList = bulletPoints.split('\n').map((bp) => bp.trim()).filter((bp) => bp !== '');
 
         if (bulletPointsList.length > 0) {
           const listElement = document.createElement('ul');
           listElement.style.listStyleType = 'disc'; // Set list style to bullet points
 
-          bulletPointsList.forEach(bullet => {
+          bulletPointsList.forEach((bullet) => {
             const listItem = document.createElement('li');
             listItem.textContent = bullet;
             listElement.appendChild(listItem);
@@ -123,7 +123,7 @@ async function decorate(block) {
     button.setAttribute('role', 'tab');
     button.setAttribute('type', 'button');
     button.addEventListener('click', () => {
-      tablist.querySelectorAll('.tabs-tab').forEach(btn => {
+      tablist.querySelectorAll('.tabs-tab').forEach((btn) => {
         btn.setAttribute('aria-selected', 'false');
         btn.style.backgroundColor = 'white';
         btn.style.color = 'black';
