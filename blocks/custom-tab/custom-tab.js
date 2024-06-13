@@ -20,7 +20,7 @@ async function fetchData(apiUrl) {
   tabpanel.id = 'tabpanel-tab';
   tabpanel.setAttribute('aria-labelledby', 'tab-1');
   tabpanel.setAttribute('role', 'tabpanel');
-  block.appendChild(tabpanel);
+
 function renderData(data, tablist, tabpanel, dropdown) {
   const selectedTabButton = tablist.querySelector('button[aria-selected="true"]');
   if (!selectedTabButton) {
@@ -93,6 +93,7 @@ function renderData(data, tablist, tabpanel, dropdown) {
 }
 
 async function decorate(block) {
+  block.appendChild(tabpanel);
   const tabListWrapper = document.createElement('div');
   tabListWrapper.className = 'tabs-list-wrapper';
 
@@ -147,7 +148,6 @@ async function decorate(block) {
   data = await fetchData(apiUrl);
 
   if (!data) {
-    console.error('Data not available.');
     return;
   }
 
