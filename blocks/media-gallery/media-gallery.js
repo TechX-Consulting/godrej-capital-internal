@@ -285,13 +285,13 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   function handleNextButtonClick() {
     showSlides(slideIndex += 1);
   }
-  
+
   // Create navigation buttons
   const prevButton = document.createElement('a');
   prevButton.classList.add('prev');
   prevButton.innerHTML = '&#10094;';
   prevButton.addEventListener('click', handlePrevButtonClick);
-  
+
   const nextButton = document.createElement('a');
   nextButton.classList.add('next');
   nextButton.innerHTML = '&#10095;';
@@ -310,7 +310,7 @@ function createPictureCards(data, container) {
       alt: item.category,
       style: 'width: 100%; height: 200px;',
     });
-    
+
     const heading = createAndAppendElement(card, 'h5');
     heading.textContent = item.category.toUpperCase();
 
