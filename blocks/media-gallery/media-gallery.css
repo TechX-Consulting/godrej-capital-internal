@@ -21,7 +21,6 @@
     border-radius: 10px;
 }
 
-
 .tab {
     padding: 8px 12px;
     background-color: #FFF;
@@ -69,7 +68,7 @@
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px color-mix(in srgb, black 10%);
     padding: 10px;
     margin: 10px;
     text-align: center;
@@ -77,19 +76,18 @@
     flex-direction: column;
     box-sizing: border-box;
 }
+
 .card img {
     height: 200px !important; 
     object-fit: cover; 
 }
 
-/* Three cards in a row for large screens */
 @media (min-width: 768px) {
     .card {
         width: calc(33.33% - 40px); /* 3 cards per row, including margin */
     }
 }
 
-/* Two cards in a row for smaller screens */
 @media (max-width: 767px) {
     .card {
         width: calc(50% - 40px); /* 2 cards per row, including margin */
@@ -187,7 +185,7 @@
   }
   
   .prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: color(srgb 0 0 0 / 80%);
   }
   
   @keyframes fade {
