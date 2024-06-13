@@ -118,7 +118,7 @@ async function decorate(block) {
     const button = document.createElement('button');
     button.className = 'tabs-tab';
     button.innerHTML = tabName;
-    button.setAttribute('aria-controls', `tabpanel-tab`);
+    button.setAttribute('aria-controls', 'tabpanel-tab');
     button.setAttribute('aria-selected', i === 0);
     button.setAttribute('role', 'tab');
     button.setAttribute('type', 'button');
