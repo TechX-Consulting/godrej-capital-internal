@@ -14,7 +14,13 @@ async function fetchData(apiUrl) {
     return null; // or handle the error as needed
   }
 }
-
+  const apiUrl = 'https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/query-index.json';
+  const tabpanel = document.createElement('div');
+  tabpanel.className = 'tabs-panel';
+  tabpanel.id = 'tabpanel-tab';
+  tabpanel.setAttribute('aria-labelledby', 'tab-1');
+  tabpanel.setAttribute('role', 'tabpanel');
+  block.appendChild(tabpanel);
 function renderData(data, tablist, tabpanel, dropdown) {
   const selectedTabButton = tablist.querySelector('button[aria-selected="true"]');
   if (!selectedTabButton) {
@@ -138,14 +144,6 @@ async function decorate(block) {
   tabListWrapper.append(tablist);
   block.prepend(tabListWrapper);
 
-  const tabpanel = document.createElement('div');
-  tabpanel.className = 'tabs-panel';
-  tabpanel.id = 'tabpanel-tab';
-  tabpanel.setAttribute('aria-labelledby', 'tab-1');
-  tabpanel.setAttribute('role', 'tabpanel');
-  block.appendChild(tabpanel);
-
-  const apiUrl = 'https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/query-index.json';
   data = await fetchData(apiUrl);
 
   if (!data) {
