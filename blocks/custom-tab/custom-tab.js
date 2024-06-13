@@ -1,92 +1,93 @@
 async function fetchData(apiUrl) {
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      throw new Error('Response is not JSON');
-    }
-    const responseData = await response.json();
-    return responseData.data; // Access the 'data' array
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return null; // or handle the error as needed
-  }
-}
-// Address the no-console warnings by removing or replacing console statements
-function renderData(data, tablist, tabpanel, dropdown) {
-  const selectedTabButton = tablist.querySelector('button[aria-selected="true"]');
-  if (!selectedTabButton) {
-    throw new Error('No tab is currently selected.');
-  }
-
-  const selectedTab = selectedTabButton.innerHTML;
-  const selectedOption = dropdown.value;
-
-  if (!selectedTab || !selectedOption) {
-    throw new Error('Selected tab or option is invalid.');
-  }
-
-  const filteredData = data.filter(item => item.tab === selectedTab && item.dropdown === selectedOption);
-
-  if (filteredData.length === 0) {
-    throw new Error(`Data for combination '${selectedTab} - ${selectedOption}' not found.`);
-  }
-
-  // Clear previous data
-  tabpanel.innerHTML = '';
-
-  // Display the filtered data
-  filteredData.forEach(item => {
-    let sectionIndex = 1;
-
-    // Iterate through sections until no more titles are found
-    while (item[`title_${sectionIndex}`]) {
-      const title = item[`title_${sectionIndex}`].trim();
-      const description = item[`description_${sectionIndex}`] || ''; // Default to empty string if description is not present
-      const bulletPoints = item[`bullet_points_${sectionIndex}`] || ''; // Default to empty string if bullet points are not present
-
-      // Create paragraph element for title with bold styling
-      const titleElement = document.createElement('p');
-      titleElement.textContent = title;
-      titleElement.style.fontWeight = 'bold'; // Set bold font weight
-      tabpanel.appendChild(titleElement);
-
-      // Create paragraph element for description
-      const descriptionElement = document.createElement('p');
-      descriptionElement.textContent = description.trim();
-      tabpanel.appendChild(descriptionElement);
-
-      // Render bullet points if available
-      if (bulletPoints.trim() !== '') {
-        const bulletPointsList = bulletPoints.split('\n').map(bp => bp.trim()).filter(bp => bp !== '');
-
-        if (bulletPointsList.length > 0) {
-          const listElement = document.createElement('ul');
-          listElement.style.listStyleType = 'disc'; // Set list style to bullet points
-
-          bulletPointsList.forEach(bullet => {
-            const listItem = document.createElement('li');
-            listItem.textContent = bullet;
-            listElement.appendChild(listItem);
-          });
-
-          tabpanel.appendChild(listElement);
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-      }
-
-      // Add some space between sections
-      tabpanel.appendChild(document.createElement('hr'));
-
-      sectionIndex++;
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            throw new Error('Response is not JSON');
+        }
+        const responseData = await response.json();
+        return responseData.data; // Access the 'data' array
+    } catch (error) {
+        return null;
     }
-  });
 }
 
-export default renderData;
+function renderData(data, tablist, tabpanel, dropdown) {
+    const selectedTabButton = tablist.querySelector('button[aria-selected="true"]');
+    if (!selectedTabButton) {
+        console.error('No tab is currently selected.');
+        return;
+    }
 
+    const selectedTab = selectedTabButton.innerHTML;
+    const selectedOption = dropdown.value;
+
+    if (!selectedTab || !selectedOption) {
+        console.error('Selected tab or option is invalid.');
+        return;
+    }
+
+    const filteredData = data.filter((item) => {
+        return item.tab === selectedTab && item.dropdown === selectedOption;
+    });
+
+    if (filteredData.length === 0) {
+        console.error(`Data for combination '${selectedTab} - ${selectedOption}' not found.`);
+        return;
+    }
+
+    // Clear previous data
+    tabpanel.innerHTML = '';
+
+    // Display the filtered data
+    filteredData.forEach((item) => {
+        let sectionIndex = 1;
+
+        // Iterate through sections until no more titles are found
+        while (item[`title_${sectionIndex}`]) {
+            const title = item[`title_${sectionIndex}`].trim();
+            const description = item[`description_${sectionIndex}`] || ''; // Default to empty string if description is not present
+            const bulletPoints = item[`bullet_points_${sectionIndex}`] || ''; // Default to empty string if bullet points are not present
+
+            // Create paragraph element for title with bold styling
+            const titleElement = document.createElement('p');
+            titleElement.textContent = title;
+            titleElement.style.fontWeight = 'bold'; // Set bold font weight
+            tabpanel.appendChild(titleElement);
+
+            // Create paragraph element for description
+            const descriptionElement = document.createElement('p');
+            descriptionElement.textContent = description.trim();
+            tabpanel.appendChild(descriptionElement);
+
+            // Render bullet points if available
+            if (bulletPoints.trim() !== '') {
+                const bulletPointsList = bulletPoints.split('\n').map(bp => bp.trim()).filter(bp => bp !== '');
+
+                if (bulletPointsList.length > 0) {
+                    const listElement = document.createElement('ul');
+                    listElement.style.listStyleType = 'disc'; // Set list style to bullet points
+
+                    bulletPointsList.forEach((bullet) => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = bullet;
+                        listElement.appendChild(listItem);
+                    });
+
+                    tabpanel.appendChild(listElement);
+                }
+            }
+
+            // Add some space between sections
+            tabpanel.appendChild(document.createElement('hr'));
+
+            sectionIndex++;
+        }
+    });
+}
 
 async function decorate(block) {
     const tabListWrapper = document.createElement('div');
@@ -147,7 +148,7 @@ async function decorate(block) {
     tabpanel.setAttribute('role', 'tabpanel');
     block.appendChild(tabpanel);
 
-    const apiUrl = 'https://main--godrej-capital-internal--divanshu-techx.hlx.page/website/query-index.json';
+    const apiUrl = 'https://main--my-website-1--gargshivam2034.hlx.page/PressRelease/query-index.json';
     data = await fetchData(apiUrl);
 
     if (!data) {
