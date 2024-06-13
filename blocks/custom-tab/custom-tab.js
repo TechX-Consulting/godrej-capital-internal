@@ -28,7 +28,7 @@ function renderData(data, tablist, tabpanel, dropdown) {
     throw new Error('Selected tab or option is invalid.');
   }
 
-  const filteredData = data.filter(item => (
+  const filteredData = data.filter((item) => (
     item.tab === selectedTab && item.dropdown === selectedOption
   ));
 
@@ -91,7 +91,6 @@ async function decorate(block) {
   const data = await fetchData(apiUrl);
 
   if (!data) {
-    console.error('Data not available.');
     return;
   }
 
