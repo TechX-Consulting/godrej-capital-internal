@@ -3,8 +3,9 @@
     background-color: red;
 }
 
+/* Set background color of the wrapper div */
 .tabs-list-wrapper {
-    background-color: rgb(204, 211, 206,1); /* Set background color of the wrapper div */
+    background-color: rgba(204, 211, 206, 1); /* Set background color of the wrapper div */
     padding: 0; /* Remove padding */
     position: relative; /* Position the wrapper relatively */
 }
@@ -13,6 +14,7 @@
     margin-left: 10px;
 }
 
+/* Styles for the tabs list */
 .tabs .tabs-list {
     display: flex;
     justify-content: space-between;
@@ -22,6 +24,7 @@
     margin: 0; /* Remove margin */
 }
 
+/* Styles for individual tab buttons */
 .tabs .tabs-list button {
     flex: 1; /* Make buttons take equal space */
     margin: 5px; /* Add margin to create space between buttons */
@@ -43,22 +46,26 @@
     width: 100px; /* Ensure the buttons are square by setting a fixed width */
 }
 
+/* Style the last button with a right border */
 .tabs .tabs-list button:last-child {
-    border-right: 1px solid var(--dark-color); /* Add right border to the last button */
+    border-right: 1px solid var(--dark-color);
 }
 
+/* Styles for the selected tab button */
 .tabs .tabs-list button[aria-selected="true"] {
-    background-color: rgb(48, 48, 228,1); /* Background color for the selected tab */
+    background-color: rgba(48, 48, 228, 1); /* Background color for the selected tab */
     color: black; /* Text color for the selected tab */
     cursor: initial;
 }
 
+/* Hover and focus styles for non-selected tab buttons */
 .tabs .tabs-list button[aria-selected="false"]:hover,
 .tabs .tabs-list button[aria-selected="false"]:focus {
     background-color: blue;
     color: white; /* Change text color to white when hovered or focused */
 }
 
+/* Styles for the tabs panel */
 .tabs .tabs-panel {
     margin-top: 10px;
     padding: 20px; /* Add padding */
@@ -67,10 +74,12 @@
     overflow: auto;
 }
 
+/* Hide the panel when aria-hidden is true */
 .tabs .tabs-panel[aria-hidden="true"] {
     display: none;
 }
 
+/* Styles for the tabs wrapper */
 .tabs-wrapper {
     padding: 20px;
     margin: 20px;
@@ -82,7 +91,7 @@
     margin-right: 10px; /* Adjust margin as needed */
 }
 
-/* Style the panels */
+/* Style the individual panels */
 .tabs-panel {
     padding: 20px;
     margin-top: 10px;
