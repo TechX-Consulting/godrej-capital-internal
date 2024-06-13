@@ -301,7 +301,7 @@ async function fetchAndDisplayHtml(url, container, categoryDiv) {
   album.appendChild(nextButton);
 }
 
-const createPictureCardsOnClick = (data, container, fullData) => {
+function createPictureCardsOnClick(data, container, fullData) {
   const categoryDiv = createAndAppendElement(container, 'div', {
     class: 'category-div',
   });
@@ -327,9 +327,9 @@ const createPictureCardsOnClick = (data, container, fullData) => {
     style: 'display: flex;',
   });
   fetchAndDisplayHtml(data.album_doc, cardContainer, categoryDiv);
-};
+}
 
-const createPictureCards = (data, container) => {
+function createPictureCards(data, container) {
   data.forEach((item) => {
     const card = createAndAppendElement(container, 'div', { class: 'card' });
 
@@ -347,7 +347,7 @@ const createPictureCards = (data, container) => {
       createPictureCardsOnClick(item, container, data);
     });
   });
-};
+}
 
 function handleTabSwitching(tabs, contents) {
   tabs.forEach((tab) => {
