@@ -17,78 +17,149 @@ async function fetchData(apiUrl) {
 }
 
 function renderData(data, tablist, tabpanel, dropdown) {
-    const selectedTabButton = tablist.querySelector('button[aria-selected="true"]');
-    if (!selectedTabButton) {
-        console.error('No tab is currently selected.');
-        return;
-    }
+  const selectedTabButton = tablist.querySelector('button[aria-selected="true"]');
+  if (!selectedTabButton) {
+    console.error('No tab is currently selected.');
+    return;
+  }
 
-    const selectedTab = selectedTabButton.innerHTML;
-    const selectedOption = dropdown.value;
+  const selectedTab = selectedTabButton.innerHTML;
+  const selectedOption = dropdown.value;
 
-    if (!selectedTab || !selectedOption) {
-        console.error('Selected tab or option is invalid.');
-        return;
-    }
+  if (!selectedTab || !selectedOption) {
+    console.error('Selected tab or option is invalid.');
+    return;
+  }
 
-    const filteredData = data.filter((item) => {
-        return item.tab === selectedTab && item.dropdown === selectedOption;
-    });
+  const filteredData = data.filter(item => item.tab === selectedTab && item.dropdown === selectedOption);
 
-    if (filteredData.length === 0) {
-        console.error(`Data for combination '${selectedTab} - ${selectedOption}' not found.`);
-        return;
-    }
+  if (filteredData.length === 0) {
+    console.error(`Data for combination '${selectedTab} - ${selectedOption}' not found.`);
+    return;
+  }
 
-    // Clear previous data
-    tabpanel.innerHTML = '';
+  // Clear previous data
+  tabpanel.innerHTML = '';
 
-    // Display the filtered data
-    filteredData.forEach((item) => {
-        let sectionIndex = 1;
+  // Display the filtered data
+  filteredData.forEach(item => {
+    let sectionIndex = 1;
 
-        // Iterate through sections until no more titles are found
-        while (item[`title_${sectionIndex}`]) {
-            const title = item[`title_${sectionIndex}`].trim();
-            const description = item[`description_${sectionIndex}`] || ''; // Default to empty string if description is not present
-            const bulletPoints = item[`bullet_points_${sectionIndex}`] || ''; // Default to empty string if bullet points are not present
+    // Iterate through sections until no more titles are found
+    while (item[`title_${sectionIndex}`]) {
+      const title = item[`title_${sectionIndex}`].trim();
+      const description = item[`description_${sectionIndex}`] || ''; // Default to empty string if description is not present
+      const bulletPoints = item[`bullet_points_${sectionIndex}`] || ''; // Default to empty string if bullet points are not present
 
-            // Create paragraph element for title with bold styling
-            const titleElement = document.createElement('p');
-            titleElement.textContent = title;
-            titleElement.style.fontWeight = 'bold'; // Set bold font weight
-            tabpanel.appendChild(titleElement);
+      // Create paragraph element for title with bold styling
+      const titleElement = document.createElement('p');
+      titleElement.textContent = title;
+      titleElement.style.fontWeight = 'bold'; // Set bold font weight
+      tabpanel.appendChild(titleElement);
 
-            // Create paragraph element for description
-            const descriptionElement = document.createElement('p');
-            descriptionElement.textContent = description.trim();
-            tabpanel.appendChild(descriptionElement);
+      // Create paragraph element for description
+      const descriptionElement = document.createElement('p');
+      descriptionElement.textContent = description.trim();
+      tabpanel.appendChild(descriptionElement);
 
-            // Render bullet points if available
-            if (bulletPoints.trim() !== '') {
-                const bulletPointsList = bulletPoints.split('\n').map(bp => bp.trim()).filter(bp => bp !== '');
+      // Render bullet points if available
+      if (bulletPoints.trim() !== '') {
+        const bulletPointsList = bulletPoints.split('\n').map(bp => bp.trim()).filter(bp => bp !== '');
 
-                if (bulletPointsList.length > 0) {
-                    const listElement = document.createElement('ul');
-                    listElement.style.listStyleType = 'disc'; // Set list style to bullet points
+        if (bulletPointsList.length > 0) {
+          const listElement = document.createElement('ul');
+          listElement.style.listStyleType = 'disc'; // Set list style to bullet points
 
-                    bulletPointsList.forEach((bullet) => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = bullet;
-                        listElement.appendChild(listItem);
-                    });
+          bulletPointsList.forEach(bullet => {
+            const listItem = document.createElement('li');
+            listItem.textContent = bullet;
+            listElement.appendChild(listItem);
+          });
 
-                    tabpanel.appendChild(listElement);
-                }
-            }
-
-            // Add some space between sections
-            tabpanel.appendChild(document.createElement('hr'));
-
-            sectionIndex++;
+          tabpanel.appendChild(listElement);
         }
-    });
+      }
+
+      // Add some space between sections
+      tabpanel.appendChild(document.createElement('hr'));
+
+      sectionIndex++;
+    }
+  });
 }
+
+// Address the no-console warnings by removing or replacing console statements
+function renderData(data, tablist, tabpanel, dropdown) {
+  const selectedTabButton = tablist.querySelector('button[aria-selected="true"]');
+  if (!selectedTabButton) {
+    throw new Error('No tab is currently selected.');
+  }
+
+  const selectedTab = selectedTabButton.innerHTML;
+  const selectedOption = dropdown.value;
+
+  if (!selectedTab || !selectedOption) {
+    throw new Error('Selected tab or option is invalid.');
+  }
+
+  const filteredData = data.filter(item => item.tab === selectedTab && item.dropdown === selectedOption);
+
+  if (filteredData.length === 0) {
+    throw new Error(`Data for combination '${selectedTab} - ${selectedOption}' not found.`);
+  }
+
+  // Clear previous data
+  tabpanel.innerHTML = '';
+
+  // Display the filtered data
+  filteredData.forEach(item => {
+    let sectionIndex = 1;
+
+    // Iterate through sections until no more titles are found
+    while (item[`title_${sectionIndex}`]) {
+      const title = item[`title_${sectionIndex}`].trim();
+      const description = item[`description_${sectionIndex}`] || ''; // Default to empty string if description is not present
+      const bulletPoints = item[`bullet_points_${sectionIndex}`] || ''; // Default to empty string if bullet points are not present
+
+      // Create paragraph element for title with bold styling
+      const titleElement = document.createElement('p');
+      titleElement.textContent = title;
+      titleElement.style.fontWeight = 'bold'; // Set bold font weight
+      tabpanel.appendChild(titleElement);
+
+      // Create paragraph element for description
+      const descriptionElement = document.createElement('p');
+      descriptionElement.textContent = description.trim();
+      tabpanel.appendChild(descriptionElement);
+
+      // Render bullet points if available
+      if (bulletPoints.trim() !== '') {
+        const bulletPointsList = bulletPoints.split('\n').map(bp => bp.trim()).filter(bp => bp !== '');
+
+        if (bulletPointsList.length > 0) {
+          const listElement = document.createElement('ul');
+          listElement.style.listStyleType = 'disc'; // Set list style to bullet points
+
+          bulletPointsList.forEach(bullet => {
+            const listItem = document.createElement('li');
+            listItem.textContent = bullet;
+            listElement.appendChild(listItem);
+          });
+
+          tabpanel.appendChild(listElement);
+        }
+      }
+
+      // Add some space between sections
+      tabpanel.appendChild(document.createElement('hr'));
+
+      sectionIndex++;
+    }
+  });
+}
+
+export default renderData;
+
 
 async function decorate(block) {
     const tabListWrapper = document.createElement('div');
