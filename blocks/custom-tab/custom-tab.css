@@ -1,16 +1,16 @@
-
-#tabs-list-dropdown
-{
+/* Ensure there is an empty line before each rule */
+#tabs-list-dropdown {
     background-color: red;
 }
+
 .tabs-list-wrapper {
     background-color: rgb(204, 211, 206); /* Set background color of the wrapper div */
     padding: 0; /* Remove padding */
     position: relative; /* Position the wrapper relatively */
 }
 
-.tabs-list{
-    margin-left:10px;
+.tabs-list {
+    margin-left: 10px;
 }
 
 .tabs .tabs-list {
@@ -55,8 +55,8 @@
 
 .tabs .tabs-list button[aria-selected="false"]:hover,
 .tabs .tabs-list button[aria-selected="false"]:focus {
-    background-color:blue;
-    color: white /* Change text color to white when hovered or focused */
+    background-color: blue;
+    color: white; /* Change text color to white when hovered or focused */
 }
 
 .tabs .tabs-panel {
@@ -95,8 +95,8 @@
     position: absolute; /* Position the dropdown absolutely */
     top: 11px; /* Adjust top position */
     right: 5px; /* Adjust right position */
-    background-color:white; /* Green background color */
-    color:black(0, 0%, 100%); /* White text color */
+    background-color: white; /* Green background color */
+    color: black; /* White text color */
     text-decoration: solid;
     padding: 10px; /* Add padding */
     border: none; /* Remove border */
