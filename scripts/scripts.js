@@ -12,14 +12,16 @@ import {
   loadBlocks,
   loadCSS,
   decorateBlock,
-  loadBlock, updateSectionsStatus,
+  loadBlock,
 } from './lib-franklin.js';
+
 import loadContentFromURL from '../blocks/fragmentcards/fragmentcards.js';
-loadContentFromURL();
 import loadBoardContentFromURL from '../blocks/boardmembers/boardmembers.js';
-loadBoardContentFromURL();
+
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
+loadContentFromURL();
+loadBoardContentFromURL();
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -32,18 +34,6 @@ function buildHeroBlock(main) {
     const section = document.createElement('div');
     section.append(buildBlock('hero', { elems: [picture, h1] }));
     main.prepend(section);
-  }
-}
-
-/**
- * load fonts.css and set a session storage flag
- */
-async function loadFonts() {
-  await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
-  try {
-    if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
-  } catch (e) {
-    // do nothing
   }
 }
 
@@ -120,19 +110,19 @@ function calculateTabSectionCoordinates(main) {
   let foldedTabsCounter = 0;
   const mainSections = [...main.childNodes];
   main
-    .querySelectorAll('div.section[data-tab-title]')
-    .forEach((section) => {
-      const currentSectionIndex = mainSections.indexOf(section);
+      .querySelectorAll('div.section[data-tab-title]')
+      .forEach((section) => {
+        const currentSectionIndex = mainSections.indexOf(section);
 
-      if (lastTabIndex < 0 || (currentSectionIndex - foldedTabsCounter) !== lastTabIndex) {
-        // we construct a new tabs component, at the currentSectionIndex
-        lastTabIndex = currentSectionIndex;
-        foldedTabsCounter = 0;
-      }
+        if (lastTabIndex < 0 || (currentSectionIndex - foldedTabsCounter) !== lastTabIndex) {
+          // we construct a new tabs component, at the currentSectionIndex
+          lastTabIndex = currentSectionIndex;
+          foldedTabsCounter = 0;
+        }
 
-      foldedTabsCounter += 2;
-      calculateTabSectionCoordinate(main, lastTabIndex, section);
-    });
+        foldedTabsCounter += 2;
+        calculateTabSectionCoordinate(main, lastTabIndex, section);
+      });
 }
 
 async function autoBlockTabComponent(main, targetIndex, tabSections) {
