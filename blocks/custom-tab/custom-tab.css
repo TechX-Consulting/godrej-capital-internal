@@ -5,7 +5,7 @@
 
 /* Set background color of the wrapper div */
 .tabs-list-wrapper {
-    background-color: color(rgb(204, 211, 206) alpha(1)); /* Set background color of the wrapper div */
+    background-color:#035fe6;
     padding: 0; /* Remove padding */
     position: relative; /* Position the wrapper relatively */
 }
@@ -53,7 +53,7 @@
 
 /* Styles for the selected tab button */
 .tabs .tabs-list button[aria-selected="true"] {
-    background-color: rgba(48, 48, 228, 1); /* Background color for the selected tab */
+    background-color: yellow;
     color: black; /* Text color for the selected tab */
     cursor: initial;
 }
