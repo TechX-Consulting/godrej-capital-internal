@@ -14,7 +14,6 @@ const CREATE_SELECTOR_CLASS = {
   titleContainer: 'different-loans-title',
 };
 
-
 const AUTHORABLE_VALUES = {
   loansTitle: 'Different Types of Loans',
 };
