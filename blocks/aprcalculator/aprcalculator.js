@@ -197,7 +197,7 @@ export default async function decorate() {
     const loanAmountRangeElement = document.getElementById('loanamountRange');
     const numericValue = Number(value);
     loanAmountRangeElement.value = Number.isNaN(numericValue)
-    ? loanAmountRangeElement.min : numericValue;
+      ? loanAmountRangeElement.min : numericValue;
 
     updateDisplay();
   });
@@ -208,7 +208,7 @@ export default async function decorate() {
     const interestRangeElement = document.getElementById('interestRange');
     const numericValue = Number(value);
     interestRangeElement.value = Number.isNaN(numericValue)
-    ? interestRangeElement.min : numericValue;
+      ? interestRangeElement.min : numericValue;
     updateDisplay();
   });
 
@@ -236,7 +236,7 @@ export default async function decorate() {
     const originationChargesRangeElement = document.getElementById('originationchargesRange');
     const numericValue = Number(value);
     originationChargesRangeElement.value = Number.isNaN(numericValue)
-    ? originationChargesRangeElement.min : numericValue;
+      ? originationChargesRangeElement.min : numericValue;
     updateDisplay();
   });
 
