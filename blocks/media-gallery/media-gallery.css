@@ -82,16 +82,16 @@
     object-fit: cover; 
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
   .card {
       width: calc(33.33% - 40px); /* 3 cards per row, including margin */
   }
 }
 
-@media (width >= 767px) {
-    .card {
-        width: calc(50% - 40px); /* 2 cards per row, including margin */
-    }
+@media (max-width: 767px) {
+  .card {
+      width: calc(50% - 40px); /* 2 cards per row, including margin */
+  }
 }
 
 .card h3 {
