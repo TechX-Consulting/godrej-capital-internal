@@ -2,7 +2,6 @@ export default async function decorate() {
   const container = document.querySelector('.loaneligibility');
   let i;
   let option;
-  let applyButton;
   let P;
   let R;
   let N;
@@ -10,16 +9,7 @@ export default async function decorate() {
   let E;
   let pie;
   let line;
-  let loanAmtSlider;
-  let loanAmtText;
-  let loanPeriodTextMonth;
-  let loanPeriodSliderMonth;
-  let loanPeriodText;
-  let loanPeriodSlider;
-  let intRateText;
-  let intRateSlider;
-  let exisitingEmiAmountSlider;
-  let exisitingEmiText;
+  let url;
 
   function createElement(type, attributes = {}, ...children) {
     const element = document.createElement(type);
@@ -89,7 +79,7 @@ export default async function decorate() {
   const optionsArray = productList.split(',');
 
   //   Loop through the array and create option elements
-  for (i = 0; i < optionsArray.length; i++) {
+  for (i = 0; i < optionsArray.length; i += 1) {
     option = document.createElement('option');
     option.value = optionsArray[i].toLowerCase().replace(/ /g, '-');
     option.text = optionsArray[i];
@@ -123,7 +113,7 @@ export default async function decorate() {
     ),
   );
 
-  const existing_emi = createElement(
+  const existingEmi = createElement(
     'div',
     {},
     createElement(
@@ -231,7 +221,7 @@ export default async function decorate() {
     ),
   );
 
-  applyButton = document.createElement('button');
+  let applyButton = document.createElement('button');
   applyButton.textContent = 'Apply Now';
   applyButton.id = 'apply-btn';
 
@@ -240,7 +230,7 @@ export default async function decorate() {
     { class: 'details' },
     selectProduct,
     amountDetail,
-    existing_emi,
+    existingEmi,
     interestDetail,
     tenureYearsDetail,
     tenureMonthsDetail,
@@ -304,18 +294,52 @@ export default async function decorate() {
 
   container.append(header, subContainer, loanDetails);
 
-  loanAmtSlider = document.getElementById('loan-amount');
-  loanAmtText = document.getElementById('loan-amt-text');
+  const loanAmtSlider = document.getElementById('loan-amount');
+  const loanAmtText = document.getElementById('loan-amt-text');
 
-  exisitingEmiText = document.getElementById('exisiting-emi-text');
-  exisitingEmiAmountSlider = document.getElementById('exisiting-emi-amount');
+  const exisitingEmiText = document.getElementById('exisiting-emi-text');
+  const exisitingEmiAmountSlider = document.getElementById('exisiting-emi-amount');
 
-  intRateSlider = document.getElementById('interest-rate');
-  intRateText = document.getElementById('interest-rate-text');
-  loanPeriodSlider = document.getElementById('loan-period');
-  loanPeriodText = document.getElementById('loan-period-text');
-  loanPeriodSliderMonth = document.getElementById('loan-period-month');
-  loanPeriodTextMonth = document.getElementById('loan-period-month-text');
+  const intRateSlider = document.getElementById('interest-rate');
+  const intRateText = document.getElementById('interest-rate-text');
+  const loanPeriodSlider = document.getElementById('loan-period');
+  const loanPeriodText = document.getElementById('loan-period-text');
+  const loanPeriodSliderMonth = document.getElementById('loan-period-month');
+  const loanPeriodTextMonth = document.getElementById('loan-period-month-text');
+
+  function calculateLoanDetails(p, r, n, m) {
+    let totalInterest = 0;
+    const yearlyInterest = [];
+    const yearPrincipal = [];
+    const years = [];
+    const year = 1;
+    let counter = 0;
+    let principal = 0;
+    let interes = 0;
+    const totalMonths = n * 12 + m;
+
+    const emi = (p * r * (1 + r) ** totalMonths) / ((1 + r) ** totalMonths - 1);
+    const totalPayment = emi * totalMonths;
+    totalInterest = totalPayment - p;
+
+    for (i = 0; i < totalMonths; i += 1) {
+      const interest = p * r;
+      p -= (emi - interest);
+      principal += emi - interest;
+      interes += interest;
+      if (counter + 1 === 12) {
+        years.push(year + 1);
+        yearlyInterest.push(parseInt(interes));
+        yearPrincipal.push(parseInt(principal));
+        counter = 0;
+      }
+    }
+
+    line.data.datasets[0].data = yearPrincipal;
+    line.data.datasets[1].data = yearlyInterest;
+    line.data.labels = years;
+    return totalInterest;
+  }
 
   function displayDetails() {
     const r = parseFloat(R) / 1200;
@@ -421,13 +445,14 @@ export default async function decorate() {
   interestDetail.appendChild(interestRateError);
   tenureYearsDetail.appendChild(loanPeriodError);
   tenureMonthsDetail.appendChild(loanPeriodMonthError);
-  existing_emi.appendChild(exisitingEmiError);
+  existingEmi.appendChild(exisitingEmiError);
 
   //   Event listeners for input elements to validate input values
 
   //  error for loan amount
   loanAmtText.addEventListener('input', function () {
-    if (parseFloat(this.value) < parseFloat(loanAmountMinValue) || parseFloat(this.value) > parseFloat(loanAmountMaxValue)) {
+    if (parseFloat(this.value) < parseFloat(loanAmountMinValue)
+      || parseFloat(this.value) > parseFloat(loanAmountMaxValue)) {
       loanAmtError.style.display = 'block';
     } else {
       loanAmtError.style.display = 'none';
@@ -436,7 +461,8 @@ export default async function decorate() {
 
   //  error for existing emi
   exisitingEmiText.addEventListener('input', function () {
-    if (parseFloat(this.value) < parseFloat(existingEmiMin) || parseFloat(this.value) > parseFloat(existingEmiMax)) {
+    if (parseFloat(this.value) < parseFloat(existingEmiMin)
+      || parseFloat(this.value) > parseFloat(existingEmiMax)) {
       exisitingEmiError.style.display = 'block';
     } else {
       exisitingEmiError.style.display = 'none';
@@ -445,7 +471,8 @@ export default async function decorate() {
 
   //  error for interest amount
   intRateText.addEventListener('input', function () {
-    if (parseFloat(this.value) < parseFloat(interestRateMinValue) || parseFloat(this.value) > parseFloat(interestRateMaxValue)) {
+    if (parseFloat(this.value) < parseFloat(interestRateMinValue)
+      || parseFloat(this.value) > parseFloat(interestRateMaxValue)) {
       interestRateError.style.display = 'block';
     } else {
       interestRateError.style.display = 'none';
@@ -454,7 +481,8 @@ export default async function decorate() {
 
   //  error for year
   loanPeriodText.addEventListener('input', function () {
-    if (parseFloat(this.value) < parseFloat(tenureMinYearValue) || parseFloat(this.value) > parseFloat(tenureMaxYearValue)) {
+    if (parseFloat(this.value) < parseFloat(tenureMinYearValue)
+      || parseFloat(this.value) > parseFloat(tenureMaxYearValue)) {
       loanPeriodError.style.display = 'block';
     } else {
       loanPeriodError.style.display = 'none';
@@ -463,7 +491,8 @@ export default async function decorate() {
 
   // error for month
   loanPeriodTextMonth.addEventListener('input', function () {
-    if (parseFloat(this.value) < parseFloat(tenureMinMonthValue) || parseFloat(this.value) > parseFloat(tenureMaxMonthValue)) {
+    if (parseFloat(this.value) < parseFloat(tenureMinMonthValue)
+      || parseFloat(this.value) > parseFloat(tenureMaxMonthValue)) {
       loanPeriodMonthError.style.display = 'block';
     } else {
       loanPeriodMonthError.style.display = 'none';
@@ -473,7 +502,7 @@ export default async function decorate() {
   // Set the product type in the apply button data attributes.
   selectProduct.addEventListener('input', function () {
     const selectedValue = this.value;
-    const applyButton = document.getElementById('apply-btn');
+    applyButton = document.getElementById('apply-btn');
     applyButton.setAttribute('data-product', selectedValue);
   });
 
@@ -481,47 +510,13 @@ export default async function decorate() {
   document.getElementById('apply-btn').addEventListener('click', function () {
     const productValue = this.getAttribute('data-product');
     if (productValue) {
-      var url = `${redirectionPath}?product=${encodeURIComponent(productValue)}`;
+      url = `${redirectionPath}?product=${encodeURIComponent(productValue)}`;
       window.location.href = url;
     } else {
-      var url = redirectionPath;
+      url = redirectionPath;
       window.location.href = url;
     }
   });
-
-  function calculateLoanDetails(p, r, n, m) {
-    let totalInterest = 0;
-    const yearlyInterest = [];
-    const yearPrincipal = [];
-    const years = [];
-    const year = 1;
-    let counter = 0;
-    let principal = 0;
-    let interes = 0;
-    const totalMonths = n * 12 + m;
-
-    const emi = (p * r * (1 + r) ** totalMonths) / ((1 + r) ** totalMonths - 1);
-    const totalPayment = emi * totalMonths;
-    totalInterest = totalPayment - p;
-
-    for (let i = 0; i < totalMonths; i++) {
-      const interest = p * r;
-      p -= (emi - interest);
-      principal += emi - interest;
-      interes += interest;
-      if (counter + 1 === 12) {
-        years.push(year + 1);
-        yearlyInterest.push(parseInt(interes));
-        yearPrincipal.push(parseInt(principal));
-        counter = 0;
-      }
-    }
-
-    line.data.datasets[0].data = yearPrincipal;
-    line.data.datasets[1].data = yearlyInterest;
-    line.data.labels = years;
-    return totalInterest;
-  }
 
   function initialize() {
     //  Set input values to their minimum values
