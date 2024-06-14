@@ -37,8 +37,8 @@ export default async function decorate() {
     const monthlyInterestRate = interestRate / 100 / 12;
 
     // Calculate monthly EMI (Equated Monthly Installment)
-    const monthlyEMI = loanAmount * monthlyInterestRate * Math.pow((1 + monthlyInterestRate), totalLoanTenure)
-    /(Math.pow((1 + monthlyInterestRate), totalLoanTenure) - 1);
+    const monthlyEMI = loanAmount * monthlyInterestRate * ((1 + monthlyInterestRate) ** totalLoanTenure)
+    / (((1 + monthlyInterestRate) ** totalLoanTenure) - 1);
 
     // Calculate total payment over the loan tenure
     const totalPayment = monthlyEMI * totalLoanTenure;
