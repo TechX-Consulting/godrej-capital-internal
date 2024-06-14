@@ -39,11 +39,8 @@ export default async function decorate(block) {
 
   try {
     const responseData = await ffetch('https://main--eds--aryanjha12.hlx.page/blogs/query-index.json').all();
-    console.log('new object is', responseData);
-
     // Store the original data
     const originalData = responseData;
-    console.log(originalData);
     const dateDropdown = ['latest to oldest', 'oldest to latest'];
     const categoryVal = originalData.map((item) => item.category);
     // Create and populate dropdowns
