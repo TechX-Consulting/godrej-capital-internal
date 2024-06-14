@@ -1,5 +1,3 @@
-import ffetch from '../../scripts/ffetch.js';
-
 const SELECTORS = {
   tabsSelector: '.tab',
 };
@@ -62,13 +60,13 @@ function handleLoanTab(tabName, contentContainer, data) {
 
   if (filteredData.length > 0) {
     contentContainer.innerHTML = filteredData.map((item) => `
-    <a href="${item.url}" class="loan-card">
-      <img src="${item.image}" alt="${item.title}" class="loan-image"/>
-        <div class="loan-content">
-           <h2 class="loanTitle">${item.title}</h2>
-           <p class="loanDescription">${item.description}</p>
-        </div>
-    </a>
+  <a href="${item.url}" class="loan-card">
+    <img src="${item.image}" alt="${item.title}" class="loan-image"/>
+    <div class="loan-content">
+      <h2 class="loanTitle">${item.title}</h2>
+      <p class="loanDescription">${item.description}</p>
+    </div>
+  </a>
         `).join('');
   } else {
     contentContainer.textContent = `No data available for ${tabName}.`;
@@ -76,11 +74,12 @@ function handleLoanTab(tabName, contentContainer, data) {
 }
 
 async function fetchData() {
-  const responseData = await ffetch(API_URL.Different_Home_Loan_Url).all();
+  const responseData = await fetch(API_URL.Different_Home_Loan_Url);
+  const dataObj = await responseData.json();
   if (!responseData.ok) {
     console.log('Api is not getting response');
   }
-  return responseData;
+  return dataObj.data; // Ensure we return the correct part of the response
 }
 
 function addEventListeners(tabsContainer, contentContainer) {
@@ -91,8 +90,8 @@ function addEventListeners(tabsContainer, contentContainer) {
       tabs.forEach((t) => t.classList.remove('active'));
       tab.classList.add('active');
       try {
-        const responseData = await fetchData();
-        handleLoanTab(tab.dataset.tabName, contentContainer, responseData);
+        const dataObj = await fetchData();
+        handleLoanTab(tab.dataset.tabName, contentContainer, dataObj);
       } catch (err) {
         console.error('Error fetching data:', err);
       }
