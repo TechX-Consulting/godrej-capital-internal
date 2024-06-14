@@ -1,0 +1,32 @@
+
+.address-cards{
+    display: flex;
+}
+.card {
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside the card */
+    width: 300px; /* Fixed width for the card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
+    margin: 20px; /* Space around the card */
+    background-color: #fff; /* White background */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
+}
+
+.card h2 {
+    font-size: 1.5em; /* Larger font size for the title */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.card p {
+    margin: 5px 0; /* Space between paragraphs */
+}
+
+.card .phone, .card .hours {
+    font-weight: bold; /* Bold font for phone number and hours */
+}
