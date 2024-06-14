@@ -11,8 +11,6 @@ export default async function decorate() {
   let line;
   let url;
 
-
-  
   function createElement(type, attributes = {}, ...children) {
     const element = document.createElement(type);
 
@@ -314,26 +312,32 @@ export default async function decorate() {
     const yearlyInterest = [];
     const yearPrincipal = [];
     const years = [];
-    const year = 1;
+    let year = 1; // Allow incrementing
     let counter = 0;
-    let principal = 0;
-    let interes = 0;
+    let principalAccumulator = 0;
+    let interestAccumulator = 0;
     const totalMonths = n * 12 + m;
 
     const emi = (p * r * (1 + r) ** totalMonths) / ((1 + r) ** totalMonths - 1);
     const totalPayment = emi * totalMonths;
     totalInterest = totalPayment - p;
 
+    let currentPrincipal = p; // New variable to avoid modifying the parameter
+
     for (i = 0; i < totalMonths; i += 1) {
-      const interest = p * r;
-      p -= (emi - interest);
-      principal += emi - interest;
-      interes += interest;
-      if (counter + 1 === 12) {
-        years.push(year + 1);
-        yearlyInterest.push(parseInt(interes));
-        yearPrincipal.push(parseInt(principal));
+      const interest = currentPrincipal * r;
+      currentPrincipal -= (emi - interest);
+      principalAccumulator += emi - interest;
+      interestAccumulator += interest;
+      counter += 1; // Increment counter
+      if (counter === 12) {
+        years.push(year);
+        yearlyInterest.push(parseInt(interestAccumulator, 10));
+        yearPrincipal.push(parseInt(principalAccumulator, 10));
         counter = 0;
+        year += 1; // Increment year
+        interestAccumulator = 0; // Reset yearly interest accumulator
+        principalAccumulator = 0; // Reset yearly principal accumulator
       }
     }
 
