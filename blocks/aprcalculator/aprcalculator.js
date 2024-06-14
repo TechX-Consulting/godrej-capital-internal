@@ -80,8 +80,7 @@ export default async function decorate() {
   const originationChargesMax = getDataAttributeValueByName('origination-charges-max');
 
   const textSize = getDataAttributeValueByName('font-size');
-  console.log(textSize);
-
+  
   const htmlCode = `
     <div class="calculator-container">
         <div class="inputs">
