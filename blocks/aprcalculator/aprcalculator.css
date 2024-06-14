@@ -59,14 +59,4 @@
     .error{
         color: red;
     }
-
-    .calculator-container {
-        width: 80%;
-        margin: 20px auto;
-        padding: 20px;
-        display: flex;
-        background: white;
-        box-shadow: 0 0 10px rgb(0 0 0 / 10%);
-        justify-content: space-around;
-    }
 }
