@@ -172,17 +172,17 @@ export default async function decorate() {
 
   container.innerHTML += htmlCode;
 
-  //set the fontsize
+  // set the fontsize
   const allInput = document.querySelectorAll('.inputBox');
   console.log(allInput);
   allInput.forEach((element) => {
     console.log(element);
     element.style.fontSize = `${textSize}px`;
-  })
+  });
 
   window.updateDisplay = updateDisplay;
   window.updateRange = function (id) {
-    const value = document.getElementById(`${id}Range`).value;
+    const { value } = document.getElementById(`${id}Range`);
     document.getElementById(id).textContent = value;
     updateDisplay();
   };
@@ -196,49 +196,57 @@ export default async function decorate() {
     // document.getElementById('loanamountRange').value = clampedValue; // Update loanamountRange value
     // updateDisplay();
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
-    document.getElementById('loanamountRange').value = isNaN(value) ? document.getElementById('loanamountRange').min : value;
+    const loanAmountRangeElement = document.getElementById('loanamountRange');
+    const numericValue = Number(value);
+    loanAmountRangeElement.value = Number.isNaN(numericValue) ? loanAmountRangeElement.min : numericValue;
     updateDisplay();
   });
 
   // Add event listener to interest span to update corresponding range input
   document.getElementById('interest').addEventListener('input', function () {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
-    document.getElementById('interestRange').value = isNaN(value) ? document.getElementById('interestRange').min : value;
+    const interestRangeElement = document.getElementById('interestRange');
+    const numericValue = Number(value);
+    interestRangeElement.value = Number.isNaN(numericValue) ? interestRangeElement.min : numericValue;
     updateDisplay();
   });
 
   // Add event listener to year span to update corresponding range input
   document.getElementById('year').addEventListener('input', function () {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
-    document.getElementById('yearRange').value = isNaN(value) ? document.getElementById('yearRange').min : value;
+    const yearRangeElement = document.getElementById('yearRange');
+    const numericValue = Number(value);
+    yearRangeElement.value = Number.isNaN(numericValue) ? yearRangeElement.min : numericValue;
     updateDisplay();
   });
 
   // Add event listener to month span to update corresponding range input
   document.getElementById('month').addEventListener('input', function () {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
-    document.getElementById('monthRange').value = isNaN(value) ? document.getElementById('monthRange').min : value;
+    const monthRangeElement = document.getElementById('monthRange');
+    const numericValue = Number(value);
+    monthRangeElement.value = Number.isNaN(numericValue) ? monthRangeElement.min : numericValue;
     updateDisplay();
-
   });
 
   // Add event listener to originationcharges span to update corresponding range input
   document.getElementById('originationcharges').addEventListener('input', function () {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
-    document.getElementById('originationchargesRange').value = isNaN(value) ? document.getElementById('originationchargesRange').min : value;
+    const originationChargesRangeElement = document.getElementById('originationchargesRange');
+    const numericValue = Number(value);
+    originationChargesRangeElement.value = Number.isNaN(numericValue) ? originationChargesRangeElement.min : numericValue;
     updateDisplay();
   });
-
 
   updateDisplay();
 
   // Add event listeners to spans to enforce numeric input
-  document.querySelectorAll('.input-details span').forEach(span => {
+  document.querySelectorAll('.input-details span').forEach((span) => {
     span.addEventListener('input', function () {
       const value = this.textContent.trim();
       const numericValue = parseFloat(value.replace(/\D/g, ''));
 
-      if (!isNaN(numericValue)) {
+     if (!Number.isNaN(Number(numericValue))) {
         const formattedValue = numericValue.toLocaleString(); // Format numeric value
         this.textContent = formattedValue; // Update span content with formatted numeric value
 
@@ -258,7 +266,7 @@ export default async function decorate() {
   // Apply Now Button
   const applyBtn = document.getElementById('apply-btn');
   applyBtn.addEventListener('click', () => {
-    console.log("clicked");
+    console.log('clicked');
     window.location.href = '/applynow';
   });
 }
