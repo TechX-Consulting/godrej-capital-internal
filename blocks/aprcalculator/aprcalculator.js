@@ -157,7 +157,7 @@ export default async function decorate() {
             </div>
 			<div class="errorMsg">
 			    <p id="originationchargesError" class="error" style="display: none;">Value must be between ${originationChargesMin} and ${originationChargesMax}</p>
-		</div>
+</div>
             </div>
 
         </div>
