@@ -1,83 +1,83 @@
 export default async function decorate() {
-    const container = document.querySelector('.aprcalculator');
+  const container = document.querySelector('.aprcalculator');
 
-    function updateDisplay() {
-        const loanAmount = parseFloat(document.getElementById('loanamount').textContent.replace(/\D/g, ''));
-        const interestRate = parseFloat(document.getElementById('interest').textContent.replace(/\D/g, ''));
-        const loanTenureYears = parseFloat(document.getElementById('year').textContent.replace(/\D/g, ''));
-        const loanTenureMonths = parseFloat(document.getElementById('month').textContent.replace(/\D/g, ''));
-        const originationCharges = parseFloat(document.getElementById('originationcharges').textContent.replace(/\D/g, ''));
+  function updateDisplay() {
+    const loanAmount = parseFloat(document.getElementById('loanamount').textContent.replace(/\D/g, ''));
+    const interestRate = parseFloat(document.getElementById('interest').textContent.replace(/\D/g, ''));
+    const loanTenureYears = parseFloat(document.getElementById('year').textContent.replace(/\D/g, ''));
+    const loanTenureMonths = parseFloat(document.getElementById('month').textContent.replace(/\D/g, ''));
+    const originationCharges = parseFloat(document.getElementById('originationcharges').textContent.replace(/\D/g, ''));
 
-        const loanAmountMin = parseFloat(document.getElementById('loanamount').dataset.min);
-        const loanAmountMax = parseFloat(document.getElementById('loanamount').dataset.max);
-        const interestMin = parseFloat(document.getElementById('interest').dataset.min);
-        const interestMax = parseFloat(document.getElementById('interest').dataset.max);
-        const yearMin = parseFloat(document.getElementById('year').dataset.min);
-        const yearMax = parseFloat(document.getElementById('year').dataset.max);
-        const originationChargesMin = parseFloat(document.getElementById('originationcharges').dataset.min);
-        const originationChargesMax = parseFloat(document.getElementById('originationcharges').dataset.max);
+    const loanAmountMin = parseFloat(document.getElementById('loanamount').dataset.min);
+    const loanAmountMax = parseFloat(document.getElementById('loanamount').dataset.max);
+    const interestMin = parseFloat(document.getElementById('interest').dataset.min);
+    const interestMax = parseFloat(document.getElementById('interest').dataset.max);
+    const yearMin = parseFloat(document.getElementById('year').dataset.min);
+    const yearMax = parseFloat(document.getElementById('year').dataset.max);
+    const originationChargesMin = parseFloat(document.getElementById('originationcharges').dataset.min);
+    const originationChargesMax = parseFloat(document.getElementById('originationcharges').dataset.max);
 
-        const validateAndShowError = (value, min, max, errorElement) => {
-            if (value < min || value > max) {
-                errorElement.style.display = 'block';
-            } else {
-                errorElement.style.display = 'none';
-            }
-        };
+    const validateAndShowError = (value, min, max, errorElement) => {
+      if (value < min || value > max) {
+        errorElement.style.display = 'block';
+      } else {
+        errorElement.style.display = 'none';
+      }
+    };
 
-        validateAndShowError(loanAmount, loanAmountMin, loanAmountMax, document.getElementById('loanamountError'));
-        validateAndShowError(interestRate, interestMin, interestMax, document.getElementById('interestError'));
-        validateAndShowError(loanTenureYears, yearMin, yearMax, document.getElementById('yearError'));
-        validateAndShowError(loanTenureMonths, monthMin, monthMax, document.getElementById('monthError'));
-        validateAndShowError(originationCharges, originationChargesMin, originationChargesMax, document.getElementById('originationchargesError'));
+    validateAndShowError(loanAmount, loanAmountMin, loanAmountMax, document.getElementById('loanamountError'));
+    validateAndShowError(interestRate, interestMin, interestMax, document.getElementById('interestError'));
+    validateAndShowError(loanTenureYears, yearMin, yearMax, document.getElementById('yearError'));
+    validateAndShowError(loanTenureMonths, monthMin, monthMax, document.getElementById('monthError'));
+    validateAndShowError(originationCharges, originationChargesMin, originationChargesMax, document.getElementById('originationchargesError'));
 
-        const totalLoanTenure = loanTenureYears * 12 + loanTenureMonths;
+    const totalLoanTenure = loanTenureYears * 12 + loanTenureMonths;
 
-        // Convert annual interest rate to monthly rate
-        const monthlyInterestRate = interestRate / 100 / 12;
+    // Convert annual interest rate to monthly rate
+    const monthlyInterestRate = interestRate / 100 / 12;
 
-        // Calculate monthly EMI (Equated Monthly Installment)
-        const monthlyEMI = loanAmount * monthlyInterestRate * Math.pow((1 + monthlyInterestRate), totalLoanTenure) / (Math.pow((1 + monthlyInterestRate), totalLoanTenure) - 1);
+    // Calculate monthly EMI (Equated Monthly Installment)
+    const monthlyEMI = loanAmount * monthlyInterestRate * Math.pow((1 + monthlyInterestRate), totalLoanTenure) / (Math.pow((1 + monthlyInterestRate), totalLoanTenure) - 1);
 
-        // Calculate total payment over the loan tenure
-        const totalPayment = monthlyEMI * totalLoanTenure;
+    // Calculate total payment over the loan tenure
+    const totalPayment = monthlyEMI * totalLoanTenure;
 
-        // Calculate total cost of the loan (including origination charges)
-        const totalCost = totalPayment + originationCharges;
+    // Calculate total cost of the loan (including origination charges)
+    const totalCost = totalPayment + originationCharges;
 
-        // Calculate APR (Annual Percentage Rate)
-        const apr = ((totalCost / loanAmount - 1) / (totalLoanTenure / 12)) * 100;
+    // Calculate APR (Annual Percentage Rate)
+    const apr = ((totalCost / loanAmount - 1) / (totalLoanTenure / 12)) * 100;
 
-        document.getElementById('aprDisplay').textContent = `${apr.toFixed(2)}%`;
-    }
+    document.getElementById('aprDisplay').textContent = `${apr.toFixed(2)}%`;
+  }
 
-    function getDataAttributeValueByName(name) {
-        const element = document.querySelector(`[data-${name}]`);
-        return element ? element.getAttribute(`data-${name}`) : null;
-    }
+  function getDataAttributeValueByName(name) {
+    const element = document.querySelector(`[data-${name}]`);
+    return element ? element.getAttribute(`data-${name}`) : null;
+  }
 
-    // Extract the value from the section metaData
-    const loanAmountTitle = getDataAttributeValueByName('loan-amount-title');
-    const loanAmountMin = getDataAttributeValueByName('loan-amount-min');
-    const loanAmountMax = getDataAttributeValueByName('loan-amount-max');
-    const interestTitle = getDataAttributeValueByName('interest-title');
-    const interestMin = getDataAttributeValueByName('interest-min');
-    const interestMax = getDataAttributeValueByName('interest-max');
-    const yearTitle = getDataAttributeValueByName('year-title');
-    const yearMin = getDataAttributeValueByName('year-min');
-    const yearMax = getDataAttributeValueByName('year-max');
-    const monthTitle = getDataAttributeValueByName('month-title');
-    const monthMin = getDataAttributeValueByName('month-min');
-    const monthMax = getDataAttributeValueByName('month-max');
+  // Extract the value from the section metaData
+  const loanAmountTitle = getDataAttributeValueByName('loan-amount-title');
+  const loanAmountMin = getDataAttributeValueByName('loan-amount-min');
+  const loanAmountMax = getDataAttributeValueByName('loan-amount-max');
+  const interestTitle = getDataAttributeValueByName('interest-title');
+  const interestMin = getDataAttributeValueByName('interest-min');
+  const interestMax = getDataAttributeValueByName('interest-max');
+  const yearTitle = getDataAttributeValueByName('year-title');
+  const yearMin = getDataAttributeValueByName('year-min');
+  const yearMax = getDataAttributeValueByName('year-max');
+  const monthTitle = getDataAttributeValueByName('month-title');
+  const monthMin = getDataAttributeValueByName('month-min');
+  const monthMax = getDataAttributeValueByName('month-max');
 
-    const originationChargesTitle = getDataAttributeValueByName('origination-charges-title');
-    const originationChargesMin = getDataAttributeValueByName('origination-charges-min');
-    const originationChargesMax = getDataAttributeValueByName('origination-charges-max');
+  const originationChargesTitle = getDataAttributeValueByName('origination-charges-title');
+  const originationChargesMin = getDataAttributeValueByName('origination-charges-min');
+  const originationChargesMax = getDataAttributeValueByName('origination-charges-max');
 
-    const textSize = getDataAttributeValueByName('font-size');
-    console.log(textSize);
+  const textSize = getDataAttributeValueByName('font-size');
+  console.log(textSize);
 
-    const htmlCode = `
+  const htmlCode = `
     <div class="calculator-container">
         <div class="inputs">
             <div class="inputBox">
@@ -170,95 +170,95 @@ export default async function decorate() {
         </div>
     </div>`;
 
-    container.innerHTML += htmlCode;
+  container.innerHTML += htmlCode;
 
-    //set the fontsize
-    const allInput = document.querySelectorAll('.inputBox');
-    console.log(allInput);
-    allInput.forEach((element) => {
-        console.log(element);
-        element.style.fontSize = `${textSize}px`;
-    })
+  //set the fontsize
+  const allInput = document.querySelectorAll('.inputBox');
+  console.log(allInput);
+  allInput.forEach((element) => {
+    console.log(element);
+    element.style.fontSize = `${textSize}px`;
+  })
 
-    window.updateDisplay = updateDisplay;
-    window.updateRange = function (id) {
-        const value = document.getElementById(`${id}Range`).value;
-        document.getElementById(id).textContent = value;
-        updateDisplay();
-    };
+  window.updateDisplay = updateDisplay;
+  window.updateRange = function (id) {
+    const value = document.getElementById(`${id}Range`).value;
+    document.getElementById(id).textContent = value;
+    updateDisplay();
+  };
 
-    document.getElementById('loanamount').addEventListener('input', function () {
-        // const value = parseFloat(this.textContent.replace(/[^\d.]/g, '')); // Extract numeric value
-        // const min = parseFloat(this.dataset.min);
-        // const max = parseFloat(this.dataset.max);
-        // const clampedValue = Math.min(Math.max(value, min), max); // Clamp value within range
-        // this.textContent = clampedValue.toLocaleString(); // Update span content with formatted value
-        // document.getElementById('loanamountRange').value = clampedValue; // Update loanamountRange value
-        // updateDisplay();
-        const value = parseFloat(this.textContent.replace(/\D/g, ''));
-        document.getElementById('loanamountRange').value = isNaN(value) ? document.getElementById('loanamountRange').min : value;
-        updateDisplay();
-    });
+  document.getElementById('loanamount').addEventListener('input', function () {
+    // const value = parseFloat(this.textContent.replace(/[^\d.]/g, '')); // Extract numeric value
+    // const min = parseFloat(this.dataset.min);
+    // const max = parseFloat(this.dataset.max);
+    // const clampedValue = Math.min(Math.max(value, min), max); // Clamp value within range
+    // this.textContent = clampedValue.toLocaleString(); // Update span content with formatted value
+    // document.getElementById('loanamountRange').value = clampedValue; // Update loanamountRange value
+    // updateDisplay();
+    const value = parseFloat(this.textContent.replace(/\D/g, ''));
+    document.getElementById('loanamountRange').value = isNaN(value) ? document.getElementById('loanamountRange').min : value;
+    updateDisplay();
+  });
 
-    // Add event listener to interest span to update corresponding range input
-    document.getElementById('interest').addEventListener('input', function () {
-        const value = parseFloat(this.textContent.replace(/\D/g, ''));
-        document.getElementById('interestRange').value = isNaN(value) ? document.getElementById('interestRange').min : value;
-        updateDisplay();
-    });
+  // Add event listener to interest span to update corresponding range input
+  document.getElementById('interest').addEventListener('input', function () {
+    const value = parseFloat(this.textContent.replace(/\D/g, ''));
+    document.getElementById('interestRange').value = isNaN(value) ? document.getElementById('interestRange').min : value;
+    updateDisplay();
+  });
 
-    // Add event listener to year span to update corresponding range input
-    document.getElementById('year').addEventListener('input', function () {
-        const value = parseFloat(this.textContent.replace(/\D/g, ''));
-        document.getElementById('yearRange').value = isNaN(value) ? document.getElementById('yearRange').min : value;
-        updateDisplay();
-    });
+  // Add event listener to year span to update corresponding range input
+  document.getElementById('year').addEventListener('input', function () {
+    const value = parseFloat(this.textContent.replace(/\D/g, ''));
+    document.getElementById('yearRange').value = isNaN(value) ? document.getElementById('yearRange').min : value;
+    updateDisplay();
+  });
 
-    // Add event listener to month span to update corresponding range input
-    document.getElementById('month').addEventListener('input', function () {
-        const value = parseFloat(this.textContent.replace(/\D/g, ''));
-        document.getElementById('monthRange').value = isNaN(value) ? document.getElementById('monthRange').min : value;
-        updateDisplay();
-
-    });
-
-    // Add event listener to originationcharges span to update corresponding range input
-    document.getElementById('originationcharges').addEventListener('input', function () {
-        const value = parseFloat(this.textContent.replace(/\D/g, ''));
-        document.getElementById('originationchargesRange').value = isNaN(value) ? document.getElementById('originationchargesRange').min : value;
-        updateDisplay();
-    });
-
-
+  // Add event listener to month span to update corresponding range input
+  document.getElementById('month').addEventListener('input', function () {
+    const value = parseFloat(this.textContent.replace(/\D/g, ''));
+    document.getElementById('monthRange').value = isNaN(value) ? document.getElementById('monthRange').min : value;
     updateDisplay();
 
-    // Add event listeners to spans to enforce numeric input
-    document.querySelectorAll('.input-details span').forEach(span => {
-        span.addEventListener('input', function () {
-            const value = this.textContent.trim();
-            const numericValue = parseFloat(value.replace(/\D/g, ''));
+  });
 
-            if (!isNaN(numericValue)) {
-                const formattedValue = numericValue.toLocaleString(); // Format numeric value
-                this.textContent = formattedValue; // Update span content with formatted numeric value
+  // Add event listener to originationcharges span to update corresponding range input
+  document.getElementById('originationcharges').addEventListener('input', function () {
+    const value = parseFloat(this.textContent.replace(/\D/g, ''));
+    document.getElementById('originationchargesRange').value = isNaN(value) ? document.getElementById('originationchargesRange').min : value;
+    updateDisplay();
+  });
 
-                // Set cursor position to the end of the span
-                const range = document.createRange();
-                const selection = window.getSelection();
-                range.setStart(this.childNodes[0], formattedValue.length);
-                range.collapse(true);
-                selection.removeAllRanges();
-                selection.addRange(range);
-            } else {
-                this.textContent = ''; // Clear span content if input is not numeric
-            }
-        });
+
+  updateDisplay();
+
+  // Add event listeners to spans to enforce numeric input
+  document.querySelectorAll('.input-details span').forEach(span => {
+    span.addEventListener('input', function () {
+      const value = this.textContent.trim();
+      const numericValue = parseFloat(value.replace(/\D/g, ''));
+
+      if (!isNaN(numericValue)) {
+        const formattedValue = numericValue.toLocaleString(); // Format numeric value
+        this.textContent = formattedValue; // Update span content with formatted numeric value
+
+        // Set cursor position to the end of the span
+        const range = document.createRange();
+        const selection = window.getSelection();
+        range.setStart(this.childNodes[0], formattedValue.length);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      } else {
+        this.textContent = ''; // Clear span content if input is not numeric
+      }
     });
+  });
 
-    // Apply Now Button
-    const applyBtn = document.getElementById('apply-btn');
-    applyBtn.addEventListener('click', () => {
-        console.log("clicked");
-        window.location.href = '/applynow';
-    });
+  // Apply Now Button
+  const applyBtn = document.getElementById('apply-btn');
+  applyBtn.addEventListener('click', () => {
+    console.log("clicked");
+    window.location.href = '/applynow';
+  });
 }
