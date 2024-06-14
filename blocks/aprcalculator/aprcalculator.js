@@ -14,6 +14,8 @@ export default async function decorate() {
     const interestMax = parseFloat(document.getElementById('interest').dataset.max);
     const yearMin = parseFloat(document.getElementById('year').dataset.min);
     const yearMax = parseFloat(document.getElementById('year').dataset.max);
+    const monthMin = parseFloat(document.getElementById('month').dataset.min);
+    const monthMax = parseFloat(document.getElementById('month').dataset.max);
     const originationChargesMin = parseFloat(document.getElementById('originationcharges').dataset.min);
     const originationChargesMax = parseFloat(document.getElementById('originationcharges').dataset.max);
 
