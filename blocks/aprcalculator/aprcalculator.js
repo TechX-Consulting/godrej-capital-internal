@@ -3,7 +3,6 @@ export default async function decorate() {
 
     function updateDisplay() {
         const loanAmount = parseFloat(document.getElementById('loanamount').textContent.replace(/\D/g, ''));
-        console.log(loanAmount);
         const interestRate = parseFloat(document.getElementById('interest').textContent.replace(/\D/g, ''));
         const loanTenureYears = parseFloat(document.getElementById('year').textContent.replace(/\D/g, ''));
         const loanTenureMonths = parseFloat(document.getElementById('month').textContent.replace(/\D/g, ''));
