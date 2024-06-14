@@ -17,9 +17,10 @@ export default function decorate(block) {
     ul.append(li);
   });
   ul.querySelectorAll('img').forEach((img) =>
-   img.closest('picture').replaceWith(
-     createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])
-   ),
+    img.closest('picture').replaceWith(
+      createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])
+    ),
+  );
   block.textContent = '';
   block.append(ul);
 }
