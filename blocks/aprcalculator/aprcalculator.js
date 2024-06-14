@@ -180,9 +180,11 @@ export default async function decorate() {
 
   window.updateDisplay = updateDisplay;
   window.updateRange = function (id) {
+
     const {value} = document.getElementById(`${id}Range`).value;
     document.getElementById(id).textContent = value;
     updateDisplay();
+    
   };
 
   document.getElementById('loanamount').addEventListener('input', function () {
