@@ -206,7 +206,7 @@ export default async function decorate() {
   });
 
   // Add event listener to interest span to update corresponding range input
-  document.getElementById('interest').addEventListener('input', function updateInput (){
+  document.getElementById('interest').addEventListener('input', function updateInput() {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const interestRangeElement = document.getElementById('interestRange');
     const numericValue = Number(value);
@@ -216,7 +216,7 @@ export default async function decorate() {
   });
 
   // Add event listener to year span to update corresponding range input
-  document.getElementById('year').addEventListener('input', function updateInput (){
+  document.getElementById('year').addEventListener('input', function updateInput() {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const yearRangeElement = document.getElementById('yearRange');
     const numericValue = Number(value);
@@ -225,7 +225,7 @@ export default async function decorate() {
   });
 
   // Add event listener to month span to update corresponding range input
-  document.getElementById('month').addEventListener('input', function updateInput (){
+  document.getElementById('month').addEventListener('input', function updateInput() {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const monthRangeElement = document.getElementById('monthRange');
     const numericValue = Number(value);
@@ -234,7 +234,7 @@ export default async function decorate() {
   });
 
   // Add event listener to originationcharges span to update corresponding range input
-  document.getElementById('originationcharges').addEventListener('input', function updateInput (){
+  document.getElementById('originationcharges').addEventListener('input', function updateInput() {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const originationChargesRangeElement = document.getElementById('originationchargesRange');
     const numericValue = Number(value);
@@ -247,7 +247,7 @@ export default async function decorate() {
 
   // Add event listeners to spans to enforce numeric input
   document.querySelectorAll('.input-details span').forEach((span) => {
-    span.addEventListener('input', function updateSpan (){
+    span.addEventListener('input', function updateSpan() {
       const value = this.textContent.trim();
       const numericValue = parseFloat(value.replace(/\D/g, ''));
 
