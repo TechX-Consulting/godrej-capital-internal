@@ -8,7 +8,6 @@ export default async function decorate() {
         const loanTenureMonths = parseFloat(document.getElementById('month').textContent.replace(/\D/g, ''));
         const originationCharges = parseFloat(document.getElementById('originationcharges').textContent.replace(/\D/g, ''));
 
-        // Validation
         const loanAmountMin = parseFloat(document.getElementById('loanamount').dataset.min);
         const loanAmountMax = parseFloat(document.getElementById('loanamount').dataset.max);
         const interestMin = parseFloat(document.getElementById('interest').dataset.min);
