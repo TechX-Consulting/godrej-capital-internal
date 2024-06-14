@@ -91,9 +91,9 @@ export default async function decorate() {
                 <span>${loanAmountMin}</span>
                 <span>${loanAmountMax}</span>
             </div>
-			<div class="errorMsg">
-			    <p id="loanamountError" class="error" style="display: none;">Value must be between ${loanAmountMin} and ${loanAmountMax}</p>
-			</div>
+<div class="errorMsg">
+<p id="loanamountError" class="error" style="display: none;">Value must be between ${loanAmountMin} and ${loanAmountMax}</p>
+</div>
             </div>
 
             <div class="inputBox">
@@ -107,9 +107,9 @@ export default async function decorate() {
                 <span>${interestMin}%</span>
                 <span>${interestMax}%</span>
             </div>
-			<div class="errorMsg">
-			    <p id="interestError" class="error" style="display: none;">Value must be between ${interestMin} and ${interestMax}</p>
-			</div>
+<div class="errorMsg">
+<p id="interestError" class="error" style="display: none;">Value must be between ${interestMin} and ${interestMax}</p>
+</div>
             </div>
 
             <div class="inputBox">
@@ -123,9 +123,9 @@ export default async function decorate() {
                 <span>${yearMin}</span>
                 <span>${yearMax}Year</span>
             </div>
-			<div class="errorMsg">
-			    <p id="yearError" class="error" style="display: none;">Value must be between ${yearMin} and ${yearMax}</p>
-			</div>
+<div class="errorMsg">
+<p id="yearError" class="error" style="display: none;">Value must be between ${yearMin} and ${yearMax}</p>
+</div>
             </div>
 
             <div class="inputBox">
@@ -139,9 +139,9 @@ export default async function decorate() {
                 <span>${monthMin}</span>
                 <span>${monthMax}</span>
             </div>
-			<div class="errorMsg">
-			    <p id="monthError" class="error" style="display: none;">Value must be between ${monthMin} and ${monthMax}</p>
-			</div>
+<div class="errorMsg">
+<p id="monthError" class="error" style="display: none;">Value must be between ${monthMin} and ${monthMax}</p>
+</div>
             </div>
 
             <div class="inputBox">
@@ -155,9 +155,9 @@ export default async function decorate() {
                 <span>${originationChargesMin}</span>
                 <span>${originationChargesMax}</span>
             </div>
-			<div class="errorMsg">
-			    <p id="originationchargesError" class="error" style="display: none;">Value must be between ${originationChargesMin} and ${originationChargesMax}</p>
-			</div>
+<div class="errorMsg">
+<p id="originationchargesError" class="error" style="display: none;">Value must be between ${originationChargesMin} and ${originationChargesMax}</p>
+</div>
             </div>
 
         </div>
@@ -172,11 +172,11 @@ export default async function decorate() {
 
   container.innerHTML += htmlCode;
 
-  //set the fontsize
+  //  set the fontsize
   const allInput = document.querySelectorAll('.inputBox');
   allInput.forEach((element) => {
     element.style.fontSize = `${textSize}px`;
-  })
+  });
 
   window.updateDisplay = updateDisplay;
   window.updateRange = function (id) {
@@ -186,17 +186,18 @@ export default async function decorate() {
   };
 
   document.getElementById('loanamount').addEventListener('input', function () {
-    // const value = parseFloat(this.textContent.replace(/[^\d.]/g, '')); // Extract numeric value
+    // const value = parseFloat(this.textContent.replace(/[^\d.]/g, ''));
     // const min = parseFloat(this.dataset.min);
     // const max = parseFloat(this.dataset.max);
-    // const clampedValue = Math.min(Math.max(value, min), max); // Clamp value within range
-    // this.textContent = clampedValue.toLocaleString(); // Update span content with formatted value
-    // document.getElementById('loanamountRange').value = clampedValue; // Update loanamountRange value
+    // const clampedValue = Math.min(Math.max(value, min), max);
+    // this.textContent = clampedValue.toLocaleString();
+    // document.getElementById('loanamountRange').value = clampedValue;
     // updateDisplay();
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const loanAmountRangeElement = document.getElementById('loanamountRange');
     const numericValue = Number(value);
-    loanAmountRangeElement.value = Number.isNaN(numericValue) ? loanAmountRangeElement.min : numericValue;
+    loanAmountRangeElement.value = Number.isNaN(numericValue)
+    ? loanAmountRangeElement.min : numericValue;
 
     updateDisplay();
   });
@@ -206,7 +207,8 @@ export default async function decorate() {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const interestRangeElement = document.getElementById('interestRange');
     const numericValue = Number(value);
-    interestRangeElement.value = Number.isNaN(numericValue) ? interestRangeElement.min : numericValue;
+    interestRangeElement.value = Number.isNaN(numericValue)
+    ? interestRangeElement.min : numericValue;
     updateDisplay();
   });
 
@@ -233,7 +235,8 @@ export default async function decorate() {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const originationChargesRangeElement = document.getElementById('originationchargesRange');
     const numericValue = Number(value);
-    originationChargesRangeElement.value = Number.isNaN(numericValue) ? originationChargesRangeElement.min : numericValue;
+    originationChargesRangeElement.value = Number.isNaN(numericValue)
+    ? originationChargesRangeElement.min : numericValue;
     updateDisplay();
   });
 
@@ -245,7 +248,7 @@ export default async function decorate() {
       const value = this.textContent.trim();
       const numericValue = parseFloat(value.replace(/\D/g, ''));
 
-     if (!Number.isNaN(Number(numericValue))) {
+      if (!Number.isNaN(Number(numericValue))) {
         const formattedValue = numericValue.toLocaleString(); // Format numeric value
         this.textContent = formattedValue; // Update span content with formatted numeric value
 
