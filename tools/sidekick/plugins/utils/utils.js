@@ -37,9 +37,9 @@ export function createElement(tagName, classes, props) {
       elem.setAttribute(propName, props[propName]);
     });
   }
+  
   return elem;
 }
-
 /**
   * Copies to the clipboard
   * @param {Blob} blob The data
