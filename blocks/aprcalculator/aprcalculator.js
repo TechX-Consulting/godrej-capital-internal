@@ -157,7 +157,7 @@ export default async function decorate() {
             </div>
 			<div class="errorMsg">
 			    <p id="originationchargesError" class="error" style="display: none;">Value must be between ${originationChargesMin} and ${originationChargesMax}</p>
-</div>
+			</div>
             </div>
 
         </div>
@@ -172,48 +172,46 @@ export default async function decorate() {
 
   container.innerHTML += htmlCode;
 
-  // set the fontsize
+  //set the fontsize
   const allInput = document.querySelectorAll('.inputBox');
   allInput.forEach((element) => {
     element.style.fontSize = `${textSize}px`;
-  });
+  })
 
   window.updateDisplay = updateDisplay;
-  window.updateRange = (id) => {
-    const { value } = document.getElementById(`${id}Range`);
+  window.updateRange = function (id) {
+    const value = document.getElementById(`${id}Range`).value;
     document.getElementById(id).textContent = value;
     updateDisplay();
   };
 
-  document.getElementById('loanamount').addEventListener('input', () => {
+  document.getElementById('loanamount').addEventListener('input', function () {
     // const value = parseFloat(this.textContent.replace(/[^\d.]/g, '')); // Extract numeric value
     // const min = parseFloat(this.dataset.min);
     // const max = parseFloat(this.dataset.max);
     // const clampedValue = Math.min(Math.max(value, min), max); // Clamp value within range
     // this.textContent = clampedValue.toLocaleString(); // Update span content with formatted value
-    // document.getElementById('loanamountRange').value =clampedValue;
-     // Update loanamountRange value
+    // document.getElementById('loanamountRange').value = clampedValue; // Update loanamountRange value
     // updateDisplay();
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const loanAmountRangeElement = document.getElementById('loanamountRange');
     const numericValue = Number(value);
-    loanAmountRangeElement.value = Number.isNaN(numericValue) ?
-    loanAmountRangeElement.min : numericValue;
+    loanAmountRangeElement.value = Number.isNaN(numericValue) ? loanAmountRangeElement.min : numericValue;
+
     updateDisplay();
   });
 
   // Add event listener to interest span to update corresponding range input
-  document.getElementById('interest').addEventListener('input', () => {
+  document.getElementById('interest').addEventListener('input', function () {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const interestRangeElement = document.getElementById('interestRange');
     const numericValue = Number(value);
-    interestRangeElement.value = Number.isNaN(numericValue) ?
-    interestRangeElement.min : numericValue;
+    interestRangeElement.value = Number.isNaN(numericValue) ? interestRangeElement.min : numericValue;
     updateDisplay();
   });
 
   // Add event listener to year span to update corresponding range input
-  document.getElementById('year').addEventListener('input',  () => {
+  document.getElementById('year').addEventListener('input', function () {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const yearRangeElement = document.getElementById('yearRange');
     const numericValue = Number(value);
@@ -222,7 +220,7 @@ export default async function decorate() {
   });
 
   // Add event listener to month span to update corresponding range input
-  document.getElementById('month').addEventListener('input',  () => {
+  document.getElementById('month').addEventListener('input', function () {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const monthRangeElement = document.getElementById('monthRange');
     const numericValue = Number(value);
@@ -231,12 +229,11 @@ export default async function decorate() {
   });
 
   // Add event listener to originationcharges span to update corresponding range input
-  document.getElementById('originationcharges').addEventListener('input',  () => {
+  document.getElementById('originationcharges').addEventListener('input', function () {
     const value = parseFloat(this.textContent.replace(/\D/g, ''));
     const originationChargesRangeElement = document.getElementById('originationchargesRange');
     const numericValue = Number(value);
-    originationChargesRangeElement.value = Number.isNaN(numericValue) ?
-    originationChargesRangeElement.min : numericValue;
+    originationChargesRangeElement.value = Number.isNaN(numericValue) ? originationChargesRangeElement.min : numericValue;
     updateDisplay();
   });
 
@@ -244,11 +241,11 @@ export default async function decorate() {
 
   // Add event listeners to spans to enforce numeric input
   document.querySelectorAll('.input-details span').forEach((span) => {
-    span.addEventListener('input',  ()=> {
+    span.addEventListener('input', function () {
       const value = this.textContent.trim();
       const numericValue = parseFloat(value.replace(/\D/g, ''));
 
-      if (!Number.isNaN(Number(numericValue))) {
+     if (!Number.isNaN(Number(numericValue))) {
         const formattedValue = numericValue.toLocaleString(); // Format numeric value
         this.textContent = formattedValue; // Update span content with formatted numeric value
 
