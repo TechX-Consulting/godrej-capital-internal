@@ -21,7 +21,7 @@ function renderData(data, selectedTab, selectedOption, tabpanel) {
   }
 
   const filteredData = data.filter(
-    (item) => item.tab === selectedTab && item.dropdown === selectedOption
+    (item) => item.tab === selectedTab && item.dropdown === selectedOption,
   );
 
   if (filteredData.length === 0) {
