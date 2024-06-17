@@ -136,9 +136,9 @@ export default async function decorate(block) {
           }
           // Create a new scope for each page button
           ((pageNumber) => {
-            pageButton.addEventListener('click', () => {
-            currentPage = pageNumber;
-            renderPage();
+              pageButton.addEventListener('click', () => {
+              currentPage = pageNumber;
+              renderPage();
             });
           })(i);
           paginationContainer.appendChild(pageButton);
