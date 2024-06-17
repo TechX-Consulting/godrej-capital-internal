@@ -1,6 +1,6 @@
 import ffetch from '../utils/ffetch.js';
 import {
-  div, p, h2, select, option, label, input,
+  div, p, h2, select, option, label, input, button,
 } from '../utils/dom-helper.js';
 import createMap from '../utils/google-map.js';
 
@@ -19,6 +19,14 @@ const pincodeInput = input({
   type: 'text',
   placeholder: 'Enter Pincode',
 });
+
+function updateMapCard(item) {
+  document.getElementById('mapCardTitle').textContent = item.location;
+  document.getElementById('mapCardAddress').textContent = item.address;
+  document.getElementById('mapCardPhone').textContent = `Phone No.: ${item.phone}`;
+  document.getElementById('mapCardHours').textContent = item.hours;
+  document.getElementById('mapCard').style.display = 'block'; // Show the card
+}
 
 /**
  * Displays filtered location results within a container element.
@@ -52,8 +60,14 @@ function displayResults(filteredLocations) {
       p({ class: 'hours' }, item.hours),
     );
     // Add click listener to the card to create a map on click
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (event) => {
       createMap(lat, lng, 'mapCanvas');
+      updateMapCard(item);
+      document.querySelectorAll('.card').forEach((c) => {
+        c.classList.remove('active');
+      });
+      // Add active class to the clicked card
+      event.currentTarget.classList.add('active');
     });
 
     cardContainer.appendChild(card);
@@ -177,6 +191,16 @@ function initialize(entries) {
   const defaultLong = coordinates.split(',')[1];
   // Initialize the map
 
+  mapContainer.appendChild(
+    div(
+      { id: 'mapCard' },
+      h2({ id: 'mapCardTitle' }, entries[0].location),
+      p({ id: 'mapCardAddress' }, entries[0].address),
+      p({ id: 'mapCardPhone' }, `Phone No.: ${entries[0].phone}`),
+      p({ id: 'mapCardHours' }, entries[0].hours),
+      button({ id: 'getDirections' }, 'Get Directions'),
+    ),
+  );
   createMap(defaultLat, defaultLong, 'mapCanvas');
 }
 
