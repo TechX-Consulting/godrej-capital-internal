@@ -134,11 +134,13 @@ export default async function decorate(block) {
           if (i === currentPage) {
             pageButton.classList.add('active');
           }
-          // Capture the current page number to avoid closure issues
-          pageButton.addEventListener('click', () => {
-            currentPage = i;
+          // Create a new scope for each page button
+          ((pageNumber) => {
+            pageButton.addEventListener('click', () => {
+            currentPage = pageNumber;
             renderPage();
-          });
+            });
+          })(i);
           paginationContainer.appendChild(pageButton);
         }
       }
