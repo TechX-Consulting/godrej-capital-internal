@@ -10,6 +10,8 @@ main .about-banner-container {
   position: relative;
   padding: 32px;
   min-height: 300px;
+  background: linear-gradient(90deg, rgb(36, 36, 36) 0%,
+  rgba(36, 36, 36, 60%) 23.3%, rgba(36, 36, 36, 0%) 76.88%);
 }
 
 .about-banner h3 {
@@ -58,8 +60,3 @@ main .about-banner-container {
   height: 100%;
 }
 
-.about-banner {
-  background: linear-gradient(90deg, #242424 0%, rgba(36, 36, 36, 0.6) 23.3%, rgba(36, 36, 36, 0) 76.88%);
-
-
-}
