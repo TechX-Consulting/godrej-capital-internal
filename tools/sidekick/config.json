@@ -1,6 +1,6 @@
 {
     "project": "godrej-capital",
-    "host": "main--godrej-capital-internal--divanshu-techx.hlx.live",
+    "host": "main--godrej-capital-internal--techx-consulting.hlx.live",
     "plugins": [
       {
         "id": "library",
