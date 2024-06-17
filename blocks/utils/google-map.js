@@ -27,9 +27,9 @@ function createMap(lat, long, mapCanvasID, icons) {
 
   map.setOptions({
     mapTypeControl: false,
-    streetViewControl: false,
+    streetViewControl: true,
     fullscreenControl: false,
-    zoomControl: false,
+    zoomControl: true,
   });
 
   marker.setPosition(pos);
