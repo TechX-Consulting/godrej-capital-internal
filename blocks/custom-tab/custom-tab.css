@@ -45,7 +45,7 @@
 
 /* Styles for the selected tab button */
 .tabs-list button[aria-selected="true"] {
-     background-color: yellow;
+    background-color: yellow;
     color: black;
 }
 
