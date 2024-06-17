@@ -147,280 +147,279 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
 
-  // my js called
+      console.log('js called');
 
-  console.log('js called');
+      const api = "https://main--eds-practice--imjeekxgurjar.hlx.page/nav-element/globalnavigation.json";
+      let responseData = [];
 
-  const api = "https://main--eds-practice--imjeekxgurjar.hlx.page/nav-element/globalnavigation.json";
-  let responseData = [];
+      // Create the topnav div
+      const topNav = document.createElement('div');
+      topNav.className = 'topnav';
 
-  // Create the topnav div
-  const topNav = document.createElement('div');
-  topNav.className = 'topnav';
+      // Create main container div
+      const belowNavMainContainer = document.createElement('div');
+      belowNavMainContainer.className = 'belowNavMainContainer';
 
-  // create main container div
-  const belowNavMainContainer = document.createElement('div');
-  belowNavMainContainer.className = 'belowNavMainContainer';
+      const parentContainerDiv = document.createElement('div');
+      parentContainerDiv.className = 'parentContainerdiv';
 
-  const parentContainerDiv = document.createElement('div');
-  parentContainerDiv.className = 'parentContainerdiv';
+      const firstElementChildDiv = document.createElement('div');
+      firstElementChildDiv.className = 'firstElementChildDiv';
 
-  navWrapper.appendChild(topNav); // Assuming navWrapper is defined in your HTML
-  navWrapper.appendChild(belowNavMainContainer);
+      const secondElementDiv = document.createElement('div');
+      secondElementDiv.className = 'secondElementDiv';
 
-  // Function to render news items
-  function getResponseData(filteredData) {
-         // Create the ul element
-         const ul = document.createElement('ul');
+      const thirdElementDiv = document.createElement('div');
+      thirdElementDiv.className = 'thirdElementDiv';
 
-         filteredData.forEach((item) => {
-             // Create the li element
-             const li = document.createElement('li');
-             li.className = 'listElement';
+      navSections.appendChild(topNav);
+      navSections.appendChild(belowNavMainContainer);
 
-             // Create the a element
-             const a = document.createElement('a');
-             a.href = "#.html";
-             a.textContent = item.HeadingName;
-             a.setAttribute('data-path', item.ChildPageUrl);
-             a.setAttribute('data-depth',item.depth);
-             a.setAttribute('data-navItem',item.HeadingName)
+      // Function to render nav items
+      function getResponseData(filteredData) {
+          const ul = document.createElement('ul');
 
-             // Replace spaces with hyphens and add custom class
-             const apiClass = item.HeadingName.replace(/\s+/g, '-');
-             const customClass = 'anchorClass';
-             a.classList.add(apiClass, customClass);
+          filteredData.forEach((item) => {
+              const li = document.createElement('li');
+              li.className = 'listElement';
 
-             // Append the a element to the li
-             li.appendChild(a);
+              const a = document.createElement('a');
+              a.href = "#.html";
+              a.textContent = item.HeadingName;
+              a.setAttribute('data-path', item.ChildPageUrl);
+              a.setAttribute('data-depth', item.depth);
+              a.setAttribute('data-navItem', item.HeadingName);
 
-             // Append the li element to the ul
-             ul.appendChild(li);
-         });
+              const apiClass = item.HeadingName.replace(/\s+/g, '-');
+              const customClass = 'anchorClass';
+              a.classList.add(apiClass, customClass);
 
-         // Append the ul to the topNav
-         topNav.appendChild(ul);
-             // Add event listeners to show/hide the belowNavMainContainer
-             const navItems = ul.querySelectorAll('a.anchorClass');
-             const belowNavMainContainer = document.querySelector('.belowNavMainContainer');
+              li.appendChild(a);
+              ul.appendChild(li);
+          });
 
-             navItems.forEach((navItem) => {
-                 navItem.addEventListener('mouseover', () => {
-                     let depth = navItem.getAttribute('data-depth'),
-                         navElement = navItem.getAttribute('data-navItem') ,
-                         childPath =  navItem.getAttribute('data-path');
-                         getChildApiResponse(childPath, navElement, depth);
-                     belowNavMainContainer.classList.add('show');
-                 });
+          topNav.appendChild(ul);
 
-                //  navItem.addEventListener('mouseout', () => {
-                //      belowNavMainContainer.classList.remove('show');
-                //  });
-             });
-  }
+          const navItems = ul.querySelectorAll('a.anchorClass');
+          navItems.forEach((navItem) => {
+              navItem.addEventListener('click', () => {
+                  let depth = navItem.getAttribute('data-depth'),
+                      navElement = navItem.getAttribute('data-navItem'),
+                      childPath = navItem.getAttribute('data-path');
+                  getChildApiResponse(childPath, navElement, depth);
+                  belowNavMainContainer.classList.add('show');
+              });
+          });
 
+          const navLinks = document.querySelectorAll('.anchorClass');
+          navLinks.forEach(link => {
+              link.addEventListener('click', function(event) {
+                  event.preventDefault();
+                  if (this.classList.contains('rotate')) {
+                      this.classList.remove('rotate');
+                      belowNavMainContainer.classList.remove('show');
+                  } else {
+                      navLinks.forEach(link => link.classList.remove('rotate'));
+                      this.classList.add('rotate');
+                      belowNavMainContainer.classList.add('show');
+                  }
+              });
+          });
+      }
 
-  function createListElement(textContent, href = "#.html") {
-    const li = document.createElement('li');
-    li.className = 'listElement';
+      function createListElement(textContent, href = "#.html") {
+          const li = document.createElement('li');
+          li.className = 'listElement';
+          const a = document.createElement('a');
+          a.href = href;
+          a.textContent = textContent;
+          a.className = 'anchorPath';
+          a.addEventListener('click', function(event) {
+              event.preventDefault();
+              console.log("Link clicked:", href);
+          });
+          li.appendChild(a);
+          return li;
+      }
 
-    const a = document.createElement('a');
-    a.href = href;
-    a.textContent = textContent;
-    a.className = 'anchorPath';
+      function getChildResponseData(childResponseData) {
+        parentContainerDiv.innerHTML = '';
+        firstElementChildDiv.innerHTML = '';
+        secondElementDiv.innerHTML = '';
+        let depth;
 
-    li.appendChild(a);
-    return li;
-  }
+        const ul = document.createElement('ul');
 
-  function getChildResponseData(childResponseData) {
-    parentContainerDiv.innerHTML = '';
+        if (typeof childResponseData === 'object' && childResponseData !== null) {
+            for (const key in childResponseData) {
+                if (childResponseData.hasOwnProperty(key)) {
+                    const item = childResponseData[key];
+                    const li = createListElement(key);
+                    ul.appendChild(li);
 
-    console.log(childResponseData.depth);
-
-    const firstElementChildDiv = document.createElement('div');
-    firstElementChildDiv.className = 'firstElementChildDiv';
-
-    const secondElementDiv = document.createElement('div');
-    secondElementDiv.className = 'secondElementDiv';
-    console.log(secondElementDiv);
-
-    const thirdElementDiv = document.createElement('div');
-    thirdElementDiv.className = 'thirdElementDiv';
-
-    const ul = document.createElement('ul');
-
-    console.log(childResponseData);
-    if (typeof childResponseData === 'object' && childResponseData !== null) {
-        // Iterate over object keys
-        for (const key in childResponseData) {
-
-            if (childResponseData.hasOwnProperty(key)) {
-                const item = childResponseData[key];
-                const li = createListElement(key);
-                ul.appendChild(li);
-
-                // Check if the item has children and process them
-                if (Array.isArray(item)) {
-                    const subUl = document.createElement('ul');
-                    subUl.className = 'subList';
-                    item.forEach((subItem) => {
-                      console.log(subItem);
-                        subUl.appendChild(createListElement(subItem.title, subItem.path));
-                        console.log(subItem.depth);
-
-                    });
-                    secondElementDiv.appendChild(subUl);
+                    if (Array.isArray(item)) {
+                        const subUl = document.createElement('ul');
+                        subUl.className = 'subList';
+                        item.forEach((subItem) => {
+                            subUl.appendChild(createListElement(subItem.title, subItem.path));
+                            depth = subItem.depth;
+                        });
+                        secondElementDiv.appendChild(subUl);
+                    }
                 }
             }
-        }
-    } else {
-        console.error("childResponseData is not an array or object.");
-    }
-
-    firstElementChildDiv.appendChild(ul);
-    parentContainerDiv.appendChild(firstElementChildDiv);
-    parentContainerDiv.appendChild(secondElementDiv);
-
-    // By default, show the first sublist
-    const firstSubList = secondElementDiv.querySelector('.subList');
-    if (firstSubList) {
-        firstSubList.classList.add('active');
-    }
-
-    // Add event listeners to show/hide the sublists
-    const mainItems = firstElementChildDiv.querySelectorAll('.listElement');
-    const subLists = secondElementDiv.querySelectorAll('.subList');
-    mainItems.forEach((item, index) => {
-        item.addEventListener('mouseover', () => {
-            subLists.forEach((subList) => subList.classList.remove('active'));
-            subLists[index].classList.add('active');
-        });
-        item.addEventListener('click', () => {
-            subLists.forEach((subList) => subList.classList.remove('active'));
-            subLists[index].classList.add('active');
-        });
-    });
-    const anchorTags = secondElementDiv.querySelectorAll('.anchorPath');
-    anchorTags.forEach(anchor => {
-        anchor.addEventListener('mouseover', () => {
-          console.log(anchor.getAttribute('href'));  // Use the href value as needed
-            let imagePath = anchor.getAttribute('href');
-            displayURLContent(imagePath, thirdElementDiv);
-        });
-    });
-
-    parentContainerDiv.appendChild(thirdElementDiv);
-    belowNavMainContainer.appendChild(parentContainerDiv);
-
-
-  }
-
-
-  function getApiResponse(api) {
-      fetch(api, {
-          method: 'GET',
-      })
-      .then((response) => {
-          if (!response.ok) {
-              throw new Error(response.statusText);
-          }
-          return response.json();
-      })
-      .then((response) => {
-          console.log(response.data);
-          responseData = response.data;
-          getResponseData(responseData);
-      })
-      .catch((error) => {
-          console.error(error);
-      });
-  }
-
-  function transformResponseData(data) {
-    console.log(data.depth);
-    let depth = data.depth;
-    const transformedData = {};
-    data.forEach(item => {
-      if(item.parent){
-        if (!transformedData[item.parent]) {
-            transformedData[item.parent] = [];
-        }
-        transformedData[item.parent].push({
-          title: item.title,
-          path: item.path,
-          depth: depth
-      });
-      } else {
-        if(item.title){
-          if (!transformedData[item.title]) {
-              transformedData[item.title] = [];
-          }
-          transformedData[item.title].push({
-            title:item.title,
-            path: item.path,
-            depth:depth
-        });
-        }
-
-      }
-    });
-
-    return transformedData;
-  }
-
-  // child path response
-  function getChildApiResponse(api, navElement, depth) {
-    fetch(api, {
-        method: 'GET',
-    })
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error(response.statusText);
-        }
-        return response.json();
-    })
-    .then((response) => {
-        console.log(response.data);
-        let childResponseData = response.data;
-        childResponseData.depth = depth;
-        console.log(childResponseData.depth);
-        // Transform the response data
-        const transformedData = transformResponseData(childResponseData);
-        console.log(transformedData);
-        getChildResponseData(transformedData);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
-  }
-
-  function displayURLContent(url, targetElement) {
-    let mainUrl = "https://main--eds-practice--imjeekxgurjar.hlx.page" + url;
-    fetch(mainUrl)
-      .then(response => response.text())
-      .then(data => {
-        // Create a temporary div element to hold the fetched HTML content
-        let tempDiv = document.createElement('div');
-        tempDiv.innerHTML = data;
-
-        // Extract the <main> tag content
-        let mainContent = tempDiv.querySelector('main');
-
-        if (mainContent) {
-          // Clear any previous content in targetElement
-          targetElement.innerHTML = '';
-
-          // Append the <main> content to the targetElement
-          targetElement.appendChild(mainContent);
         } else {
-          console.error('Main tag not found in fetched content.');
+            console.error("childResponseData is not an array or object.");
         }
-      })
-      .catch(error => {
-        console.error('Error fetching URL content:', error);
-      });
-  }
 
-  getApiResponse(api);
+        if (depth === '2') {
+          firstElementChildDiv.appendChild(ul);
+          parentContainerDiv.appendChild(firstElementChildDiv);
+      }
+
+        parentContainerDiv.appendChild(secondElementDiv);
+        parentContainerDiv.appendChild(thirdElementDiv);
+
+        const subLists = secondElementDiv.querySelectorAll('.subList');
+        if (subLists.length > 0) {
+            subLists[0].classList.add('active');
+        }
+
+        const mainItems = firstElementChildDiv.querySelectorAll('.listElement');
+        if (mainItems.length > 0) {
+            mainItems[0].classList.add('active');
+        }
+
+        mainItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                mainItems.forEach(mainItem => mainItem.classList.remove('active'));
+                item.classList.add('active');
+                thirdElementDiv.innerHTML = '';
+                subLists.forEach(subList => subList.classList.remove('active'));
+                if (index < subLists.length) {
+                    subLists[index].classList.add('active');
+                    const firstSubItem = subLists[index].querySelector('.anchorPath');
+                    if (firstSubItem) {
+                        displayURLContent(firstSubItem.getAttribute('href'));
+                        firstSubItem.classList.add('anchor_active');
+                    }
+                }
+            });
+        });
+
+        const anchorTags = secondElementDiv.querySelectorAll('.anchorPath');
+        anchorTags.forEach(anchor => {
+            anchor.addEventListener('click', function () {
+                anchorTags.forEach(anchor => anchor.classList.remove('anchor_active'));
+                this.classList.add('anchor_active');
+                let imagePath = this.getAttribute('href');
+                displayURLContent(imagePath);
+            });
+        });
+
+        belowNavMainContainer.appendChild(parentContainerDiv);
+
+        if (mainItems.length > 0) {
+            const firstMainItem = mainItems[0];
+            firstMainItem.click(); // Simulate a click on the first main item
+        }
+    }
+
+
+      function getApiResponse(api) {
+          fetch(api, {
+              method: 'GET',
+          })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error(response.statusText);
+              }
+              return response.json();
+          })
+          .then((response) => {
+              console.log(response.data);
+              responseData = response.data;
+              getResponseData(responseData);
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+      }
+
+      function transformResponseData(data) {
+          let depth = data.depth;
+          const transformedData = {};
+          data.forEach(item => {
+              if(item.parent){
+                  if (!transformedData[item.parent]) {
+                      transformedData[item.parent] = [];
+                  }
+                  transformedData[item.parent].push({
+                      title: item.title,
+                      path: item.path,
+                      depth: depth
+                  });
+              } else {
+                  if(item.title){
+                      if (!transformedData[item.title]) {
+                          transformedData[item.title] = [];
+                      }
+                      transformedData[item.title].push({
+                          title:item.title,
+                          path: item.path,
+                          depth:depth
+                      });
+                  }
+              }
+          });
+          return transformedData;
+      }
+
+      // Child path response
+      function getChildApiResponse(api, navElement, depth) {
+          fetch(api, {
+              method: 'GET',
+          })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error(response.statusText);
+              }
+              return response.json();
+          })
+          .then((response) => {
+              console.log(response.data);
+              let childResponseData = response.data;
+              childResponseData.depth = depth;
+              const transformedData = transformResponseData(childResponseData);
+              getChildResponseData(transformedData);
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+      }
+
+      function displayURLContent(url) {
+          let mainUrl = "https://main--eds-practice--imjeekxgurjar.hlx.page" + url;
+          fetch(mainUrl)
+              .then(response => response.text())
+              .then(data => {
+                  let tempDiv = document.createElement('div');
+                  tempDiv.innerHTML = data;
+
+                  let mainContent = tempDiv.querySelector('main');
+
+                  if (mainContent) {
+                      thirdElementDiv.innerHTML = '';
+                      thirdElementDiv.appendChild(mainContent);
+                      parentContainerDiv.appendChild(thirdElementDiv);
+                  } else {
+                      console.error('Main tag not found in fetched content.');
+                  }
+              })
+              .catch(error => {
+                  console.error('Error fetching URL content:', error);
+              });
+      }
+
+      getApiResponse(api);
 }
