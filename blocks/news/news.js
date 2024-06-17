@@ -1,7 +1,6 @@
 export default async function decorate(block) {
   // This will be your API response data
   let responseData = [];
-  let currentPage = 1;
 
   // Function to get authored label data
   function getDataAttributeValueByName(name) {
@@ -117,21 +116,21 @@ export default async function decorate(block) {
 
   // Function to render items on the current page
   function createRenderPage() {
-      let currentPage = 1;
-      const renderPage = (page) => {
-          currentPage = page;
-          const start = (currentPage - 1) * itemsPerPage;
-          const end = start + itemsPerPage;
-          const currentData = responseData.slice(start, end);
-          getResponseData(currentData);
-          renderPagination();
+    let currentPage = 1;
+    const renderPage = (page) => {
+      currentPage = page;
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const currentData = responseData.slice(start, end);
+      getResponseData(currentData);
+      renderPagination();
       };
 
-      const renderPagination = () => {
-          paginationContainer.innerHTML = '';
-          const totalPages = Math.ceil(responseData.length / itemsPerPage);
-          // Only show pagination buttons if there are more items than the items per page limit
-          if (responseData.length > itemsPerPage) {
+    const renderPagination = () => {
+       paginationContainer.innerHTML = '';
+       const totalPages = Math.ceil(responseData.length / itemsPerPage);
+       // Only show pagination buttons if there are more items than the items per page limit
+       if (responseData.length > itemsPerPage) {
               for (let i = 1; i <= totalPages; i += 1) {
                   const pageButton = document.createElement('button');
                   pageButton.textContent = i;
@@ -147,7 +146,7 @@ export default async function decorate(block) {
           }
       };
 
-      return renderPage;
+    return renderPage;
   }
 
   const renderPage = createRenderPage();
