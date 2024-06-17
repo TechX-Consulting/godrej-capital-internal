@@ -1,4 +1,4 @@
-import { ffetch } from '../utils/ffetch.js';
+import { ffetch } from '../utils/ffetch';
 
 let displayData; let updatePagination; let displayPagination;
 let createCards; let filterAndSortCards;
