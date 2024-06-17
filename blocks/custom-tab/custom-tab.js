@@ -22,9 +22,7 @@ function renderData(data, selectedTab, selectedOption, tabpanel) {
     return;
   }
 
-  const filteredData = data.filter((item) => {
-    return item.tab === selectedTab && item.dropdown === selectedOption;
-  });
+  const filteredData = data.filter(item => item.tab === selectedTab && item.dropdown === selectedOption);
 
   if (filteredData.length === 0) {
     console.error(`Data for combination '${selectedTab} - ${selectedOption}' not found.`);
@@ -35,7 +33,7 @@ function renderData(data, selectedTab, selectedOption, tabpanel) {
   tabpanel.innerHTML = '';
 
   // Display the filtered data
-  filteredData.forEach((item) => {
+  filteredData.forEach(item => {
     let sectionIndex = 1;
 
     // Iterate through sections until no more titles are found
@@ -57,13 +55,16 @@ function renderData(data, selectedTab, selectedOption, tabpanel) {
 
       // Render bullet points if available
       if (bulletPoints.trim() !== '') {
-        const bulletPointsList = bulletPoints.split('\n').map(bp => bp.trim()).filter(bp => bp !== '');
+        const bulletPointsList = bulletPoints
+          .split('\n')
+          .map(bp => bp.trim())
+          .filter(bp => bp !== '');
 
         if (bulletPointsList.length > 0) {
           const listElement = document.createElement('ul');
           listElement.style.listStyleType = 'disc'; // Set list style to bullet points
 
-          bulletPointsList.forEach((bullet) => {
+          bulletPointsList.forEach(bullet => {
             const listItem = document.createElement('li');
             listItem.textContent = bullet;
             listElement.appendChild(listItem);
@@ -76,7 +77,7 @@ function renderData(data, selectedTab, selectedOption, tabpanel) {
       // Add some space between sections
       tabpanel.appendChild(document.createElement('hr'));
 
-      sectionIndex++;
+      sectionIndex += 1; // Increment sectionIndex in a more verbose way to avoid the no-plusplus error
     }
   });
 }
@@ -159,7 +160,12 @@ async function decorate(block) {
   tablist.setAttribute('role', 'tablist');
 
   const tabNames = ['KYC Documents', 'Income Documents', 'Property Documents'];
-  const dropdownOptions = ['Indian Resident Salaried', 'Non-Resident Indian Salaried', 'Business Self Employed', 'Professional Self Employed'];
+  const dropdownOptions = [
+    'Indian Resident Salaried',
+    'Non-Resident Indian Salaried',
+    'Business Self Employed',
+    'Professional Self Employed'
+  ];
 
   let data = [];
 
