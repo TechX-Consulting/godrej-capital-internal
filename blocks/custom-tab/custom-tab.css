@@ -1,6 +1,6 @@
 /* Set background color of the wrapper div */
 .tabs-list-wrapper {
-    background-color:rgb(138, 182, 138);
+    background-color: rgb(138, 182, 138);
     padding: 20px; /* Adjust padding as needed */
     position: relative; /* Position the wrapper relatively */
     display: flex;
@@ -9,7 +9,7 @@
 }
 
 /* Styles for the tabs list */
-.tabs .tabs-list {
+.tabs-list {
     display: flex;
     justify-content: flex-start; /* Keep tabs left-aligned */
     max-width: 100%; /* Take full width of parent */
@@ -19,7 +19,7 @@
 }
 
 /* Styles for individual tab buttons */
-.tabs .tabs-list button {
+.tabs-list button {
     flex: 1;
     margin: 5px;
     padding: 0;
@@ -38,19 +38,19 @@
 }
 
 /* Style the last button with a right border */
-.tabs .tabs-list button:last-child {
+.tabs-list button:last-child {
     border-right: 1px solid var(--dark-color);
 }
 
 /* Styles for the selected tab button */
-.tabs .tabs-list button[aria-selected="true"] {
+.tabs-list button[aria-selected="true"] {
      background-color: yellow;
     color: black;
 }
 
 /* Hover and focus styles for non-selected tab buttons */
-.tabs .tabs-list button[aria-selected="false"]:hover,
-.tabs .tabs-list button[aria-selected="false"]:focus {
+.tabs-list button[aria-selected="false"]:hover,
+.tabs-list button[aria-selected="false"]:focus {
     background-color: blue;
     color: white;
 }
@@ -66,7 +66,7 @@
 }
 
 /* Hide the panel when aria-hidden is true */
-.tabs .tabs-panel[aria-hidden="true"] {
+.tabs-panel[aria-hidden="true"] {
     display: none;
 }
 
@@ -125,9 +125,6 @@
 }
 
 .tabs-list-label {
-    font-weight: bold;
-    color: white;
-    position: absolute;
     top: 0px; /* Adjust position as needed */
     left: 20px; /* Adjust position as needed */
     margin-top: 5px; /* Adjust margin to separate from tabs */
@@ -139,13 +136,12 @@
 }
 
 .tabs-dropdown-label {
-    display: none;
     top: 5px; /* Adjust position as needed */
     right: 20px; /* Adjust position as needed */
 }
 
 @media (max-width: 768px) {
-    .tabs .tabs-list {
+    .tabs-list {
         display: none;
     }
 
@@ -157,26 +153,18 @@
         display: block;
     }
 
-    .tabs-dropdown {
-        /* Hide tabs-dropdown on smaller screens */
-    }
-
     .tabs-dropdown-label {
         display: block; /* Show dropdown label on mobile view */
     }
 }
 
 @media (min-width: 769px) {
-    .tabs .tabs-list {
+    .tabs-list {
         display: flex;
     }
 
     .tabs-list-dropdown {
         display: none;
-    }
-
-    .tabs-dropdown {
-        display: block;
     }
 
     .tabs-dropdown-label {
