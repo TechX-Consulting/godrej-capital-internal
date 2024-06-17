@@ -21,7 +21,7 @@ function renderData(data, selectedTab, selectedOption, tabpanel) {
   }
 
   const filteredData = data.filter(
-    item => item.tab === selectedTab && item.dropdown === selectedOption
+    (item) => item.tab === selectedTab && item.dropdown === selectedOption
   );
 
   if (filteredData.length === 0) {
@@ -56,7 +56,7 @@ function renderData(data, selectedTab, selectedOption, tabpanel) {
       if (bulletPoints.trim() !== '') {
         const bulletPointsList = bulletPoints
           .split('\n')
-          .map(bp => bp.trim())
+          .map((bp) => bp.trim())
           .filter((bp) => bp !== '');
 
         if (bulletPointsList.length > 0) {
@@ -82,7 +82,7 @@ function renderData(data, selectedTab, selectedOption, tabpanel) {
 }
 
 function handleTabClick(event, data, tablist, tabpanel, dropdown) {
-  tablist.querySelectorAll('.tabs-tab').forEach(btn => {
+  tablist.querySelectorAll('.tabs-tab').forEach((btn) => {
     btn.setAttribute('aria-selected', 'false');
     btn.style.backgroundColor = 'white';
     btn.style.color = 'black';
@@ -183,7 +183,7 @@ async function decorate(block) {
     'Indian Resident Salaried',
     'Non-Resident Indian Salaried',
     'Business Self Employed',
-    'Professional Self Employed'
+    'Professional Self Employed',
   ];
 
   let data = [];
