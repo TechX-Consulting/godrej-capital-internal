@@ -134,8 +134,8 @@ export default async function decorate(block) {
           if (i === currentPage) {
             pageButton.classList.add('active');
           }
-          // Create a new scope for each page button
-          ((pageNumber) => {
+            // Create a new scope for each page button
+            ((pageNumber) => {
               pageButton.addEventListener('click', () => {
               currentPage = pageNumber;
               renderPage();
