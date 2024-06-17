@@ -114,39 +114,43 @@ export default async function decorate(block) {
       });
     }
   };
-  // Function to render pagination buttons
 
   // Function to render items on the current page
-  function renderPage() {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const currentData = responseData.slice(start, end);
-    getResponseData(currentData);
-    const renderPagination = () => {
-      paginationContainer.innerHTML = '';
-      const totalPages = Math.ceil(responseData.length / itemsPerPage);
-      // Only show pagination buttons if there are more items than the items per page limit
-      if (responseData.length > itemsPerPage) {
-        for (let i = 1; i <= totalPages; i += 1) {
-          const pageButton = document.createElement('button');
-          pageButton.textContent = i;
-          pageButton.className = 'page-button';
-          if (i === currentPage) {
-            pageButton.classList.add('active');
+  function createRenderPage() {
+      let currentPage = 1;
+      const renderPage = (page) => {
+          currentPage = page;
+          const start = (currentPage - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+          const currentData = responseData.slice(start, end);
+          getResponseData(currentData);
+          renderPagination();
+      };
+
+      const renderPagination = () => {
+          paginationContainer.innerHTML = '';
+          const totalPages = Math.ceil(responseData.length / itemsPerPage);
+          // Only show pagination buttons if there are more items than the items per page limit
+          if (responseData.length > itemsPerPage) {
+              for (let i = 1; i <= totalPages; i += 1) {
+                  const pageButton = document.createElement('button');
+                  pageButton.textContent = i;
+                  pageButton.className = 'page-button';
+                  if (i === currentPage) {
+                      pageButton.classList.add('active');
+                  }
+                  pageButton.addEventListener('click', () => {
+                      renderPage(i);
+                  });
+                  paginationContainer.appendChild(pageButton);
+              }
           }
-          // Create a new scope for each page button
-          ((pageNumber) => {
-            pageButton.addEventListener('click', () => {
-              currentPage = pageNumber;
-              renderPage();
-            });
-          })(i);
-          paginationContainer.appendChild(pageButton);
-        }
-      }
-    };
-    renderPagination();
+      };
+
+      return renderPage;
   }
+
+  const renderPage = createRenderPage();
 
   // Function to sort data based on the selected option
   function sortData() {
@@ -166,9 +170,8 @@ export default async function decorate(block) {
       }
       const data = await response.json();
       responseData = data.data;
-      currentPage = 1;
       sortData(); // Ensure data is sorted initially
-      renderPage();
+      renderPage(1);
     } catch (error) {
       contentContainer.innerHTML = noResultFoundMessage;
     }
@@ -208,7 +211,7 @@ export default async function decorate(block) {
   // Add event listener to the sort dropdown
   sortDropdown.addEventListener('change', () => {
     sortData();
-    renderPage();
+    renderPage(1);
   });
 }
 
