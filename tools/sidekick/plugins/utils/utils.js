@@ -27,25 +27,25 @@
  * @returns the element
  */
 export function createElement(tagName, classes, props) {
-    const elem = document.createElement(tagName);
-    if (classes) {
-      const classesArr = (typeof classes === 'string') ? [classes] : classes;
-      elem.classList.add(...classesArr);
-    }
-    if (props) {
-      Object.keys(props).forEach((propName) => {
-        elem.setAttribute(propName, props[propName]);
-      });
-    }
-  
-    return elem;
+  const elem = document.createElement(tagName);
+  if (classes) {
+    const classesArr = (typeof classes === 'string') ? [classes] : classes;
+    elem.classList.add(...classesArr);
   }
-  
-  /**
+  if (props) {
+    Object.keys(props).forEach((propName) => {
+      elem.setAttribute(propName, props[propName]);
+    });
+  }
+
+  return elem;
+}
+
+/**
    * Copies to the clipboard
    * @param {Blob} blob The data
    */
-  export function createCopy(blob) {
-    const data = [new ClipboardItem({ [blob.type]: blob })];
-    navigator.clipboard.write(data);
-  }
+export function createCopy(blob) {
+  const data = [new ClipboardItem({ [blob.type]: blob })];
+  navigator.clipboard.write(data);
+}
