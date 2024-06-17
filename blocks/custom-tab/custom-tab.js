@@ -186,6 +186,13 @@ async function decorate(block) {
     'Professional Self Employed',
   ];
 
+  const tabpanel = document.createElement('div');
+  tabpanel.className = 'tabs-panel';
+  tabpanel.id = 'tabpanel-tab';
+  tabpanel.setAttribute('aria-labelledby', 'tab-1');
+  tabpanel.setAttribute('role', 'tabpanel');
+  block.appendChild(tabpanel);
+
   let data = [];
 
   tabNames.forEach((tabName, i) => {
@@ -214,13 +221,6 @@ async function decorate(block) {
   tabListWrapper.appendChild(documentsWrapper); // Append documentsWrapper to tabListWrapper
 
   block.prepend(tabListWrapper);
-
-  const tabpanel = document.createElement('div');
-  tabpanel.className = 'tabs-panel';
-  tabpanel.id = 'tabpanel-tab';
-  tabpanel.setAttribute('aria-labelledby', 'tab-1');
-  tabpanel.setAttribute('role', 'tabpanel');
-  block.appendChild(tabpanel);
 
   const apiUrl = 'https://main--godrej-capital-internal--divanshu-techx.hlx.live/website/query-index.json';
   data = await fetchData(apiUrl);
