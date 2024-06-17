@@ -13,7 +13,7 @@ export default async function decorate(block) {
   const inputFieldPlaceholder = getDataAttributeValueByName('inputFieldPlaceholder');
   const latestToOldestLabel = getDataAttributeValueByName('latestToOldestLabel');
   const oldestToLatestLabel = getDataAttributeValueByName('oldestToLatestLabel');
-  const itemsPerPage = parseInt(getDataAttributeValueByName('itemsPerPage'), 10); // Corrected line
+  const itemsPerPage = parseInt(getDataAttributeValueByName('itemsPerPage'), 10);
   const noResultFoundMessage = getDataAttributeValueByName('noResultFoundMessage');
   const newsApi = getDataAttributeValueByName('newsApi');
   const pressReleaseApi = getDataAttributeValueByName('pressApi');
@@ -114,54 +114,49 @@ export default async function decorate(block) {
     }
   };
 
+  // Function to render pagination buttons
+  const renderPagination = (totalPages, currentPage, renderPage) => {
+    paginationContainer.innerHTML = '';
+    if (responseData.length > itemsPerPage) {
+      for (let i = 1; i <= totalPages; i += 1) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.className = 'page-button';
+        if (i === currentPage) {
+          pageButton.classList.add('active');
+        }
+        pageButton.addEventListener('click', () => {
+          renderPage(i);
+        });
+        paginationContainer.appendChild(pageButton);
+      }
+    }
+  };
+
   // Function to render items on the current page
-  function createRenderPage() {
-    let currentPage = 1;
-    const renderPage = (page) => {
-      currentPage = page;
-      const start = (currentPage - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      const currentData = responseData.slice(start, end);
-      getResponseData(currentData);
-      renderPagination();
-      };
+  const renderPage = (page = 1) => {
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const currentData = responseData.slice(start, end);
+    getResponseData(currentData);
 
-    const renderPagination = () => {
-       paginationContainer.innerHTML = '';
-       const totalPages = Math.ceil(responseData.length / itemsPerPage);
-       // Only show pagination buttons if there are more items than the items per page limit
-       if (responseData.length > itemsPerPage) {
-              for (let i = 1; i <= totalPages; i += 1) {
-                  const pageButton = document.createElement('button');
-                  pageButton.textContent = i;
-                  pageButton.className = 'page-button';
-                  if (i === currentPage) {
-                      pageButton.classList.add('active');
-                  }
-                  pageButton.addEventListener('click', () => {
-                      renderPage(i);
-                  });
-                  paginationContainer.appendChild(pageButton);
-              }
-          }
-      };
-
-    return renderPage;
-  }
-
-  const renderPage = createRenderPage();
+    const totalPages = Math.ceil(responseData.length / itemsPerPage);
+    renderPagination(totalPages, page, renderPage);
+  };
 
   // Function to sort data based on the selected option
-  function sortData() {
+  const sortData = () => {
     const selectedOption = sortDropdown.value;
     if (selectedOption === 'newToOld') {
       responseData.sort((a, b) => new Date(b.publishdate) - new Date(a.publishdate));
     } else if (selectedOption === 'oldToNew') {
       responseData.sort((a, b) => new Date(a.publishdate) - new Date(b.publishdate));
     }
-  }
+    renderPage();
+  };
+
   // Function for an API call
-  async function getApiResponse(api) {
+  const getApiResponse = async (api) => {
     try {
       const response = await fetch(api, { method: 'GET' });
       if (!response.ok) {
@@ -170,13 +165,14 @@ export default async function decorate(block) {
       const data = await response.json();
       responseData = data.data;
       sortData(); // Ensure data is sorted initially
-      renderPage(1);
+      renderPage(1); // Pass the initial page as 1
     } catch (error) {
       contentContainer.innerHTML = noResultFoundMessage;
     }
-  }
+  };
+
   // Function for active tabs
-  function setActiveTab(tab) {
+  const setActiveTab = (tab) => {
     if (tab === 'news') {
       newsTab.classList.add('active');
       pressReleaseTab.classList.remove('active');
@@ -185,7 +181,7 @@ export default async function decorate(block) {
       pressReleaseTab.classList.add('active');
     }
     getApiResponse(tab === 'news' ? newsApi : pressReleaseApi);
-  }
+  };
 
   // On load API call function call
   getApiResponse(newsApi);
@@ -210,7 +206,7 @@ export default async function decorate(block) {
   // Add event listener to the sort dropdown
   sortDropdown.addEventListener('change', () => {
     sortData();
-    renderPage(1);
+    renderPage();
   });
 }
 
