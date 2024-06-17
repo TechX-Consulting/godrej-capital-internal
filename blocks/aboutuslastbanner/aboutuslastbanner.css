@@ -12,8 +12,8 @@ main .aboutlast-banner-container {
   min-height: 300px;
   background: linear-gradient(90deg,
   #242424 0%,
-  rgba(36, 36, 36, 0.6) 23.3%, /* Semi-transparent color in RGBA format */
-  rgba(36, 36, 36, 0) 76.88% /* Fully transparent color in RGBA format */
+  rgba(36, 36, 36, 60%) 23.3%,
+  rgba(36, 36, 36, 0%) 76.88%
 );
 }
 
