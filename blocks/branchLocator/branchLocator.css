@@ -138,12 +138,12 @@ body {
     position: relative;
 }
 
-#mapCanvas {
+#map-canvas {
     height: 100%;
     width: 100%;
 }
 
-#mapCard {
+#map-card {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -158,22 +158,22 @@ body {
     z-index: 1000; /* Ensure it is above the map */
 }
 
-#mapCard h2 {
+#map-card h2 {
     margin-top: 0;
     font-size: 1.2em;
 }
 
-#mapCard p {
+#map-card p {
     margin: 5px 0;
     font-size: 0.9em;
 }
 
-#mapCard .phone, #mapCard .hours {
+#map-card .phone, #map-card .hours {
     font-weight: bold;
     font-size: 0.9em;
 }
 
-#mapCard button {
+#map-card button {
     background: #ff4c4c;
     color: #fff;
     border: none;
@@ -183,6 +183,6 @@ body {
     margin-top: 10px;
 }
 
-#mapCard button:hover {
+#map-card button:hover {
     background: #ff7878;
 }

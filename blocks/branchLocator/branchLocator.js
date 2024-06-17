@@ -25,7 +25,7 @@ function updateMapCard(item) {
   document.getElementById('mapCardAddress').textContent = item.address;
   document.getElementById('mapCardPhone').textContent = `Phone No.: ${item.phone}`;
   document.getElementById('mapCardHours').textContent = item.hours;
-  document.getElementById('mapCard').style.display = 'block'; // Show the card
+  document.getElementById('map-card').style.display = 'block'; // Show the card
 }
 
 /**
@@ -61,7 +61,7 @@ function displayResults(filteredLocations) {
     );
     // Add click listener to the card to create a map on click
     card.addEventListener('click', (event) => {
-      createMap(lat, lng, 'mapCanvas');
+      createMap(lat, lng, 'map-canvas');
       updateMapCard(item);
       document.querySelectorAll('.card').forEach((c) => {
         c.classList.remove('active');
@@ -179,7 +179,7 @@ function renderFilters(locations) {
  * @param {Array} entries - All location entries.
  */
 function initialize(entries) {
-  mapContainer.appendChild(div({ id: 'mapCanvas', style: 'height: 500px;' }));
+  mapContainer.appendChild(div({ id: 'map-canvas', style: 'height: 500px;' }));
 
   renderFilters(entries);
 
@@ -193,7 +193,7 @@ function initialize(entries) {
 
   mapContainer.appendChild(
     div(
-      { id: 'mapCard' },
+      { id: 'map-card' },
       h2({ id: 'mapCardTitle' }, entries[0].location),
       p({ id: 'mapCardAddress' }, entries[0].address),
       p({ id: 'mapCardPhone' }, `Phone No.: ${entries[0].phone}`),
@@ -201,7 +201,7 @@ function initialize(entries) {
       button({ id: 'getDirections' }, 'Get Directions'),
     ),
   );
-  createMap(defaultLat, defaultLong, 'mapCanvas');
+  createMap(defaultLat, defaultLong, 'map-canvas');
 }
 
 /**
