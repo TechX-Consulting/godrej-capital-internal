@@ -45,7 +45,7 @@
 /* Styles for the selected tab button */
 .tabs .tabs-list button[aria-selected="true"] {
      background-color: yellow;
-    color: black; */
+    color: black;
 }
 
 /* Hover and focus styles for non-selected tab buttons */
