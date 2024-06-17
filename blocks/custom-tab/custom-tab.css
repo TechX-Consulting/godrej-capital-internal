@@ -1,6 +1,6 @@
 /* Set background color of the wrapper div */
 .tabs-list-wrapper {
-    background-color: rgb(138, 182, 138);
+    background-color: #8AB68A
     padding: 20px; /* Adjust padding as needed */
     position: relative; /* Position the wrapper relatively */
     display: flex;
