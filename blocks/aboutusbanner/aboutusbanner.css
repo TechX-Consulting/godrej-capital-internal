@@ -12,8 +12,8 @@ main .about-banner-container {
   min-height: 300px;
   background: linear-gradient(90deg,
   #242424 0%,
-  hsla(0deg, 0%, 14%, 60%) 23.3%,
-  hsla(0deg, 0%, 14%, 0%) 76.88%
+  hsl(0deg, 0%, 14%, 60%) 23.3%,
+  hsl(0deg, 0%, 14%, 0%) 76.88%
 );
 }
 
