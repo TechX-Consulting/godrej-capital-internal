@@ -9,11 +9,11 @@
 
 .about-columns>div>div {
   order: 1;
-  width: Hug (656px)px;
-  height: Hug (126px)px;
+  width: hug (656px)px;
+  height: hug (126px)px;
   gap: 16px;
   opacity: 0px;
-  font-family: Work Sans;
+  font-family: 'Work Sans' , sans-serif;
   font-size: 16px;
   font-weight: 300;
   line-height: 18.77px;
@@ -44,10 +44,10 @@
   }
 }
 
-/*My CSS*/
+/* My CSS */
 
 .aboutuscolumns.about-columns.block.about-columns-2-cols>div>div>h3 {
-  font-family: Work Sans;
+  font-family: 'Work Sans', sans-serif;
   font-size: 35px;
   font-weight: 600;
   line-height: 41.06px;
@@ -56,7 +56,7 @@
 }
 
 strong {
-  font-family: Work Sans;
+  font-family: 'Work Sans', sans-serif;
   font-size: 16px;
   font-weight: 300;
   line-height: 18.77px;
