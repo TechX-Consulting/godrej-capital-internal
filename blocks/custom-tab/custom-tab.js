@@ -11,18 +11,18 @@ async function fetchData(apiUrl) {
     const responseData = await response.json();
     return responseData.data; // Access the 'data' array
   } catch (error) {
-    console.error(error);
     return null;
   }
 }
 
 function renderData(data, selectedTab, selectedOption, tabpanel) {
   if (!selectedTab || !selectedOption) {
-    console.error('Selected tab or option is invalid.');
     return;
   }
 
-  const filteredData = data.filter(item => item.tab === selectedTab && item.dropdown === selectedOption);
+  const filteredData = data.filter(
+    item => item.tab === selectedTab && item.dropdown === selectedOption
+  );
 
   if (filteredData.length === 0) {
     console.error(`Data for combination '${selectedTab} - ${selectedOption}' not found.`);
@@ -98,7 +98,9 @@ function handleTabClick(event, data, tablist, tabpanel, dropdown) {
 
 function handleDropdownChange(data, tablist, tabpanel, dropdown) {
   const selectedTabButton = tablist.querySelector('button[aria-selected="true"]');
-  const selectedTab = selectedTabButton ? selectedTabButton.innerHTML : tablist.querySelector('button').innerHTML;
+  const selectedTab = selectedTabButton
+    ? selectedTabButton.innerHTML
+    : tablist.querySelector('button').innerHTML;
   const selectedOption = dropdown.value;
   renderData(data, selectedTab, selectedOption, tabpanel);
 }
@@ -124,6 +126,24 @@ function createDropdownForTabs(tabNames, tablist, data, tabpanel, dropdown) {
   });
 
   return dropdownForTabs;
+}
+
+function handleViewportChange(tablist, tabsListDropdown) {
+  const tabsWrapper = document.querySelector('.tabs-list-wrapper');
+  const tabsListLabel = tabsWrapper.querySelector('.tabs-list-label');
+  const tabsDropdownLabel = tabsWrapper.querySelector('.tabs-dropdown-label');
+
+  if (window.innerWidth <= 968) {
+    tablist.style.display = 'none';
+    tabsListDropdown.style.display = 'block';
+    tabsListLabel.style.display = 'block'; // Show "Select Documents" label
+  } else {
+    tablist.style.display = 'flex';
+    tabsListDropdown.style.display = 'none';
+    tabsListLabel.style.display = 'block'; // Show "Select Documents" label
+  }
+
+  tabsDropdownLabel.style.display = 'block'; // Always show "Select Category" label
 }
 
 async function decorate(block) {
@@ -220,24 +240,6 @@ async function decorate(block) {
 
   window.addEventListener('resize', () => handleViewportChange(tablist, tabsListDropdown));
   handleViewportChange(tablist, tabsListDropdown);
-}
-
-function handleViewportChange(tablist, tabsListDropdown) {
-  const tabsWrapper = document.querySelector('.tabs-list-wrapper');
-  const tabsListLabel = tabsWrapper.querySelector('.tabs-list-label');
-  const tabsDropdownLabel = tabsWrapper.querySelector('.tabs-dropdown-label');
-
-  if (window.innerWidth <= 968) {
-    tablist.style.display = 'none';
-    tabsListDropdown.style.display = 'block';
-    tabsListLabel.style.display = 'block'; // Show "Select Documents" label
-  } else {
-    tablist.style.display = 'flex';
-    tabsListDropdown.style.display = 'none';
-    tabsListLabel.style.display = 'block'; // Show "Select Documents" label
-  }
-
-  tabsDropdownLabel.style.display = 'block'; // Always show "Select Category" label
 }
 
 export default decorate;
