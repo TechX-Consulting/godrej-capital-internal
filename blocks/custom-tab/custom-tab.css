@@ -1,49 +1,40 @@
-/* Ensure there is an empty line before each rule */
-#tabs-list-dropdown {
-    background-color: red;
-}
-
 /* Set background color of the wrapper div */
 .tabs-list-wrapper {
-    background-color:#035fe6;
-    padding: 0; /* Remove padding */
+    background-color:rgb(138, 182, 138);
+    padding: 20px; /* Adjust padding as needed */
     position: relative; /* Position the wrapper relatively */
-}
-
-.tabs-list {
-    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
 }
 
 /* Styles for the tabs list */
 .tabs .tabs-list {
     display: flex;
-    justify-content: space-between;
-    max-width: calc(100% - 200px); /* Adjust the max-width to leave space for the dropdown */
+    justify-content: flex-start; /* Keep tabs left-aligned */
+    max-width: 100%; /* Take full width of parent */
     overflow-x: auto;
     padding: 0;
-    margin: 0; /* Remove margin */
+    margin: 0;
 }
 
 /* Styles for individual tab buttons */
 .tabs .tabs-list button {
-    flex: 1; /* Make buttons take equal space */
-    margin: 5px; /* Add margin to create space between buttons */
-    padding: 0; /* Remove padding to make buttons square */
-    background-color: white; /* Default background color to white */
-    color: black; /* Default text color to black */
-    font-size: unset;
+    flex: 1;
+    margin: 5px;
+    padding: 0;
+    background-color: white;
+    color: black;
     font-weight: bold;
-    line-height: unset;
     text-align: center;
-    text-overflow: unset;
-    overflow: hidden;
-    white-space: nowrap;
     transition: background-color 0.2s, color 0.2s;
+    height: 100px;
+    width: 100px;
+    border: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100px; /* Ensure the buttons are square by setting a fixed height */
-    width: 100px; /* Ensure the buttons are square by setting a fixed width */
 }
 
 /* Style the last button with a right border */
@@ -53,25 +44,25 @@
 
 /* Styles for the selected tab button */
 .tabs .tabs-list button[aria-selected="true"] {
-    background-color: yellow;
-    color: black; /* Text color for the selected tab */
-    cursor: initial;
+     background-color: yellow;
+    color: black; */
 }
 
 /* Hover and focus styles for non-selected tab buttons */
 .tabs .tabs-list button[aria-selected="false"]:hover,
 .tabs .tabs-list button[aria-selected="false"]:focus {
     background-color: blue;
-    color: white; /* Change text color to white when hovered or focused */
+    color: white;
 }
 
 /* Styles for the tabs panel */
 .tabs-panel {
-    margin-top: 10px;
-    padding: 20px; /* Add padding */
+    margin-top: 20px; /* Adjust margin as needed */
+    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: auto;
+    width: 100%; /* Ensure panel takes full width */
 }
 
 /* Hide the panel when aria-hidden is true */
@@ -83,24 +74,112 @@
 .tabs-wrapper {
     padding: 20px;
     margin: 20px;
+    width: 100%; /* Ensure wrapper takes full width */
+    box-sizing: border-box; /* Include padding and border in width calculation */
 }
 
 /* Reduce the size of the control buttons */
 .tabs-tab {
-    padding: 8px 12px; /* Adjust padding as needed */
-    margin-right: 10px; /* Adjust margin as needed */
+    padding: 8px 12px;
+    margin-right: 10px;
+}
+
+/* Style the dropdown for tabs */
+.tabs-list-dropdown {
+    position: absolute;
+    top: 60px; /* Adjust position as needed */
+    left: 20px; /* Adjust position as needed */
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 100; /* Ensure dropdown is above other elements */
+    width: calc(50% - 30px); /* Adjust width to take half of the space minus padding */
+    display: none;
 }
 
 /* Style the dropdown */
 .tabs-dropdown {
-    position: absolute; /* Position the dropdown absolutely */
-    top: 11px; /* Adjust top position */
-    right: 5px; /* Adjust right position */
-    background-color: white; /* Green background color */
-    color: black; /* White text color */
-    text-decoration: solid;
-    padding: 10px; /* Add padding */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Add border radius */
-    cursor: pointer; /* Add cursor pointer */
+    position: absolute;
+    top: 64px; /* Adjust position as needed */
+    right: 20px; /* Adjust position as needed */
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 100; /* Ensure dropdown is above other elements */
+    width: calc(50% - 30px); /* Adjust width to take half of the space minus padding */
+}
+
+/* Styles for the labels */
+.tabs-list-label,
+.tabs-dropdown-label {
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    display: none; /* Hide labels by default */
+}
+
+.tabs-list-label {
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 0px; /* Adjust position as needed */
+    left: 20px; /* Adjust position as needed */
+    margin-top: 5px; /* Adjust margin to separate from tabs */
+    display: block;
+}
+
+.tabs-list {
+    margin-top: 30px; /* Add margin to separate from label */
+}
+
+.tabs-dropdown-label {
+    display: none;
+    top: 5px; /* Adjust position as needed */
+    right: 20px; /* Adjust position as needed */
+}
+
+@media (max-width: 768px) {
+    .tabs .tabs-list {
+        display: none;
+    }
+
+    .tabs-list-dropdown {
+        display: block;
+    }
+
+    .tabs-list-label {
+        display: block;
+    }
+
+    .tabs-dropdown {
+        /* Hide tabs-dropdown on smaller screens */
+    }
+
+    .tabs-dropdown-label {
+        display: block; /* Show dropdown label on mobile view */
+    }
+}
+
+@media (min-width: 769px) {
+    .tabs .tabs-list {
+        display: flex;
+    }
+
+    .tabs-list-dropdown {
+        display: none;
+    }
+
+    .tabs-dropdown {
+        display: block;
+    }
+
+    .tabs-dropdown-label {
+        display: none; /* Hide dropdown label on larger screens */
+    }
 }
