@@ -12,8 +12,8 @@ main .aboutlast-banner-container {
   min-height: 300px;
   background: linear-gradient(90deg,
   #242424 0%,
-  hsla(0, 0%, 14%, 60%) 23.3%,
-  hsla(0, 0%, 14%, 0%) 76.88%
+  hsla(0deg, 0%, 14%, 60%) 23.3%,
+  hsla(0deg, 0%, 14%, 0%) 76.88%
 );
 }
 
@@ -26,7 +26,7 @@ main .aboutlast-banner-container {
   top: 1538px;
   left: 80px;
   gap: 4px;
-  font-family: 'Work Sans','sans-serif';
+  font-family: 'Work Sans', sans-serif;
   font-size: 36px;
   font-weight: 300;
   line-height: 42.23px;
@@ -38,7 +38,7 @@ main .aboutlast-banner-container {
   margin-left: auto;
   margin-right: auto;
   color: white;
-  font-family: 'Work Sans', 'sans-serif';
+  font-family: 'Work Sans', sans-serif;
   font-size: 54px;
   font-weight: 600;
   line-height: 48.6px;
