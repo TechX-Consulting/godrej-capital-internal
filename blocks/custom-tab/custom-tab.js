@@ -76,7 +76,7 @@ function renderData(data, selectedTab, selectedOption, tabpanel) {
       // Add some space between sections
       tabpanel.appendChild(document.createElement('hr'));
 
-      sectionIndex += 1; // Increment sectionIndex in a more verbose way to avoid the no-plusplus error
+      sectionIndex += 1;
     }
   });
 }
@@ -234,7 +234,7 @@ async function decorate(block) {
   renderData(data, selectedTab, selectedOption, tabpanel);
 
   const tabsListDropdown = createDropdownForTabs(tabNames, tablist, data, tabpanel, dropdown);
-  documentsWrapper.appendChild(tabsListDropdown); // Append dropdown created by createDropdownForTabs to documentsWrapper
+  documentsWrapper.appendChild(tabsListDropdown);
 
   window.addEventListener('resize', () => handleViewportChange(tablist, tabsListDropdown));
   handleViewportChange(tablist, tabsListDropdown);
