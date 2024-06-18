@@ -12,7 +12,7 @@ import {
   loadBlocks,
   loadCSS,
   decorateBlock,
-  loadBlock,
+  loadBlock,loadSubHeader
 } from './lib-franklin.js';
 
 import loadContentFromURL from '../blocks/fragmentcards/fragmentcards.js';
@@ -184,9 +184,10 @@ async function loadLazy(doc) {
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
-
+ 
   loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
+  loadSubHeader(doc.querySelector('header'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);

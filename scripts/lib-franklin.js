@@ -578,6 +578,12 @@ export function loadHeader(header) {
   return loadBlock(headerBlock);
 }
 
+export function loadSubHeader(header) {
+  const subheaderBlock = buildBlock('subheader', '');
+  header.append(subheaderBlock);
+  decorateBlock(subheaderBlock);
+  return loadBlock(subheaderBlock);
+}
 /**
  * Loads a block named 'footer' into footer
  * @param footer footer element
